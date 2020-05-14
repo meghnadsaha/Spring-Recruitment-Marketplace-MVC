@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.directwebremoting.org/schema/spring-dwr http://www.directwebremoting.org/schema/spring-dwr/spring-dwr-3.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+     <dwr:configuration /> 
+        
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com" />
+	<mvc:resources location="/WEB-INF/view/jsp/css/" mapping="/css/**"  />
+	<mvc:resources location="/WEB-INF/view/jsp/images/" mapping="images/**"  />
+	<mvc:resources location="/WEB-INF/view/jsp/js/" mapping="js/**"  />
+	<mvc:resources location="/WEB-INF/view/jsp/fonts/" mapping="fonts/**" />
+	<mvc:resources location="/WEB-INF/view/jsp/ckeditor/" mapping="ckeditor/**" />
+	
+	
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles/tiles.xml</value>
+				<value>/WEB-INF/view/jsp/**/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basename" value="classpath:messages" />
+	    <property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	    <property name="ignoreUnresolvablePlaceholders" value="true"/>
+	    <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+	    <property name="searchSystemEnvironment" value="true"/>
+	    <property name="locations">
+	        <list>
+	           <value>/WEB-INF/jdbc.properties</value>
+	           <value>classpath:*.properties</value>
+	        </list>
+	    </property>
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	    <property name="messageConverters">
+	        <list>
+	            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+	        </list>
+	    </property>
+	</bean>	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+	    <property name="dataSource" ref="dataSource" />
+	    <property name="configLocation">
+	        <value>classpath:hibernate.cfg.xml</value>
+	    </property>
+	    <property name="hibernateProperties">
+	        <props>
+	            <prop key="hibernate.dialect">${jdbc.dialect}</prop>
+	            <prop key="hibernate.show_sql">true</prop>
+	            <prop key="hibernate.connection.release_mode" >after_transaction</prop>
+	        </props>
+	    </property>
+	</bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+        p:driverClassName="${jdbc.driverClassName}"
+        p:url="${jdbc.databaseurl}" p:username="${jdbc.username}"
+        p:password="${jdbc.password}"
+         />
+        
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	   <property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<mvc:interceptors>
+	     <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+	         <property name="cacheSeconds" value="0"/>
+	         <property name="useExpiresHeader" value="false"/>
+	         <property name="useCacheControlHeader" value="true"/>
+	         <property name="useCacheControlNoStore" value="true"/>
+	     </bean>     
+	</mvc:interceptors>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" /> 
+	
+<!--  java mail sender start	 -->
+<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="smtp.gmail.com" />
+    <property name="port" value="587" />
+    <property name="username" value="unihyr@gmail.com" />
+    <property name="password" value="arc@2016" />
+    <property name="javaMailProperties">
+        <props>
+            <prop key="mail.transport.protocol">smtp</prop>
+            <prop key="mail.smtp.auth">true</prop>
+            <prop key="mail.smtp.starttls.enable">true</prop>
+        </props>
+    </property>
+</bean>
+<!--  java mail sender start	 -->
+	
+	
+	
+	
+	
+	<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	<property name="supportedMediaTypes" value="application/json"/>
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	    <property name="messageConverters">
+	        <list>
+	            <ref bean="jacksonMessageConverter" />
+	        </list>
+	    </property>
+	</bean>
+	
+	 <bean id="applicationContextProvder"  class="com.unihyr.util.ApplicationContextProvider" />
+	 
+	 
+</beans>

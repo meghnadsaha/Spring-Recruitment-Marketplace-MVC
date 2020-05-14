@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions>
+    <definition name="homeTemplate" template="/WEB-INF/tilestemplate/jsp/homeTemplate.jsp">
+        <put-attribute name="body" value="" />
+    </definition> 
+    <definition name="publicHeader"
+		template="/WEB-INF/tilestemplate/jsp/publictemplate.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/view/jsp/headerPublic.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+    <definition name="home" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Home" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/home.jsp" />
+    </definition>
+    <definition name="login" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Login" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/login.jsp" />
+    </definition>
+    <definition name="forgetpassword" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Forget Password" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/forgetpassword.jsp" />
+    </definition>
+    <definition name="registration" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Registration" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/registration.jsp" />
+    </definition>
+    <definition name="error" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Error Page" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/error.jsp" />
+    </definition>
+    <definition name="resetPassword" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Reset Password" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/resetPassword.jsp" />
+    </definition>
+    <definition name="regSuccess" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Registration successful" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/regSuccess.jsp" />
+    </definition>
+    <definition name="invoiceVerification" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Invoice Verification" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/invoiceVerification.jsp" />
+    </definition>
+    <definition name="profileClosures" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Profile Closure" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/profileClosures.jsp" />
+    </definition>
+    <definition name="indexTemplate" template="/WEB-INF/tilestemplate/jsp/indexTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/view/jsp/headerIndex.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/view/jsp/footerIndex.jsp" />
+    </definition> 
+    <definition name="pageTemplate" template="/WEB-INF/tilestemplate/jsp/pageTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/view/jsp/header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/view/jsp/footer.jsp" />
+    </definition> 
+    <definition name="index" extends="indexTemplate">
+        <put-attribute name="title" value="UniHyr - Index Page" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/index.jsp" />
+    </definition>
+    <definition name="privacyPolicy" extends="pageTemplate">
+        <put-attribute name="title" value="UniHyr - Privacy Policy" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/privacyPolicy.jsp" />
+        </definition>
+    <definition name="faq" extends="pageTemplate">
+        <put-attribute name="title" value="UniHyr - FAQ" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/faq.jsp" />
+    </definition>
+    <definition name="termsOfService" extends="pageTemplate">
+        <put-attribute name="title" value="UniHyr - Terms Of Service" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/termsOfService.jsp" />
+    </definition>
+    <definition name="test" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Test" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/test.jsp" />
+        </definition>
+    <definition name="forwardedProfile" extends="publicHeader">
+        <put-attribute name="title" value="UniHyr - Candidate Profile" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/forwardApplicantInfo.jsp" />
+    </definition>
+    <definition name="postDetails" extends="publicHeader">
+        <put-attribute name="title" value="UniHyr - Job Post" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/postDetails.jsp" />
+    </definition>
+    <definition name="contractagreement" extends="publicHeader">
+        <put-attribute name="title" value="UniHyr - Contract Agreement" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/contractagreement.jsp" />
+    </definition>
+</tiles-definitions>

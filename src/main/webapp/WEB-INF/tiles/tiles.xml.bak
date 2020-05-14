@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions>
+
+    <definition name="homeTemplate" template="/WEB-INF/tilestemplate/jsp/homeTemplate.jsp">
+        <put-attribute name="body" value="" />
+    </definition> 
+    
+    <definition name="adminTemplate"  template="/WEB-INF/tilestemplate/jsp/indexTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/view/jsp/adminHeader.jsp" />
+        <put-attribute name="leftmenu" value="/WEB-INF/view/jsp/adminLeftMenu.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/view/jsp/footerAdmin.jsp" />
+    </definition>
+    
+    <definition name="admindashboard" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Admin Dashboard" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin_dashboard.jsp" />
+    </definition>
+    
+    <definition name="adminUserList" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - User List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminUserList.jsp" />
+    </definition>
+    <definition name="adminPostList" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr post list" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminPostList.jsp" />
+    </definition>
+    <definition name="adminProfileList" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Profile List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminProfileList.jsp" />
+    </definition>
+    <definition name="adminUserDerail" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - User Detail" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminUserDerail.jsp" />
+    </definition>
+    <definition name="adminViewJd" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr View JD" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminViewJd.jsp" />
+    </definition>
+    <definition name="adminViewProfile" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - View Profile" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminViewProfile.jsp" />
+    </definition>
+    <definition name="adminNewIndustry" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - New Industry" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminNewIndustry.jsp" />
+    </definition>
+    <definition name="adminIndustries" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Industries List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminIndustries.jsp" />
+    </definition>
+    <definition name="editIndustry" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Update Industries" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/editIndustry.jsp" />
+    </definition>
+    
+    <definition name="adminLocations" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Locations list" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminLocations.jsp" />
+    </definition>
+    <definition name="adminAddLocation" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Add New Location" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminAddLocation.jsp" />
+    </definition>
+    <definition name="adminEditLocation" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Update Location" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminEditLocation.jsp" />
+    </definition>
+    <definition name="adminUserChild" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Add Child User" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminUserChild.jsp" />
+    </definition>
+    
+    
+    
+    
+    
+    
+    <definition name="adminDashboardPostList" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Post List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/adminDashboardPostList.jsp" />
+    </definition>
+    
+    
+    <definition name="home" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Home" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/home.jsp" />
+    </definition>
+    
+    
+    
+    
+    
+    <definition name="login" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Login" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/login.jsp" />
+    </definition>
+    <definition name="registration" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Registration" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/registration.jsp" />
+    </definition>
+    <definition name="error" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Error Page" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/error.jsp" />
+    </definition>
+    <definition name="resetPassword" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Reset Password" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/resetPassword.jsp" />
+    </definition>
+    <definition name="regSuccess" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Registration successful" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/regSuccess.jsp" />
+    </definition>
+    
+    
+    
+    
+    <definition name="indexTemplate" template="/WEB-INF/tilestemplate/jsp/indexTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/view/jsp/headerIndex.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/view/jsp/footerIndex.jsp" />
+    </definition> 
+    
+     
+    <definition name="index" extends="indexTemplate">
+        <put-attribute name="title" value="UniHyr - Index Page" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/index.jsp" />
+    </definition>
+    
+    <definition name="clientTemplate" template="/WEB-INF/tilestemplate/jsp/clientTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/view/jsp/headerClient.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/view/jsp/footerIndex.jsp" />
+    </definition> 
+    
+    <definition name="addPost" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - Add New Post" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/addPost.jsp" />
+        <put-attribute name="currentpage" value="yourpost" cascade="true"/>
+    </definition>
+    <definition name="editPost" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - Update Post" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/editPost.jsp" />
+        <put-attribute name="currentpage" value="editpost" cascade="true"/>
+    </definition>
+    
+    
+    <definition name="yourPosts" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - Your Posts List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/yourPosts.jsp" />
+        <put-attribute name="currentpage" value="yourpost" cascade="true"/>
+    </definition>
+    <definition name="clientPostApplicants" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - View Post Applicants" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientPostApplicants.jsp" />
+        <put-attribute name="currentpage" value="clientapplicants" cascade="true"/>
+    </definition>
+    
+    
+    <definition name="clientDashboard" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - Client Dashboard" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientDashboard.jsp" />
+        <put-attribute name="currentpage" value="clientdashboard" cascade="true"/>
+    </definition>
+    <definition name="clientBillingDetails" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - Client Billing Details" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/billingDetails.jsp" />
+        <put-attribute name="currentpage" value="clientBillingDetails" cascade="true"/>
+    </definition>
+    
+<!--     <definition name="clientBillInvoice" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - Bill Invoice" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientBillInvoice.jsp" />
+        <put-attribute name="currentpage" value="clientBillInvoice" cascade="true"/>
+    </definition> -->
+    <definition name="clientAccount" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - Client Account Detail" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientAccount.jsp" />
+        <put-attribute name="currentpage" value="clientaccount" cascade="true"/>
+    </definition>
+    <definition name="clientApplicantInfo" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - Applicant Info" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientApplicantInfo.jsp" />
+        <put-attribute name="currentpage" value="applicantinfo" cascade="true"/>
+    </definition>
+    <definition name="clientNewUser" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - New User" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientNewUser.jsp" />
+        <put-attribute name="currentpage" value="clientnewuser" cascade="true"/>
+    </definition>
+    <definition name="clientViewUser" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - View User" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientViewUser.jsp" />
+        <put-attribute name="currentpage" value="clientviewuser" cascade="true"/>
+    </definition>
+    <definition name="clientViewConsultant" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - About Consutant" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientViewConsultant.jsp" />
+        <put-attribute name="currentpage" value="clientviewconsultant" cascade="true"/>
+    </definition>
+    
+    
+    <definition name="clientProfileCenter" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - Profile Center" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientProfileCenter.jsp" />
+        <put-attribute name="currentpage" value="clientprofilecenter" cascade="true"/>
+    </definition>
+    
+    
+    
+    <definition name="clientProfileCenterList" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Profile Center" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientProfileCenterList.jsp" />
+        <put-attribute name="currentpage" value="clientprofilecenter" cascade="true"/>
+    </definition>
+    
+   	<definition name="clientPost" extends="homeTemplate">
+        <put-attribute name="title" value="client posts" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/postList.jsp" />
+    </definition>
+    <definition name="clientPostDetail" extends="clientTemplate">
+        <put-attribute name="title" value="UniHyr - View Post Detail" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientPostDetail.jsp" />
+        <put-attribute name="currentpage" value="clientaccount" cascade="true"/>
+    </definition>
+    <definition name="clientDashboardList" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Client Dashboard List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientDashboardList.jsp" />
+    </definition>
+    
+    <definition name="postApplicantList" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Post Applicant list" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/postApplicantList.jsp" />
+    </definition>
+    
+    
+    
+    <definition name="consultTemplate" template="/WEB-INF/tilestemplate/jsp/consultTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/view/jsp/headerConsultant.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/view/jsp/footerIndex.jsp" />
+    </definition> 
+    
+    <definition name="consBillingDetails" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - Consultant Billing Details" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/billingDetails.jsp" />
+        <put-attribute name="currentpage" value="consBillingDetails" cascade="true"/>
+    </definition>
+    
+    <definition name="consdashboard" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - Client Dashboard" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/consDashboard.jsp" />
+        <put-attribute name="currentpage" value="consdashboard" cascade="true"/>
+    </definition>
+    
+    <definition name="consnewposts" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - New Posts" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/consnewposts.jsp" />
+        <put-attribute name="currentpage" value="consnewposts" cascade="true"/>
+    </definition>
+    
+   	<definition name="consnewpostslist" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - New Posts List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/consnewpostslist.jsp" />
+    </definition>
+    <definition name="cons_your_positions" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - Manage Positions" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/cons_your_positions.jsp" />
+        <put-attribute name="currentpage" value="cons_your_positions" cascade="true"/>
+    </definition>
+    <definition name="uploadprofile" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - Upload profile" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/uploadprofile.jsp" />
+        <put-attribute name="currentpage" value="uploadprofile" cascade="true"/>
+    </definition>
+    <definition name="consultantAccount" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - Account" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/consultantAccount.jsp" />
+        <put-attribute name="currentpage" value="uploadprofile" cascade="true"/>
+    </definition>
+    <definition name="consApplicantInfo" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - Applicant info " />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientApplicantInfo.jsp" />
+        <put-attribute name="currentpage" value="uploadprofile" cascade="true"/>
+    </definition>
+    <definition name="viewConsPostDetail" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - Post Description" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/viewConsPostDetail.jsp" />
+        <put-attribute name="currentpage" value="uploadprofile" cascade="true"/>
+    </definition>
+    <definition name="consNewUser" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - New User" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/consNewUser.jsp" />
+        <put-attribute name="currentpage" value="consnewuser" cascade="true"/>
+    </definition>
+    
+    <definition name="consViewUser" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - View User" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/clientViewUser.jsp" />
+        <put-attribute name="currentpage" value="consviewuser" cascade="true"/>
+    </definition>
+    
+    <definition name="consProfileCenter" extends="consultTemplate">
+        <put-attribute name="title" value="UniHyr - Profile Center" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/consProfileCenter.jsp" />
+        <put-attribute name="currentpage" value="consprofilecenter" cascade="true"/>
+    </definition>
+    
+    
+    
+    <definition name="consProfileCenterList" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Profile Center" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/consProfileCenterList.jsp" />
+    </definition>
+    
+    <definition name="consultRegistration" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Consultant registration" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/consultRegistration.jsp" />
+    </definition>
+    
+     
+    <definition name="consDashboardList" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Consultant List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/consDashboardList.jsp" />
+    </definition>
+    <definition name="cons_leftside_postlist" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - side bar" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/cons_left_side_postlist.jsp" />
+    </definition>
+    
+    
+    <definition name="profilelistbyconsidclientid" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - profile list" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/cons_your_positionsinnerpage.jsp" />
+    </definition>
+</tiles-definitions>

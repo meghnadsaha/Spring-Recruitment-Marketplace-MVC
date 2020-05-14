@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	 <definition name="adminTemplate"  template="/WEB-INF/tilestemplate/jsp/indexTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/view/jsp/admin/adminHeader.jsp" />
+        <put-attribute name="leftmenu" value="/WEB-INF/view/jsp/admin/adminLeftMenu.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/view/jsp/admin/footerAdmin.jsp" />
+    </definition>
+    <definition name="admindashboard" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Admin Dashboard" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/admin_dashboard.jsp" />
+    </definition>
+    <definition name="adminUserList" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - User List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminUserList.jsp" />
+    </definition>
+    <definition name="adminPostList" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr post list" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminPostList.jsp" />
+    </definition>
+    <definition name="adminProfileList" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Profile List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminProfileList.jsp" />
+    </definition>
+    <definition name="adminBillingDetails" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Bills" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminBillingDetails.jsp" />
+    </definition>
+    <definition name="adminUserDerail" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - User Detail" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminUserDerail.jsp" />
+    </definition>
+    <definition name="adminViewJd" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr View JD" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminViewJd.jsp" />
+    </definition>
+    <definition name="adminViewProfile" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - View Profile" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminViewProfile.jsp" />
+    </definition>
+    <definition name="adminNewIndustry" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - New Industry" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminNewIndustry.jsp" />
+    </definition>
+    <definition name="adminIndustries" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Industries List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminIndustries.jsp" />
+    </definition>
+    <definition name="adminHelpMessages" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Help Desk" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminHelpDeskMsges.jsp" />
+    </definition>
+    <definition name="adminDemoRequests" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Demo Requests" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminDemoRequests.jsp" />
+    </definition>
+    <definition name="adminLoggedUsers" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Help Desk" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminLoggedUsers.jsp" />
+    </definition>
+    <definition name="editIndustry" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Update Industries" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/editIndustry.jsp" />
+    </definition>
+    <definition name="adminEditClientRegistration" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Update Registration" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminEditClientRegistration.jsp" />
+    </definition>
+    <definition name="adminEditConsultRegistration" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Update Registration" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminEditConsultRegistration.jsp" />
+    </definition>
+    
+    <definition name="adminLocations" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Locations list" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminLocations.jsp" />
+    </definition>
+    <definition name="adminAddLocation" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Add New Location" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminAddLocation.jsp" />
+    </definition>
+    <definition name="adminEditLocation" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Update Location" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminEditLocation.jsp" />
+    </definition>
+    
+    <definition name="adminAddConfiguration" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Add New Configuration" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminAddConfiguration.jsp" />
+    </definition>
+    
+    <definition name="adminEditConfiguration" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Add Edit Configuration" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminEditConfiguration.jsp" />
+    </definition>
+    
+    
+    <definition name="adminConfigurations" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Configurations" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminConfiguration.jsp" />
+    </definition>
+    <definition name="adminAddQualification" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Add Qualification" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminAddQualification.jsp" />
+    </definition>
+    
+    
+    <definition name="adminQualificationList" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Qualification List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminQualificationList.jsp" />
+    </definition>
+    
+    
+    <definition name="adminUserChild" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Add Child User" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminUserChild.jsp" />
+    </definition>
+    <definition name="adminDashboardPostList" extends="homeTemplate">
+        <put-attribute name="title" value="UniHyr - Post List" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminDashboardPostList.jsp" />
+    </definition>
+    <definition name="adminAddGlobalRating" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Add Global Rating" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminAddGlobalRating.jsp" />
+    </definition>
+    
+    <definition name="adminEditBilling" extends="adminTemplate">
+        <put-attribute name="title" value="UniHyr - Update Billing Detail" />
+        <put-attribute name="body" value="/WEB-INF/view/jsp/admin/adminEditBilling.jsp" />
+    </definition>
+    
+    
+    
+</tiles-definitions>

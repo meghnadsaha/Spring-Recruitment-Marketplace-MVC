@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="consultTemplate"
+		template="/WEB-INF/tilestemplate/jsp/consultTemplate.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/view/jsp/consultant/headerConsultant.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/view/jsp/footerIndex.jsp" />
+	</definition>
+	<definition name="consultTemplateWithoutNavigation"
+		template="/WEB-INF/tilestemplate/jsp/consultTemplate.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/view/jsp/consultant/headerConsultantWithoutNavigation.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/view/jsp/footerIndex.jsp" />
+	</definition>
+	<definition name="consultTemplateWithoutNavigationAndBack"
+		template="/WEB-INF/tilestemplate/jsp/consultTemplate.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/view/jsp/consultant/headerConsultantWithoutNavigationAndBack.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/view/jsp/footerIndex.jsp" />
+	</definition>
+	<definition name="consultTemplateGraph"
+		template="/WEB-INF/tilestemplate/jsp/consultGraph.jsp">
+		<put-attribute name="header"
+			value="/WEB-INF/view/jsp/consultant/headerConsultantGraph.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+	
+
+	<definition name="consBillingDetails" extends="consultTemplate">
+		<put-attribute name="title"
+			value="UniHyr - Consultant Billing Details" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/billingDetails.jsp" />
+		<put-attribute name="currentpage" value="consBillingDetails"
+			cascade="true" />
+	</definition>
+
+	<definition name="consdashboard" extends="consultTemplate">
+		<put-attribute name="title" value="UniHyr - Consultant Dashboard" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consDashboard.jsp" />
+		<put-attribute name="currentpage" value="consdashboard"
+			cascade="true" />
+	</definition>
+
+	<definition name="consnewposts" extends="consultTemplate">
+		<put-attribute name="title" value="UniHyr - New Positions" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consnewposts.jsp" />
+		<put-attribute name="currentpage" value="consnewposts"
+			cascade="true" />
+	</definition>
+
+	<definition name="consnewpostslist" extends="homeTemplate">
+		<put-attribute name="title" value="UniHyr - Recent Posts List" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consnewpostslist.jsp" />
+	</definition>
+	<definition name="cons_your_positions" extends="consultTemplate">
+		<put-attribute name="title" value="UniHyr - Manage Positions" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/cons_your_positions.jsp" />
+		<put-attribute name="currentpage" value="cons_your_positions"
+			cascade="true" />
+	</definition>
+	<definition name="uploadprofile" extends="consultTemplate">
+		<put-attribute name="title" value="UniHyr - Upload profile" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/uploadprofile.jsp" />
+		<put-attribute name="currentpage" value="uploadprofile"
+			cascade="true" />
+	</definition>
+	<definition name="consultantAccount" extends="consultTemplateWithoutNavigationAndBack">
+		<put-attribute name="title" value="UniHyr - Account" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consultantAccount.jsp" />
+		<put-attribute name="currentpage" value="consultantAccount"
+			cascade="true" />
+	</definition>
+	<definition name="consultantRatingGraph" extends="consultTemplateGraph">
+		<put-attribute name="title" value="UniHyr - Consultant Rating Statistics" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consultantRatingGraph.jsp" />
+		<put-attribute name="currentpage" value="consultantRatingGraph"
+			cascade="true" />
+	</definition>
+	<definition name="consApplicantInfo" extends="consultTemplateWithoutNavigationAndBack">
+		<put-attribute name="title" value="UniHyr - Applicant info " />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/applicantInfo.jsp" />
+		<put-attribute name="currentpage" value="uploadprofile"
+			cascade="true" />
+	</definition>
+	<definition name="consfaq" extends="consultTemplateWithoutNavigationAndBack">
+		<put-attribute name="title" value="UniHyr - FAQ" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consfaq.jsp" />
+		<put-attribute name="currentpage" value="consfaq"
+			cascade="true" />
+	</definition>
+	<definition name="viewConsPostDetail" extends="consultTemplateWithoutNavigationAndBack">
+		<put-attribute name="title" value="UniHyr - Post Description" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/viewConsPostDetail.jsp" />
+		<put-attribute name="currentpage" value="uploadprofile"
+			cascade="true" />
+	</definition>
+	<definition name="consNewUser" extends="consultTemplate">
+		<put-attribute name="title" value="UniHyr - New User" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consNewUser.jsp" />
+		<put-attribute name="currentpage" value="consnewuser"
+			cascade="true" />
+	</definition>
+
+	<definition name="consViewUser" extends="consultTemplate">
+		<put-attribute name="title" value="UniHyr - View User" />
+		<put-attribute name="body" value="/WEB-INF/view/jsp/viewUser.jsp" />
+		<put-attribute name="currentpage" value="consviewuser"
+			cascade="true" />
+	</definition>
+
+	<definition name="consProfileCenter" extends="consultTemplate">
+		<put-attribute name="title" value="UniHyr - Profile Center" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consProfileCenter.jsp" />
+		<put-attribute name="currentpage" value="consprofilecenter"
+			cascade="true" />
+	</definition>
+
+	<definition name="consProfileCenterList" extends="homeTemplate">
+		<put-attribute name="title" value="UniHyr - Profile Center" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consProfileCenterList.jsp" />
+	</definition>
+
+	<definition name="consultRegistration" extends="homeTemplate">
+		<put-attribute name="title" value="UniHyr - Consultant registration" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consultRegistration.jsp" />
+	</definition>
+
+	<definition name="consDashboardList" extends="homeTemplate">
+		<put-attribute name="title" value="UniHyr - Consultant List" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/consDashboardList.jsp" />
+	</definition>
+
+	<definition name="cons_leftside_postlist" extends="homeTemplate">
+		<put-attribute name="title" value="UniHyr - side bar" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/cons_left_side_postlist.jsp" />
+	</definition>
+
+	<definition name="profilelistbyconsidclientid" extends="homeTemplate">
+		<put-attribute name="title" value="UniHyr - profile list" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/cons_your_positionsinnerpage.jsp" />
+	</definition>
+	<definition name="cons_your_positions_blankpage" extends="homeTemplate">
+		<put-attribute name="title" value="UniHyr - profile list" />
+		<put-attribute name="body"
+			value="/WEB-INF/view/jsp/consultant/cons_your_positions_blankpage.jsp" />
+	</definition>
+
+</tiles-definitions>

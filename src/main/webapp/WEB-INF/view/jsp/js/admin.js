@@ -1,0 +1,401 @@
+function acceptPostCloseRequest(postId)
+{	alertify.confirm("Are you sure want to close this post ?", function (e, str) {
+	if (e) 
+	{
+	$.ajax({
+		type : "GET",
+		url : "acceptPostCloseRequest",
+		data : {'postId':postId},
+		contentType : "application/json",
+		success : function(data) {
+			alertify.success(data);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+	      }
+    }) ;	
+	}
+	});
+}
+
+jQuery(document).ready(function() {
+	
+	$(document.body).on('click', '.user_account  .change_password' ,function(){
+		var userid = $('.user_account  #userid').val();
+		var password = $('.user_account  #password').val();
+		var repassword = $('.user_account  #repassword').val();
+		if( userid != "" && password != "" && repassword != "" && password == repassword)
+		{
+
+			if(password.length<6&&repassword.length<6){
+
+				alertify.error("Password length should be 6 at least !");
+				return false;
+			}
+			if(!checkComplexity(password))
+			{
+				alertify.error("Please use atleast one  alphabet and number !");
+				return false;
+			}
+			
+			$.ajax({
+				type : "GET",
+				url : "adminreatpassword",
+				data : {'userid':userid,'password':password,'repassword':repassword},
+				contentType : "application/json",
+				success : function(data) {
+					var obj = jQuery.parseJSON(data);
+					if(obj.status)
+					{
+						alertify.success("Password changed for "+userid+" successfully !");
+						$('.user_account  #password').val("");
+						$('.user_account  #repassword').val("");
+					}else{
+						alertify.error(obj.msg);
+						$('.user_account  #password').val("");
+						$('.user_account  #repassword').val("");
+					}
+					
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+			      }
+		    }) ;	
+		}
+		else if(password != "" && repassword != "" && password != repassword)
+		{
+			alertify.error("Re-Password not matched as new password");
+		}
+		
+		
+	});
+	
+	
+	$(document.body).on('click', '.disable_user  .btn-disable' ,function(){
+		var userid = $('.user_account  #userid').val();
+		
+		if( userid != "" )
+		{
+			alertify.confirm("Are you sure to disable this user ?", function (e, str) {
+				if (e) 
+				{
+					$.ajax({
+						type : "GET",
+						url : "admindisableuser",
+						data : {'userid':userid},
+						contentType : "application/json",
+						success : function(data) {
+							
+							var obj = jQuery.parseJSON(data);
+							if(obj.status)
+							{
+								alertify.success("User "+userid+" disabled successfully !");
+								$('.disable_user  .btn-disable').html("Enable User");
+								$('.disable_user  .btn-disable').addClass("btn-enable");
+								$('.disable_user  .btn-disable').addClass("btn-success");
+								$('.disable_user  .btn-disable').removeClass("btn-danger");
+								$('.disable_user  .btn-disable').removeClass("btn-disable");
+								
+							}
+							
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+					      }
+				    }) ;	
+				}
+			});
+			
+		}
+		
+		
+	});
+	
+	
+	
+	$(document.body).on('click', '.disable_user  .btn-enable' ,function(){
+		var userid = $('.user_account  #userid').val();
+		if( userid != "" )
+		{
+				alertify.confirm("Are you sure to enable this user ?", function (e, str) {
+				if (e) 
+				{
+					$.ajax({
+						type : "GET",
+						url : "adminenableuser",
+						data : {'userid':userid},
+						contentType : "application/json",
+						success : function(data) {
+							
+							var obj = jQuery.parseJSON(data);
+							if(obj.status)
+							{
+								alertify.success("User "+userid+" enabled successfully !");
+								$('.disable_user  .btn-enable').html("Disable User");
+								$('.disable_user  .btn-enable').addClass("btn-disable");
+								$('.disable_user  .btn-enable').addClass("btn-danger");
+								$('.disable_user  .btn-enable').removeClass("btn-success");
+								$('.disable_user  .btn-enable').removeClass("btn-enable");
+							}
+							
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+					      }
+				    }) ;	
+				}
+			});
+
+		
+	}
+	});
+	
+	$(document.body).on('click', '#admin_user_list  .btn_disable' ,function(){
+		var userid = $(this).parent().parent().attr("id");
+		if( userid != "" )
+		{
+				alertify.confirm("Are you sure to disable this user ?", function (e, str) {
+				if (e) 
+				{
+					$.ajax({
+						type : "GET",
+						url : "admindisableuser",
+						data : {'userid':userid},
+						contentType : "application/json",
+						success : function(data) {
+							
+							var obj = jQuery.parseJSON(data);
+							if(obj.status)
+							{
+								location.reload();
+							}
+							else
+							{
+								alertify.error("Oops, Something wrong !");
+							}
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+					      }
+				    }) ;	
+				}
+			});
+		}
+	});
+	$(document.body).on('click', '#admin_user_list  .btn_enable' ,function(){
+		var userid = $(this).parent().parent().attr("id");
+		if( userid != "" )
+		{
+				alertify.confirm("Are you sure to enable this user ?", function (e, str) {
+				if (e) 
+				{
+					$.ajax({
+						type : "GET",
+						url : "adminenableuser",
+						data : {'userid':userid},
+						contentType : "application/json",
+						success : function(data) {
+							
+							var obj = jQuery.parseJSON(data);
+							if(obj.status)
+							{
+								location.reload();
+							}
+							else
+							{
+								alertify.error("Oops, Something wrong !");
+							}
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+					      }
+				    }) ;	
+				}
+			});
+		}
+	});
+	
+	
+	
+	$(document.body).on('click', '.verify_status .btn_verify' ,function(){
+		pleaseWait();
+		var pid= $(this).attr("verify-post");
+		$.ajax({
+			type : "GET",
+			url : "adminvarifypost",
+			data : {'pid':pid},
+			contentType : "application/json",
+			success : function(data) {
+				var obj = jQuery.parseJSON(data);
+				if(obj.status)
+				{
+					alertify.success("Post verified successfully!");
+					location.reload();
+				}
+				else
+				{
+					alertify.error("Oops, Something wrong !");
+				}
+				pleaseDontWait();
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+		        pleaseDontWait();
+		      }
+	    }) ;	
+		
+		
+	});
+	
+	
+	
+});
+
+
+function contractSignUp(){
+	var userid = $('.user_account  #userid').val();
+//	var contractNo = $('.user_account  #contractNo').val();
+	var paymentDays = $('.user_account  #paymentDays').val();
+	var emptyField = $('.user_account  #emptyField').val();
+	var feeCommission = $('#feeCommission').val();
+	
+	if(feeCommission){
+		if(!paymentDays||(!$.isNumeric(paymentDays))){
+			
+			alertify.error("Please fill all fields correctly !!");
+			return false;
+	}else{
+	return true;
+	}
+	}else{
+	var feePercent1 = $('#feePercent1').val();
+	var feePercent2 = $('#feePercent2').val();
+	var feePercent3 = $('#feePercent3').val();
+	var feePercent4 = $('#feePercent4').val();
+	var feePercent5 = $('#feePercent5').val();
+	var slab1 = $('#slab1').val();
+	var slab2 = $('#slab2').val();
+	var slab3 = $('#slab3').val();
+	var slab4 = $('#slab4').val();
+	var slab5 = $('#slab5').val();
+							if (feePercent1 == ""  ||(!$.isNumeric(feePercent1)) || 
+								(feePercent2 != ""&&!$.isNumeric(feePercent2)) || 
+								(feePercent3 != ""&&!$.isNumeric(feePercent3)) || 
+								(feePercent4 != ""&&!$.isNumeric(feePercent4)) || 
+								(feePercent5 != ""&&!$.isNumeric(feePercent5)) ||
+								slab1 == ""  ||
+							    paymentDays == ""  ||(!$.isNumeric(paymentDays)) ) {
+			alertify.error("Please fill all fields correctly !!");
+			return false;
+	}else{
+	return true;
+}}
+	}
+
+	
+function onBlueZero(){
+
+	var feePercent1 = $('#feePercent1').val();
+	var feePercent2 = $('#feePercent2').val();
+	var feePercent3 = $('#feePercent3').val();
+	var feePercent4 = $('#feePercent4').val();
+	var feePercent5 = $('#feePercent5').val();
+	if(feePercent1 == ""||!$.isNumeric(feePercent1)) {
+		$('#feePercent1').val('0');
+	} 
+	if(feePercent2 == ""||!$.isNumeric(feePercent2)) {
+
+		$('#feePercent2').val('0');
+	} 
+	if(feePercent3 == ""||!$.isNumeric(feePercent3)) {
+
+		$('#feePercent3').val('0');
+	} 
+	if(feePercent4 == ""||!$.isNumeric(feePercent4)) {
+
+		$('#feePercent4').val('0');
+	} 
+	if(feePercent5 == ""||!$.isNumeric(feePercent5)) {
+
+		$('#feePercent5').val('0');
+	}
+	
+}
+
+function checkComplexity(password)
+{
+	var strongRegex = new RegExp("^(?=.{6,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+	return strongRegex.test(password)
+}
+function validateLocationForm(){
+	var location = $('#location').val();
+	$.ajax({
+		type : "GET",
+		url : "adminCheckLocationDup",
+		data : {'location':location},
+		contentType : "application/json",
+		success : function(data) {
+			var obj = jQuery.parseJSON(data);
+			if(obj.status)
+			{
+				alertify.success("Post verified successfully!");
+				location.reload();
+			}
+			else
+			{
+				alertify.error("Oops, Something wrong !");
+			}
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+	      }
+    }) ;	
+	
+	
+	
+	
+}
+function editDetails(){
+
+	$('.blockfields').css("display","block");
+	$('.nonefields').css("display","none");
+	
+}
+function editCancel(){
+
+	$('.blockfields').css("display","none");
+	$('.nonefields').css("display","block");
+	
+}
+function editDetailsSubmit(){
+	var userid=$('#userid').val();
+	var username=$("#username").val();
+	var usercontact=$("#usercontact").val();
+	
+	pleaseWait();
+	$.ajax({
+		type : "GET",
+		url : "adminEditUser",
+		data : {'userid':userid,'username':username,"usercontact":usercontact},
+		contentType : "application/json",
+		success : function(data) {
+			var obj = jQuery.parseJSON(data);
+			if(obj.status == "success")
+			{
+				alertify.success("Edited Successfully !");
+				$("#usernamelbl").html(username);
+				$("#usercontactlbl").html(usercontact);
+				editCancel();
+			}
+			else
+			{
+				alertify.error("Oops something wrong !");
+			}
+			pleaseDontWait();
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			pleaseDontWait();
+		}
+	}) ;
+}
+
+function pleaseWait(){
+
+	$('.bodyCoverWait').css('display','block');
+}
+function pleaseDontWait(){
+
+	$('.bodyCoverWait').css('display','none');
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ldap="http://www.springframework.org/schema/ldap"
+	xmlns="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/ldap http://www.springframework.org/schema/ldap/spring-ldap-2.0.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<http pattern="/index" security="none"></http>
+	
+	<http auto-config="true" use-expressions="true">
+	    <intercept-url pattern="/index" access="permitAll" />
+	    <intercept-url pattern="/clientregistration" access="permitAll" />
+	    <intercept-url pattern="/consultantregistration" access="permitAll" />
+	    
+<!-- 		<intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" /> -->
+		    
+		<intercept-url pattern="/client*" access="hasRole('ROLE_EMP_MANAGER') or hasRole('ROLE_EMP_USER') " />
+		<intercept-url pattern="/cons*" access="hasRole('ROLE_CON_MANAGER') or hasRole('ROLE_CON_USER') " />
+		<intercept-url pattern="/uploadprofile" access="hasRole('ROLE_CON_MANAGER') or hasRole('ROLE_CON_USER') " />
+		
+		
+		<form-login login-page="/login" default-target-url="/getLogedIn" authentication-failure-url="/failtologin" />
+		<access-denied-handler error-page="/accessDenied" />
+		<logout logout-success-url="/logout" delete-cookies="JSESSIONID" />
+	   
+	    <!-- enable remember me -->
+	    <remember-me token-validity-seconds="1209600" data-source-ref="dataSource" />
+	</http>
+	
+	<authentication-manager>
+	   <authentication-provider>
+	       <password-encoder hash="bcrypt"></password-encoder>
+	           <jdbc-user-service data-source-ref="dataSource"    
+	             users-by-username-query="select userid, password,isactive from logininfo where userid=?"   
+	             authorities-by-username-query="select us.userid, ur.userrole from logininfo us, userrole ur   
+	        where us.userid = ur.userid and us.userid =?"  /> 
+	   </authentication-provider>
+	</authentication-manager>
+</beans:beans>

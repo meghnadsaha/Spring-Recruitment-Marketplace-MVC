@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+	<definition name="clientBillInvoice" extends="homeTemplate">
+		<put-attribute name="title" value="UniHyr - Client Bill Invoice" />
+		<put-attribute name="body" value="/WEB-INF/view/jsp/billing/clientBillInvoice.jsp" />
+	</definition>
+</tiles-definitions>
