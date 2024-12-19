@@ -30,7 +30,7 @@ public class GeneralConfig
 			+ "The maximum fee specified specified for this position was x %. This final recruitment "
 			+ "fee will be estimated basis the offered fee.";
 	public static final String FaqOfferedFeeNewPosition = "Specify the lowest rate you can offer within the specified "
-			+ "range to improve the visibility of your CV’s submitted at the employers end. "
+//			+ "range to improve the visibility of your CVï¿½s submitted at the employers end. "
 			+ "The rate you offer here will be final and in case any of your candidate(s) is selected, "
 			+ "the rate you specify here will be used for the estimation of recruitment fee.";
 	public static final String FaqProfileQuota="It is the maximum number of profiles you can submit for a position in a week. This quota has been specified by the employer for this position.";
@@ -77,7 +77,9 @@ public class GeneralConfig
 	public static final String Add_Post_Submit_Button_Value = "Submit";
 	public static final String Delimeter = ",,,,,,";
 	public static final long BillDaysOut = 7;
-	public static final String UnihyrAddress = "UHYR Labs Private Limited 502, Fifth Floor, Spaze iTech Park, Sector 49, Gurgaon – 122001, Haryana, India";
+	public static final String UnihyrAddress = "UHYR Labs Private Limited 502, Fifth Floor, " ;
+//	+
+//			"Spaze iTech Park, Sector 49, Gurgaon ï¿½ 122001, Haryana, India";
 	public static final String UnihyrServiceTaxNo= "Not Applicable";
 	public static final String UnihyrPanNo= "AABCU9702H";
 	public static final String OldPassErrMsg = "New password can not be same as the old password";

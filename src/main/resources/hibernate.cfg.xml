@@ -7,11 +7,12 @@
     
     <session-factory>
      	<property name="hbm2ddl.auto">create</property>
+		<mapping class="com.unihyr.domain.Post"/>
+
 		<mapping class="com.unihyr.domain.LoginInfo"/>
 		<mapping class="com.unihyr.domain.Registration"/>
 		<mapping class="com.unihyr.domain.UserRole"/>
 		<mapping class="com.unihyr.domain.Persistent_Logins"/>
-   	    <mapping class="com.unihyr.domain.Post"/>
    	    <mapping class="com.unihyr.domain.Industry"/>
    	    <mapping class="com.unihyr.domain.CandidateProfile"/>
    	    <mapping class="com.unihyr.domain.GlobalRating"/>

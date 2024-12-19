@@ -1,13 +1,13 @@
 package com.unihyr.controller;
 
-import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertEquals;
 
 import java.util.Timer;
 
-import javax.annotation.PostConstruct;
-
-import org.junit.After;
-import org.junit.Test;
+//import javax.annotation.PostConstruct;
+//
+//import org.junit.After;
+//import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +15,9 @@ import com.unihyr.constraints.GeneralConfig;
 import com.unihyr.domain.ConfigVariables;
 import com.unihyr.service.ConfigVariablesService;
 import com.unihyr.service.PostProfileService;
+
+import javax.annotation.PostConstruct;
+
 @Component
 public class WebConfig
 {

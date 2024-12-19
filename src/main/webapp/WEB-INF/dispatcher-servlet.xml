@@ -105,7 +105,7 @@
 	
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" /> 
 	
-<!--  java mail sender start	 -->
+<!--  java mail sender start	
 <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
     <property name="host" value="smtp.gmail.com" />
     <property name="port" value="587" />
@@ -118,7 +118,22 @@
             <prop key="mail.smtp.starttls.enable">true</prop>
         </props>
     </property>
+</bean> -->
+<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="smtp.example.com"/>
+    <property name="port" value="587"/>
+    <property name="username" value="your-email@example.com"/>
+    <property name="password" value="your-email-password"/>
+    <property name="javaMailProperties">
+        <props>
+            <prop key="mail.smtp.auth">true</prop>
+            <prop key="mail.smtp.starttls.enable">true</prop>
+            <prop key="mail.smtp.timeout">25000</prop>
+            <prop key="mail.smtp.connectiontimeout">25000</prop>
+        </props>
+    </property>
 </bean>
+
 <!--  java mail sender start	 -->
 	
 	

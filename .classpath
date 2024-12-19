@@ -10,16 +10,20 @@
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
@@ -37,10 +41,60 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ridl-3.0.1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/unoil-3.0.1.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/xstream-1.3.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/appletviewer.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/extcheck.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/idlj.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jabswitch.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jar.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jarsigner.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/java.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/javac.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/javadoc.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/javafxpackager.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/javah.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/javap.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/javapackager.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/java-rmi.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/javaw.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/javaws.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jcmd.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jconsole.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jdb.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jdeps.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jhat.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jinfo.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jjs.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jli.dll"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jmap.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jmc.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jmc.ini"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jps.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jrunscript.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jsadebugd.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jstack.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jstat.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jstatd.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/jvisualvm.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/keytool.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/kinit.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/klist.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/ktab.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/msvcr100.dll"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/native2ascii.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/orbd.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/pack200.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/policytool.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/rmic.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/rmid.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/rmiregistry.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/schemagen.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/serialver.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/servertool.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/tnameserv.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/unpack200.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/wsgen.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/wsimport.exe"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/jdk1.8.0_202/bin/xjc.exe"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

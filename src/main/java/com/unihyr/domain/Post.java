@@ -30,25 +30,25 @@ public class Post implements Serializable
 	@Column(nullable=false)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long postId;
-	
+
 	@Column
 	private String jobCode;
-	
+
 	@Column(nullable=false)
 	private String title;
-	
+
 	@Column(nullable=false)
 	private String location;
-	
+
 	@Column(nullable=false)
 	private String function;
-	
+
 	@Column(nullable=false)
-	private double exp_min;
-	
+	private int exp_min;
+
 	@Column(nullable=false)
-	private double exp_max;
-	
+	private int exp_max;
+
 	@Column(nullable=false)
 	private double ctc_min;
 
@@ -57,10 +57,10 @@ public class Post implements Serializable
 
 	@Column
 	private double feePercent;
-	
+
 	@Column
 	private String criteria;
-	
+
 	@Column
 	@Lob
 	private String comment;
@@ -69,24 +69,22 @@ public class Post implements Serializable
 	private String uploadjd;
 	@Column
 	private String uploadjdaudio;
-	
+
 	@Column
 	private String posterId;
-	
+
 	@Column
 	@Lob
 	private String additionDetail;
-	
+
 	@Column
 	private Date published;
-	
+
 	@Column(nullable=false)
 	private boolean isActive;
 
 	@Column
 	private Date closeDate;
-	@Column
-	private Date joinCloseDate;
 	@Column
 	private Date openAgainDate;
 
@@ -97,7 +95,7 @@ public class Post implements Serializable
 	private int noOfPostsFilled;
 	@Column
 	private int noOfPostsJoined;
-	
+
 /*	@Column(nullable=false)
 	private String role;
 
@@ -133,7 +131,7 @@ public class Post implements Serializable
 	@Column
 	@Lob
 	private String variablePayComment;
-	
+
 
 //	@Column
 //	private int inProcess;
@@ -151,16 +149,6 @@ public class Post implements Serializable
 	public Date getOpenAgainDate()
 	{
 		return openAgainDate;
-	}
-
-	public Date getJoinCloseDate()
-	{
-		return joinCloseDate;
-	}
-
-	public void setJoinCloseDate(Date joinCloseDate)
-	{
-		this.joinCloseDate = joinCloseDate;
 	}
 
 	public int getNoOfPostsJoined()
@@ -370,19 +358,19 @@ public class Post implements Serializable
 		this.function = function;
 	}
 
-	public double getExp_min() {
+	public int getExp_min() {
 		return exp_min;
 	}
 
-	public void setExp_min(double exp_min) {
+	public void setExp_min(int exp_min) {
 		this.exp_min = exp_min;
 	}
 
-	public double getExp_max() {
+	public int getExp_max() {
 		return exp_max;
 	}
 
-	public void setExp_max(double exp_max) {
+	public void setExp_max(int exp_max) {
 		this.exp_max = exp_max;
 	}
 
@@ -434,7 +422,7 @@ public class Post implements Serializable
 		this.additionDetail = additionDetail;
 	}
 
-	
+
 	public Date getPublished() {
 		return published;
 	}
@@ -448,27 +436,27 @@ public class Post implements Serializable
 	@ManyToOne()
 	@JoinColumn(name = "clientId", referencedColumnName = "userid" , nullable=false)
 	private Registration client;
-	
-	
+
+
 	@ManyToOne()
 	@JoinColumn(name = "lastModifier", referencedColumnName = "userid")
 	private Registration lastModifier;
-	
-	
+
+
 	@Column
 	private Date createDate;
-	
+
 	@Column
 	private Date modifyDate;
-	
+
 	@Column
 	private Date deleteDate;
 
 	@Column
 	private Date verifyDate;
-	
 
-	
+
+
 	public int getNoOfPosts()
 	{
 		return noOfPosts;
@@ -542,8 +530,8 @@ public class Post implements Serializable
 	public void setDeleteDate(Date deleteDate) {
 		this.deleteDate = deleteDate;
 	}
-	
-	
+
+
 	public boolean isActive()
 	{
 		return isActive;
@@ -576,7 +564,7 @@ public class Post implements Serializable
 
 
 
-	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)  
+	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
 	private Set<PostProfile> postProfile;
 
 	public Set<PostProfile> getPostProfile()
@@ -589,8 +577,8 @@ public class Post implements Serializable
 		this.postProfile = postProfile;
 	}
 
-	
-	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)  
+
+	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
 	private Set<PostConsultant> postConsultants;
 
 
@@ -614,6 +602,6 @@ public class Post implements Serializable
 		this.verifyDate = verifyDate;
 	}
 
-	
-	
+
+
 }
