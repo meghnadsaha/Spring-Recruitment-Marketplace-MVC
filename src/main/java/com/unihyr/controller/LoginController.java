@@ -102,7 +102,7 @@ public class LoginController
 			}
 			String mailContent = "Dear " + registration.getName() + " (" + companyName + "),<br><br><br>" +
 			"Please find below your user credentials. Please login and change "
-					+ "password for security reasons. For any assistance, please feel free to reach out to us at help@unihyr.com<br><br>"
+					+ "password for security reasons. For any assistance, please feel free to reach out to us at help@facebook.com<br><br>"
 					+ "Username - " + registration.getUserid() + "<br>" + "Password - " + id + "<br><br><br>" +
 			"Regards,<br>" + "Team UniHyr";
 			try{

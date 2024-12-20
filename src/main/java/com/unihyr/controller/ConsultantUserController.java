@@ -136,7 +136,7 @@ public class ConsultantUserController
 			 
 			"We are delighted to have you on-board our UniHyr family.<br>"+
 			 
-			"Please find below your user credentials. Please login and change password for security reasons. For any assistance, please feel free to reach out to us at help@unihyr.com<br><br>"+
+			"Please find below your user credentials. Please login and change password for security reasons. For any assistance, please feel free to reach out to us at help@facebook.com<br><br>"+
 			 
 			"Username - "+reg.getUserid()+"<br>"+
 			

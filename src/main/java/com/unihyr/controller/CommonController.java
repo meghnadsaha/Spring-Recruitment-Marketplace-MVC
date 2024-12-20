@@ -112,7 +112,7 @@ public class CommonController
 					+ "<p></p>"
 					//+ "<p><img src ='"+GeneralConfig.UniHyrUrl+"/images/logo.png' width='63'> </p>"
 					+ "<p><strong>Admin Team</strong></p><p></p>"
-					+ "<p>This is a system generated mail. Please do not reply to this mail. In case of any queries, please write to <a target='_blank' href='mailto:partnerdesk@unihyr.com'>partnerdesk@unihyr.com</a></p>"
+					+ "<p>This is a system generated mail. Please do not reply to this mail. In case of any queries, please write to <a target='_blank' href='mailto:partnerdesk@facebook.com'>partnerdesk@facebook.com</a></p>"
 					+ "</div>"
 					+ "</td>"
 					+ "</tr>"
@@ -359,7 +359,7 @@ public String termsOfService(ModelMap map, HttpServletRequest request, Principal
 		"We are delighted to have you on-board our UniHyr family.<br>" +
 
 		"Please find below your user credentials. Please login and change "
-				+ "password for security reasons. For any assistance, please feel free to reach out to us at help@unihyr.com<br><br>"
+				+ "password for security reasons. For any assistance, please feel free to reach out to us at help@facebook.com<br><br>"
 				+ "Username - " + registration.getUserid() + "<br>" + "Password - " + id + "<br><br><br>" +
 
 		"Regards,<br>" + "UniHyr Admin Team";

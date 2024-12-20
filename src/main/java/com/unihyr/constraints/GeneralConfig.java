@@ -47,7 +47,7 @@ public class GeneralConfig
 	public static final String InfoNoInstructionAudio="No instruction audio";
 	public static final String InfoInstructionAudio="Please check instruction audio";
 	
-	public static final String UploadPath = "/var/unihyr/data/";
+	public static final String UploadPath = "/Users/meghnadsaha/Documents/";
 	public static final String Label_Activate = "Activate";
 	public static final String Label_DeActivate = "Deactivate";
 	public static final String SubmittedOnly = "Pending";
@@ -91,7 +91,7 @@ public class GeneralConfig
 	public static final String EditPostUpdateInfo = "This post has been edited recently please see edit summary for more details";
 	public static final String Unihyr_IFSC = "XXXXXXXXX";
 	public static final String Unihyr_AccountNo = "XXXXXXXXX";
-	//public static final String UploadPath = "D:/var/unihyr/data/";
+	//public static final String UploadPath = "D:/Users/meghnadsaha/Documents/";
 	public static double TAX = 14;
 	public static int NoOfRatingStaticParams = 2;
 	public static int NoOfRatingDynamicParams = 3;
@@ -101,7 +101,7 @@ public class GeneralConfig
 	public static int globalRatingWeight1=50;
 	public static int globalRatingMaxRows2=21;
 	public static int globalRatingWeight2=50;
-	public static String admin_email = "unihyr@gmail.com,";
+	public static String admin_email = "unihyr@facebook.com,";
 	public static int filesize=1024000;
 	public static int audiofilesize=10240000;
 	public static List<String> filetype = new ArrayList<>();

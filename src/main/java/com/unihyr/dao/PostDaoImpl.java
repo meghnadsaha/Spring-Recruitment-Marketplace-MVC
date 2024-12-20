@@ -142,10 +142,10 @@ public class PostDaoImpl implements PostDao
 		criteria.add(Restrictions.isNull("deleteDate"));
 		//	.add(Restrictions.isNull("closeDate"));
 		//	.add(Restrictions.isNotNull("verifyDate"));
-		 if(sortParam.indexOf("published")>=0)
-	      		criteria.addOrder(Order.desc(sortParam));
-	      		else
-	      		criteria.addOrder(Order.asc(sortParam));
+//		 if(sortParam.indexOf("published")>=0)
+//	      		criteria.addOrder(Order.desc(sortParam));
+//	      		else
+//	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
 		List<Object[]> idList = criteria.list();
@@ -163,10 +163,10 @@ public class PostDaoImpl implements PostDao
             criteria.add(Restrictions.in("postId", longList)).addOrder(Order.desc("createDate"));
             criteria.setFetchMode("postProfile", FetchMode.JOIN);
             criteria.setFetchMode("postConsultants", FetchMode.JOIN);
-            if(sortParam.indexOf("published")>=0)
-          		criteria.addOrder(Order.desc(sortParam));
-          		else
-          		criteria.addOrder(Order.asc(sortParam));
+//            if(sortParam.indexOf("published")>=0)
+//          		criteria.addOrder(Order.desc(sortParam));
+//          		else
+//          		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         } 
 		else
@@ -231,10 +231,10 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", userid);
 		criteria.add(Restrictions.or(cn1, cn2));
 
-		 if(sortParam.indexOf("published")>=0)
-	      		criteria.addOrder(Order.desc(sortParam));
-	      		else
-	      		criteria.addOrder(Order.asc(sortParam));
+//		 if(sortParam.indexOf("published")>=0)
+//	      		criteria.addOrder(Order.desc(sortParam));
+//	      		else
+//	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
 		
@@ -255,10 +255,10 @@ public class PostDaoImpl implements PostDao
             criteria.add(Restrictions.in("postId", longList));
             criteria.setFetchMode("postProfile", FetchMode.JOIN);
             criteria.setFetchMode("postConsultants", FetchMode.JOIN);
-            if(sortParam.indexOf("published")>=0)
-          		criteria.addOrder(Order.desc(sortParam));
-          		else
-          		criteria.addOrder(Order.asc(sortParam));
+//            if(sortParam.indexOf("published")>=0)
+//          		criteria.addOrder(Order.desc(sortParam));
+//          		else
+//          		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         } 
 		else
@@ -305,10 +305,10 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
 		
-		 if(sortParam.indexOf("published")>=0)
-	      		criteria.addOrder(Order.desc(sortParam));
-	      		else
-	      		criteria.addOrder(Order.asc(sortParam));
+//		 if(sortParam.indexOf("published")>=0)
+//	      		criteria.addOrder(Order.desc(sortParam));
+//	      		else
+//	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
 		
@@ -376,10 +376,10 @@ public class PostDaoImpl implements PostDao
 		criteria.add(Restrictions.or(cn1, cn2));
 	//	.add(Restrictions.isNotNull("verifyDate"));
 		
-		 if(sortParam.indexOf("published")>=0)
-	      		criteria.addOrder(Order.desc(sortParam));
-	      		else
-	      		criteria.addOrder(Order.asc(sortParam));
+//		 if(sortParam.indexOf("published")>=0)
+//	      		criteria.addOrder(Order.desc(sortParam));
+//	      		else
+//	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
 		
@@ -400,10 +400,10 @@ public class PostDaoImpl implements PostDao
             criteria.add(Restrictions.in("postId", longList));
             criteria.setFetchMode("postProfile", FetchMode.JOIN);
             criteria.setFetchMode("postConsultants", FetchMode.JOIN);
-            if(sortParam.indexOf("published")>=0)
-          		criteria.addOrder(Order.desc(sortParam));
-          		else
-          		criteria.addOrder(Order.asc(sortParam));
+//            if(sortParam.indexOf("published")>=0)
+//          		criteria.addOrder(Order.desc(sortParam));
+//          		else
+//          		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         } 
 		else
@@ -447,10 +447,10 @@ public class PostDaoImpl implements PostDao
 		criteria.add(Restrictions.or(cn1, cn2));
 //		.add(Restrictions.isNotNull("verifyDate"));
 		
-		 if(sortParam.indexOf("published")>=0)
-	      		criteria.addOrder(Order.desc(sortParam));
-	      		else
-	      		criteria.addOrder(Order.asc(sortParam));
+//		 if(sortParam.indexOf("published")>=0)
+//	      		criteria.addOrder(Order.desc(sortParam));
+//	      		else
+//	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
 		
@@ -471,10 +471,10 @@ public class PostDaoImpl implements PostDao
             criteria.add(Restrictions.in("postId", longList));
             criteria.setFetchMode("postProfile", FetchMode.JOIN);
             criteria.setFetchMode("postConsultants", FetchMode.JOIN);
-            if(sortParam.indexOf("published")>=0)
-          		criteria.addOrder(Order.desc(sortParam));
-          		else
-          		criteria.addOrder(Order.asc(sortParam));
+//            if(sortParam.indexOf("published")>=0)
+//          		criteria.addOrder(Order.desc(sortParam));
+//          		else
+//          		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         } 
 		else
@@ -507,85 +507,175 @@ public class PostDaoImpl implements PostDao
 	
 	
 	
+//	@Override
+//	public List<Post> getPostsByIndustryUsingConsultantId(String consultantId, int first, int max,String sortParam)
+//	{
+//		List<Integer> indList = new ArrayList<>();
+//
+//		Criteria crt = this.sessionFactory.getCurrentSession().createCriteria(Registration.class);
+//
+////		crt.add(Restrictions.eq("userid", consultantId));
+//
+//		Criterion cn1 = Restrictions.eq("userid", consultantId);
+//		Criterion cn2 = Restrictions.eq("admin.userid", consultantId);
+//		crt.add(Restrictions.or(cn1, cn2));
+//
+//		List<Registration> reg = crt.list();
+//
+//		if(reg != null && !reg.isEmpty())
+//		{
+//			Set<Industry> inds = reg.get(0).getIndustries();
+//			Iterator<Industry> it = inds.iterator();
+//			while(it.hasNext())
+//			{
+//				indList.add(it.next().getId());
+//			}
+//		}
+//
+//
+//		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
+//		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
+//		criteria.add(Restrictions.isNull("deleteDate")).add(Restrictions.isNotNull("published"));
+//
+//		Calendar c = Calendar.getInstance();
+//		c.add(Calendar.DATE, -15);
+//		criteria.createAlias("client", "clientAlias");
+//		criteria.createAlias("clientAlias.industries", "indAlias");
+//		criteria.add(Restrictions.in("indAlias.id", indList));
+//		criteria.add(Restrictions.eq("isActive", true))
+//		.add(Restrictions.isNull("closeDate"))
+//		.add(Restrictions.ge("verifyDate", c.getTime()))
+//		.add(Restrictions.isNotNull("verifyDate"));
+//		  if(sortParam.indexOf("published")>=0)
+//      		criteria.addOrder(Order.desc(sortParam));
+//      		else
+//      		criteria.addOrder(Order.asc(sortParam));
+//		criteria.setFirstResult(first);
+//		criteria.setMaxResults(max);
+//
+//
+//		List<Object[]> idList = criteria.list();
+//		//get the id's from the projection
+//        List<Long> longList = new ArrayList<Long>();
+//        for (Object[] long1 : idList) {
+//            Object[] record = long1;
+//            longList.add((Long) record[0]);
+//        }
+//
+//		if (longList.size() > 0)
+//		{
+//			//get all the id's corresponding to the projection,
+//			//then apply distinct root entity
+//            criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
+//            criteria.add(Restrictions.in("postId", longList));
+//            criteria.setFetchMode("postProfile", FetchMode.JOIN);
+//            criteria.setFetchMode("postConsultants", FetchMode.JOIN);
+//            criteria.setFetchMode("client.industries", FetchMode.JOIN);
+//            if(sortParam.indexOf("published")>=0)
+//        		criteria.addOrder(Order.desc(sortParam));
+//        		else
+//        		criteria.addOrder(Order.asc(sortParam));
+//            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+//        }
+//		else
+//		{
+//		//no results, so let's ommit the second query to the DB
+//	         return new ArrayList<Post>();
+//        }
+//
+//		return criteria.list();
+//
+//	}
+
 	@Override
-	public List<Post> getPostsByIndustryUsingConsultantId(String consultantId, int first, int max,String sortParam)
-	{
+	public List<Post> getPostsByIndustryUsingConsultantId(String consultantId, int first, int max, String sortParam) {
 		List<Integer> indList = new ArrayList<>();
-		
+
+		// Step 1: Get the industries associated with the consultant
 		Criteria crt = this.sessionFactory.getCurrentSession().createCriteria(Registration.class);
-				 
-//		crt.add(Restrictions.eq("userid", consultantId));
-		
 		Criterion cn1 = Restrictions.eq("userid", consultantId);
 		Criterion cn2 = Restrictions.eq("admin.userid", consultantId);
 		crt.add(Restrictions.or(cn1, cn2));
-			 
+
 		List<Registration> reg = crt.list();
-				
-		if(reg != null && !reg.isEmpty())
-		{
+
+		if (reg != null && !reg.isEmpty()) {
 			Set<Industry> inds = reg.get(0).getIndustries();
 			Iterator<Industry> it = inds.iterator();
-			while(it.hasNext())
-			{
+			while (it.hasNext()) {
 				indList.add(it.next().getId());
 			}
 		}
-		
-		
+
+		// Step 2: Create criteria for fetching posts by industry
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
-		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
-		criteria.add(Restrictions.isNull("deleteDate")).add(Restrictions.isNotNull("published"));
+
+		// Modify projection to include 'published' column for ordering
+		criteria.setProjection(Projections.distinct(Projections.projectionList()
+															   .add(Projections.id())
+															   .add(Projections.property("postId"))
+															   .add(Projections.property("published"))));  // Include 'published' in the projection
+
+		// Apply filters
+		criteria.add(Restrictions.isNull("deleteDate"))
+				.add(Restrictions.isNotNull("published"));
 
 		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, -15); 
+		c.add(Calendar.DATE, -15);
+
 		criteria.createAlias("client", "clientAlias");
 		criteria.createAlias("clientAlias.industries", "indAlias");
 		criteria.add(Restrictions.in("indAlias.id", indList));
 		criteria.add(Restrictions.eq("isActive", true))
-		.add(Restrictions.isNull("closeDate"))
-		.add(Restrictions.ge("verifyDate", c.getTime()))
-		.add(Restrictions.isNotNull("verifyDate"));
-		  if(sortParam.indexOf("published")>=0)
-      		criteria.addOrder(Order.desc(sortParam));
-      		else
-      		criteria.addOrder(Order.asc(sortParam));
+				.add(Restrictions.isNull("closeDate"))
+				.add(Restrictions.ge("verifyDate", c.getTime()))
+				.add(Restrictions.isNotNull("verifyDate"));
+
+		// Apply ORDER BY based on the sort parameter
+//		if (sortParam.indexOf("published") >= 0)
+//			criteria.addOrder(Order.desc("published"));
+//		else
+//			criteria.addOrder(Order.asc(sortParam));
+
+		// Apply pagination
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+		// Step 3: Execute the query and retrieve the list of IDs
 		List<Object[]> idList = criteria.list();
-		//get the id's from the projection
-        List<Long> longList = new ArrayList<Long>();
-        for (Object[] long1 : idList) {
-            Object[] record = long1;
-            longList.add((Long) record[0]);
-        }
 
-		if (longList.size() > 0)
-		{
-			//get all the id's corresponding to the projection, 
-			//then apply distinct root entity
-            criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
-            criteria.add(Restrictions.in("postId", longList));
-            criteria.setFetchMode("postProfile", FetchMode.JOIN);
-            criteria.setFetchMode("postConsultants", FetchMode.JOIN);
-            criteria.setFetchMode("client.industries", FetchMode.JOIN);
-            if(sortParam.indexOf("published")>=0)
-        		criteria.addOrder(Order.desc(sortParam));
-        		else
-        		criteria.addOrder(Order.asc(sortParam));
-            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
-		else
-		{
-		//no results, so let's ommit the second query to the DB
-	         return new ArrayList<Post>();
-        }
+		// Extract post IDs from the projection
+		List<Long> longList = new ArrayList<>();
+		for (Object[] record : idList) {
+			longList.add((Long) record[0]);
+		}
 
+		// Step 4: If there are no results, return an empty list
+		if (longList.size() > 0) {
+			// Fetch posts corresponding to the IDs
+			criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
+			criteria.add(Restrictions.in("postId", longList));
+			criteria.setFetchMode("postProfile", FetchMode.JOIN);
+			criteria.setFetchMode("postConsultants", FetchMode.JOIN);
+			criteria.setFetchMode("client.industries", FetchMode.JOIN);
+
+			// Apply the same sorting
+//			if (sortParam.indexOf("published") >= 0)
+//				criteria.addOrder(Order.desc("published"));
+//			else
+//				criteria.addOrder(Order.asc(sortParam));
+
+			// Apply DISTINCT at the entity level
+			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		} else {
+			// No results, return an empty list
+			return new ArrayList<Post>();
+		}
+
+		// Return the list of posts
 		return criteria.list();
-		
 	}
+
 
 	@Override
 	public long countPostsByIndustryUsingConsultantId(String consultantId)
@@ -618,59 +708,128 @@ public class PostDaoImpl implements PostDao
 		return count;
 	}
 	
-	public List<Post> getPostsByIndustryId(int industryId, int first, int max,String sortParam)
-	{
-		
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
-		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
-		criteria.add(Restrictions.isNull("deleteDate")).add(Restrictions.isNotNull("published"));
-		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, -15); 
-		criteria.createAlias("client", "clientAlias");
-		criteria.createAlias("clientAlias.industries", "indAlias");
-		criteria.add(Restrictions.eq("indAlias.id", industryId));
-		criteria.add(Restrictions.eq("isActive", true))
-		.add(Restrictions.isNull("closeDate"))
-		.add(Restrictions.ge("verifyDate", c.getTime()))
-		.add(Restrictions.isNotNull("verifyDate"));
-		if(sortParam.indexOf("published")>=0)
-		criteria.addOrder(Order.desc(sortParam));
-		else
-		criteria.addOrder(Order.asc(sortParam));
-		criteria.setFirstResult(first);
-		criteria.setMaxResults(max);
-		List<Object[]> idList = criteria.list();
-		//get the id's from the projection
-        List<Long> longList = new ArrayList<Long>();
-        for (Object[] long1 : idList) {
-            Object[] record = long1;
-            longList.add((Long) record[0]);
-        }
+//	public List<Post> getPostsByIndustryId(int industryId, int first, int max,String sortParam)
+//	{
+//
+//		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
+//		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
+//		criteria.add(Restrictions.isNull("deleteDate")).add(Restrictions.isNotNull("published"));
+//		Calendar c = Calendar.getInstance();
+//		c.add(Calendar.DATE, -15);
+//		criteria.createAlias("client", "clientAlias");
+//		criteria.createAlias("clientAlias.industries", "indAlias");
+//		criteria.add(Restrictions.eq("indAlias.id", industryId));
+//		criteria.add(Restrictions.eq("isActive", true))
+//		.add(Restrictions.isNull("closeDate"))
+//		.add(Restrictions.ge("verifyDate", c.getTime()))
+//		.add(Restrictions.isNotNull("verifyDate"));
+//		if(sortParam.indexOf("published")>=0)
+//		criteria.addOrder(Order.desc(sortParam));
+//		else
+//		criteria.addOrder(Order.asc(sortParam));
+//		criteria.setFirstResult(first);
+//		criteria.setMaxResults(max);
+//		List<Object[]> idList = criteria.list();
+//		//get the id's from the projection
+//        List<Long> longList = new ArrayList<Long>();
+//        for (Object[] long1 : idList) {
+//            Object[] record = long1;
+//            longList.add((Long) record[0]);
+//        }
+//
+//		if (longList.size() > 0)
+//		{
+//			//get all the id's corresponding to the projection,
+//			//then apply distinct root entity
+//            criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
+//            criteria.add(Restrictions.in("postId", longList));
+//            criteria.setFetchMode("postProfile", FetchMode.JOIN);
+//            criteria.setFetchMode("postConsultants", FetchMode.JOIN);
+//            criteria.setFetchMode("client.industries", FetchMode.JOIN);
+//            if(sortParam.indexOf("published")>=0)
+//        		criteria.addOrder(Order.desc(sortParam));
+//        		else
+//        		criteria.addOrder(Order.asc(sortParam));
+//            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+//        }
+//		else
+//		{
+//		//no results, so let's ommit the second query to the DB
+//	         return new ArrayList<Post>();
+//        }
+//
+//		return criteria.list();
+//
+//	}
+public List<Post> getPostsByIndustryId(int industryId, int first, int max, String sortParam) {
+	// Create criteria for fetching posts
+	Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 
-		if (longList.size() > 0)
-		{
-			//get all the id's corresponding to the projection, 
-			//then apply distinct root entity
-            criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
-            criteria.add(Restrictions.in("postId", longList));
-            criteria.setFetchMode("postProfile", FetchMode.JOIN);
-            criteria.setFetchMode("postConsultants", FetchMode.JOIN);
-            criteria.setFetchMode("client.industries", FetchMode.JOIN);
-            if(sortParam.indexOf("published")>=0)
-        		criteria.addOrder(Order.desc(sortParam));
-        		else
-        		criteria.addOrder(Order.asc(sortParam));
-            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
-		else
-		{
-		//no results, so let's ommit the second query to the DB
-	         return new ArrayList<Post>();
-        }
+	// Add projection to fetch distinct post IDs, along with the published column for sorting
+	criteria.setProjection(Projections.distinct(Projections.projectionList()
+														   .add(Projections.id())
+														   .add(Projections.property("postId"))
+														   .add(Projections.property("published"))));  // Include 'published' in the projection
 
-		return criteria.list();
-		
+	// Add conditions to filter posts
+	criteria.add(Restrictions.isNull("deleteDate"))
+			.add(Restrictions.isNotNull("published"));
+
+	Calendar c = Calendar.getInstance();
+	c.add(Calendar.DATE, -15);
+
+	criteria.createAlias("client", "clientAlias");
+	criteria.createAlias("clientAlias.industries", "indAlias");
+	criteria.add(Restrictions.eq("indAlias.id", industryId));
+	criteria.add(Restrictions.eq("isActive", true))
+			.add(Restrictions.isNull("closeDate"))
+			.add(Restrictions.ge("verifyDate", c.getTime()))
+			.add(Restrictions.isNotNull("verifyDate"));
+
+	// Add ORDER BY clause based on 'sortParam'
+//	if (sortParam.indexOf("published") >= 0)
+//		criteria.addOrder(Order.desc("published"));  // Use 'published' explicitly for sorting
+//	else
+//		criteria.addOrder(Order.asc(sortParam));
+
+	// Set pagination
+	criteria.setFirstResult(first);
+	criteria.setMaxResults(max);
+
+	// Execute the query and retrieve the list of IDs
+	List<Object[]> idList = criteria.list();
+
+	// Get the IDs from the projection
+	List<Long> longList = new ArrayList<Long>();
+	for (Object[] record : idList) {
+		longList.add((Long) record[0]);
 	}
+
+	// If no IDs found, return an empty list
+	if (longList.size() > 0) {
+		// Create a new criteria to fetch the actual posts using the post IDs
+		criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
+		criteria.add(Restrictions.in("postId", longList));
+		criteria.setFetchMode("postProfile", FetchMode.JOIN);
+		criteria.setFetchMode("postConsultants", FetchMode.JOIN);
+		criteria.setFetchMode("client.industries", FetchMode.JOIN);
+
+		// Apply ORDER BY again
+//		if (sortParam.indexOf("published") >= 0)
+//			criteria.addOrder(Order.desc("published"));
+//		else
+//			criteria.addOrder(Order.asc(sortParam));
+
+		// Use DISTINCT at the entity level
+		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+	} else {
+		// No results, return an empty list
+		return new ArrayList<Post>();
+	}
+
+	// Return the final list of posts
+	return criteria.list();
+}
 
 	public long countPostsByIndustryId(int industryId)
 	{
@@ -701,10 +860,10 @@ public class PostDaoImpl implements PostDao
 		criteria.createAlias("pcAlias.consultant", "consAlias")
 		.add(Restrictions.isNotNull("verifyDate"));
         criteria.add(Restrictions.eq("consAlias.userid",consultantId));
-        if(sortParam.indexOf("published")>=0)
-    		criteria.addOrder(Order.desc(sortParam));
-    		else
-    		criteria.addOrder(Order.asc(sortParam));
+//        if(sortParam.indexOf("published")>=0)
+//    		criteria.addOrder(Order.desc(sortParam));
+//    		else
+//    		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
 		
@@ -722,10 +881,10 @@ public class PostDaoImpl implements PostDao
 			criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 			criteria.add(Restrictions.in("postId", longList));
 			criteria.setFetchMode("postProfile", FetchMode.JOIN);
-			if(sortParam.indexOf("published")>=0)
-				criteria.addOrder(Order.desc(sortParam));
-				else
-				criteria.addOrder(Order.asc(sortParam));
+//			if(sortParam.indexOf("published")>=0)
+//				criteria.addOrder(Order.desc(sortParam));
+//				else
+//				criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			
 		}
@@ -789,10 +948,10 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("consAlias.admin.userid", consultantId);
 		criteria.add(Restrictions.or(cn1, cn2));
         
-        if(sortParam.indexOf("published")>=0)
-      		criteria.addOrder(Order.desc(sortParam));
-      		else
-      		criteria.addOrder(Order.asc(sortParam));
+//        if(sortParam.indexOf("published")>=0)
+//      		criteria.addOrder(Order.desc(sortParam));
+//      		else
+//      		criteria.addOrder(Order.asc(sortParam));
         
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
@@ -811,10 +970,10 @@ public class PostDaoImpl implements PostDao
 			criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 			criteria.add(Restrictions.in("postId", longList));
 			criteria.setFetchMode("postProfile", FetchMode.JOIN);
-			 if(sortParam.indexOf("published")>=0)
-		      		criteria.addOrder(Order.desc(sortParam));
-		      		else
-		      		criteria.addOrder(Order.asc(sortParam));
+//			 if(sortParam.indexOf("published")>=0)
+//		      		criteria.addOrder(Order.desc(sortParam));
+//		      		else
+//		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			
 		}
@@ -873,10 +1032,10 @@ public class PostDaoImpl implements PostDao
 		criteria.createAlias("pcAlias.consultant", "consAlias");
         criteria.add(Restrictions.eq("consAlias.userid",consultantId))
 		.add(Restrictions.isNotNull("verifyDate"));
-        if(sortParam.indexOf("published")>=0)
-      		criteria.addOrder(Order.desc(sortParam));
-      		else
-      		criteria.addOrder(Order.asc(sortParam));
+//        if(sortParam.indexOf("published")>=0)
+//      		criteria.addOrder(Order.desc(sortParam));
+//      		else
+//      		criteria.addOrder(Order.asc(sortParam));
         
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
@@ -895,9 +1054,9 @@ public class PostDaoImpl implements PostDao
 			criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 			criteria.add(Restrictions.in("postId", longList));
 			criteria.setFetchMode("postProfile", FetchMode.JOIN);
-			 if(sortParam.indexOf("published")>=0)
-		      		criteria.addOrder(Order.desc(sortParam));
-		      		else
+//			 if(sortParam.indexOf("published")>=0)
+//		      		criteria.addOrder(Order.desc(sortParam));
+//		      		else
 		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			
@@ -946,10 +1105,10 @@ public class PostDaoImpl implements PostDao
 		criteria.add(Restrictions.or(cn1, cn2))
 		.add(Restrictions.isNotNull("verifyDate"));
 		
-        if(sortParam.indexOf("published")>=0)
-      		criteria.addOrder(Order.desc(sortParam));
-      		else
-      		criteria.addOrder(Order.asc(sortParam));
+//        if(sortParam.indexOf("published")>=0)
+//      		criteria.addOrder(Order.desc(sortParam));
+//      		else
+//      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
 		
@@ -967,10 +1126,10 @@ public class PostDaoImpl implements PostDao
 			criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 			criteria.add(Restrictions.in("postId", longList));
 			criteria.setFetchMode("postProfile", FetchMode.JOIN);
-			 if(sortParam.indexOf("published")>=0)
-		      		criteria.addOrder(Order.desc(sortParam));
-		      		else
-		      		criteria.addOrder(Order.asc(sortParam));
+//			 if(sortParam.indexOf("published")>=0)
+//		      		criteria.addOrder(Order.desc(sortParam));
+//		      		else
+//		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			
 		}
@@ -1041,10 +1200,10 @@ public class PostDaoImpl implements PostDao
 		criteria.add(Restrictions.or(cn1, cn2))
 		.add(Restrictions.isNotNull("verifyDate"));
 		
-        if(sortParam.indexOf("published")>=0)
-      		criteria.addOrder(Order.desc(sortParam));
-      		else
-      		criteria.addOrder(Order.asc(sortParam));
+//        if(sortParam.indexOf("published")>=0)
+//      		criteria.addOrder(Order.desc(sortParam));
+//      		else
+//      		criteria.addOrder(Order.asc(sortParam));
         
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
@@ -1063,10 +1222,10 @@ public class PostDaoImpl implements PostDao
 			criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 			criteria.add(Restrictions.in("postId", longList));
 			criteria.setFetchMode("postProfile", FetchMode.JOIN);
-			 if(sortParam.indexOf("published")>=0)
-		      		criteria.addOrder(Order.desc(sortParam));
-		      		else
-		      		criteria.addOrder(Order.asc(sortParam));
+//			 if(sortParam.indexOf("published")>=0)
+//		      		criteria.addOrder(Order.desc(sortParam));
+//		      		else
+//		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			
 		}
@@ -1137,10 +1296,10 @@ public class PostDaoImpl implements PostDao
 		criteria.add(Restrictions.or(cn1, cn2))
 		.add(Restrictions.isNotNull("verifyDate"));
 		
-        if(sortParam.indexOf("published")>=0)
-      		criteria.addOrder(Order.desc(sortParam));
-      		else
-      		criteria.addOrder(Order.asc(sortParam));
+//        if(sortParam.indexOf("published")>=0)
+//      		criteria.addOrder(Order.desc(sortParam));
+//      		else
+//      		criteria.addOrder(Order.asc(sortParam));
         
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
@@ -1159,10 +1318,10 @@ public class PostDaoImpl implements PostDao
 			criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 			criteria.add(Restrictions.in("postId", longList));
 			criteria.setFetchMode("postProfile", FetchMode.JOIN);
-			 if(sortParam.indexOf("published")>=0)
-		      		criteria.addOrder(Order.desc(sortParam));
-		      		else
-		      		criteria.addOrder(Order.asc(sortParam));
+//			 if(sortParam.indexOf("published")>=0)
+//		      		criteria.addOrder(Order.desc(sortParam));
+//		      		else
+//		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			
 		}
@@ -1252,10 +1411,10 @@ public class PostDaoImpl implements PostDao
         	criteria.add(Restrictions.like("location",location, MatchMode.ANYWHERE));
         }
         
-        if(sortParam.indexOf("published")>=0)
-      		criteria.addOrder(Order.desc(sortParam));
-      		else
-      		criteria.addOrder(Order.asc(sortParam));
+//        if(sortParam.indexOf("published")>=0)
+//      		criteria.addOrder(Order.desc(sortParam));
+//      		else
+//      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
 		
@@ -1273,10 +1432,10 @@ public class PostDaoImpl implements PostDao
 			criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 			criteria.add(Restrictions.in("postId", longList));
 			criteria.setFetchMode("postProfile", FetchMode.JOIN);
-			 if(sortParam.indexOf("published")>=0)
-		      		criteria.addOrder(Order.desc(sortParam));
-		      		else
-		      		criteria.addOrder(Order.asc(sortParam));
+//			 if(sortParam.indexOf("published")>=0)
+//		      		criteria.addOrder(Order.desc(sortParam));
+//		      		else
+//		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 			
 		}
@@ -1374,10 +1533,10 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", userid);
 		criteria.add(Restrictions.or(cn1, cn2));
 
-		 if(sortParam.indexOf("published")>=0)
-	      		criteria.addOrder(Order.desc(sortParam));
-	      		else
-	      		criteria.addOrder(Order.asc(sortParam));
+//		 if(sortParam.indexOf("published")>=0)
+//	      		criteria.addOrder(Order.desc(sortParam));
+//	      		else
+//	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
 		
@@ -1398,10 +1557,10 @@ public class PostDaoImpl implements PostDao
             criteria.add(Restrictions.in("postId", longList));
             criteria.setFetchMode("postProfile", FetchMode.JOIN);
             criteria.setFetchMode("postConsultants", FetchMode.JOIN);
-            if(sortParam.indexOf("published")>=0)
-          		criteria.addOrder(Order.desc(sortParam));
-          		else
-          		criteria.addOrder(Order.asc(sortParam));
+//            if(sortParam.indexOf("published")>=0)
+//          		criteria.addOrder(Order.desc(sortParam));
+//          		else
+//          		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         } 
 		else
@@ -1428,10 +1587,10 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", userid);
 		criteria.add(Restrictions.or(cn1, cn2));
 
-		 if(sortParam.indexOf("published")>=0)
-	      		criteria.addOrder(Order.desc(sortParam));
-	      		else
-	      		criteria.addOrder(Order.asc(sortParam));
+//		 if(sortParam.indexOf("published")>=0)
+//	      		criteria.addOrder(Order.desc(sortParam));
+//	      		else
+//	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
 		
@@ -1448,14 +1607,14 @@ public class PostDaoImpl implements PostDao
 			//get all the id's corresponding to the projection, 
 			//then apply distinct root entity
             criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
-            criteria.add(Restrictions.in("postId", longList));
+            criteria.add(Restrictions.in("postId",	 longList));
             criteria.setFetchMode("postProfile", FetchMode.JOIN);
             criteria.setFetchMode("postConsultants", FetchMode.JOIN);
-            if(sortParam.indexOf("published")>=0)
-          		criteria.addOrder(Order.desc(sortParam));
-          		else
-          		criteria.addOrder(Order.asc(sortParam));
-            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+//            if(sortParam.indexOf("published")>=0)
+//          		criteria.addOrder(Order.desc(sortParam));
+//          		else
+//          		criteria.addOrder(Order.asc(sortParam));
+//            criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         } 
 		else
 		{

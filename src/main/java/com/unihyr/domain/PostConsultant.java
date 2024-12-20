@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name="postconsultant", uniqueConstraints={ @UniqueConstraint( columnNames = { "postId", "lid" } ) } )
+@Table(name="postconsultant", uniqueConstraints={ @UniqueConstraint( columnNames = { "post_id", "lid" } ) } )
 public class PostConsultant
 {
 	@Id
@@ -23,7 +23,7 @@ public class PostConsultant
 	private long pcid;
 	
 	@ManyToOne  
-    @JoinColumn(name = "postId" , nullable= false)
+    @JoinColumn(name = "post_id" , nullable= false)
 	private Post post;
 	
 	@ManyToOne  

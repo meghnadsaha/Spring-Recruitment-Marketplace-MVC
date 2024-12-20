@@ -28,7 +28,7 @@ public class RatingCalculation
 	
 
 	@ManyToOne(cascade={CascadeType.ALL})
-    @JoinColumn(name="postId", referencedColumnName="postId")
+    @JoinColumn(name="post_id", referencedColumnName="post_id")
 	private Post post;
 	
 	@ManyToOne(cascade={CascadeType.ALL})

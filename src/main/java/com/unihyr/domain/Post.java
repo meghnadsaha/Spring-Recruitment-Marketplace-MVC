@@ -27,9 +27,12 @@ public class Post implements Serializable
 	private static final long serialVersionUID = 7878507665232547622L;
 
 	@Id
-	@Column(nullable=false)
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "post_id", nullable = false)
 	private long postId;
+
+
+
 
 	@Column
 	private String jobCode;
@@ -40,7 +43,7 @@ public class Post implements Serializable
 	@Column(nullable=false)
 	private String location;
 
-	@Column(nullable=false)
+	@Column(name = "`function`",nullable=false)
 	private String function;
 
 	@Column(nullable=false)
@@ -73,7 +76,7 @@ public class Post implements Serializable
 	@Column
 	private String posterId;
 
-	@Column
+	@Column(name = "addition_detail", nullable = false)
 	@Lob
 	private String additionDetail;
 
@@ -81,8 +84,7 @@ public class Post implements Serializable
 	private Date published;
 
 	@Column(nullable=false)
-	private boolean isActive;
-
+	private boolean isActive = false;  // Default value set in Java
 	@Column
 	private Date closeDate;
 	@Column

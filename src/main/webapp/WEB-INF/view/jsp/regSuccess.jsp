@@ -62,7 +62,7 @@
 								%>
 									<form class="form-box bottom-padding" method="POST" action="j_spring_security_check" style="padding-bottom: 0px !important;">
 									<p>
-										Thank You for showing interest in UniHyr. Our representative will get in touch with you within 24 business hours . For any other information, please write to register@unihyr.com
+										Thank You for showing interest in UniHyr. Our representative will get in touch with you within 24 business hours . For any other information, please write to register@facebook.com
 									</p>	
 									</form>
 									<sec:authorize access="hasRole('ROLE_ADMIN')">

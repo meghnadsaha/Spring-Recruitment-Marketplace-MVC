@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.security.Principal;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +28,8 @@ import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -188,34 +191,102 @@ public class ClientController
 	 * @return
 	 */
 	@RequestMapping(value = "/clientDashboardList", method = RequestMethod.GET)
-	public String clientDashboardList(ModelMap map, HttpServletRequest request ,Principal principal)
-	{
-		int rpp = GeneralConfig.rpp;
-		int pn = Integer.parseInt(request.getParameter("pn"));
-		String sortParam = request.getParameter("sortParam");
-		String db_post_status = request.getParameter("db_post_status");
 
-		Registration reg = registrationService.getRegistationByUserId(principal.getName());
-		map.addAttribute("registration",reg);
-		if(reg.getAdmin() != null)
-		{
-			reg =reg.getAdmin(); 
+
+	public String clientDashboardList(ModelMap map, HttpServletRequest request, Principal principal) {
+		// Logger initialization
+		Logger logger = LoggerFactory.getLogger(this.getClass());
+
+		int rpp = GeneralConfig.rpp;
+		int pn = 0;
+		String sortParam = null;
+		String db_post_status = null;
+
+		try {
+			// Extract parameters from the request
+			pn = Integer.parseInt(request.getParameter("pn"));
+			sortParam = request.getParameter("sortParam");
+			db_post_status = request.getParameter("db_post_status");
+
+			// Log extracted parameters
+			logger.info("Page Number: {}", pn);
+			logger.info("Sort Parameter: {}", sortParam);
+			logger.info("Post Status: {}", db_post_status);
+
+			// Fetch the logged-in user registration information
+			Registration reg = null;
+			try {
+				reg = registrationService.getRegistationByUserId(principal.getName());
+				logger.info("Registration fetched for user: {}", principal.getName());
+			} catch (Exception e) {
+				logger.error("Error occurred while fetching registration for user: {}", principal.getName(), e);
+				map.addAttribute("registration", null);
+			}
+
+			// If registration is not found, log and handle it
+			if (reg == null) {
+				logger.error("Registration not found for user: {}", principal.getName());
+				map.addAttribute("postList", new ArrayList<>());
+				map.addAttribute("totalCount", 0);
+				return "clientDashboardList";
+			}
+
+			map.addAttribute("registration", reg);
+
+			if (reg.getAdmin() != null) {
+				reg = reg.getAdmin();
+				logger.info("Admin user found. Switching to admin details.");
+			}
+
+			String loggedinUser = reg.getUserid();
+			logger.info("Logged-in user ID: {}", loggedinUser);
+
+			// Handling post fetch with exception handling
+			if (db_post_status.equals("all")) {
+				try {
+					map.addAttribute("postList", postService.getAllPostsByClient(loggedinUser, (pn - 1) * rpp, rpp, sortParam));
+					logger.info("Fetched all posts for user: {}", loggedinUser);
+
+					map.addAttribute("totalCount", postService.countAllPostByClient(loggedinUser));
+					logger.info("Fetched total post count for user: {}", loggedinUser);
+				} catch (Exception e) {
+					logger.error("Error occurred while fetching all posts for user: {}", loggedinUser, e);
+					map.addAttribute("postList", new ArrayList<>());
+					map.addAttribute("totalCount", 0);
+				}
+			} else {
+				try {
+					map.addAttribute("postList", postService.getActivePostsByClient(loggedinUser, (pn - 1) * rpp, rpp, sortParam, db_post_status));
+					logger.info("Fetched active posts for user: {} with status: {}", loggedinUser, db_post_status);
+
+					map.addAttribute("totalCount", postService.countActivePostByClient(loggedinUser, db_post_status));
+					logger.info("Fetched total active post count for user: {} with status: {}", loggedinUser, db_post_status);
+				} catch (Exception e) {
+					logger.error("Error occurred while fetching active posts for user: {} with status: {}", loggedinUser, db_post_status, e);
+					map.addAttribute("postList", new ArrayList<>());
+					map.addAttribute("totalCount", 0);
+				}
+			}
+
+			map.addAttribute("rpp", rpp);
+			map.addAttribute("pn", pn);
+			map.addAttribute("sortParam", sortParam);
+
+			logger.info("Returning client dashboard list view.");
+
+		} catch (NumberFormatException numberFormatException) {
+			logger.error("Error parsing page number (pn) or other parameters from request", numberFormatException);
+			map.addAttribute("postList", new ArrayList<>());
+			map.addAttribute("totalCount", 0);
+		} catch (Exception e) {
+			logger.error("Unexpected error occurred in clientDashboardList method", e);
+			map.addAttribute("postList", new ArrayList<>());
+			map.addAttribute("totalCount", 0);
 		}
-		String loggedinUser=reg.getUserid();
-		if(db_post_status.equals("all"))
-		{
-			map.addAttribute("postList", postService.getAllPostsByClient(loggedinUser, (pn - 1) * rpp, rpp,sortParam));
-			map.addAttribute("totalCount", postService.countAllPostByClient(loggedinUser));
-		}
-		else{
-			map.addAttribute("postList", postService.getActivePostsByClient(loggedinUser, (pn - 1) * rpp, rpp,sortParam,db_post_status));
-			map.addAttribute("totalCount", postService.countActivePostByClient(loggedinUser,db_post_status));
-		}
-		map.addAttribute("rpp", rpp);
-		map.addAttribute("pn", pn);
-		map.addAttribute("sortParam", sortParam);
+
 		return "clientDashboardList";
 	}
+
 
 	
 
@@ -320,7 +391,7 @@ public class ClientController
 		map.addAttribute("registration",reg);
 		if(reg.getAdmin() != null)
 		{
-			reg =reg.getAdmin(); 
+			reg =reg.getAdmin();
 		}
 		String loggedinUser=reg.getUserid();
 	    if(!(resumefilename.equals("")))
@@ -338,7 +409,7 @@ public class ClientController
 				map.addAttribute("fileuploaderror","true");
 				uploadMsg.add("File size must not be greater than 1 Mb.");
 				valid = false;
-			}  
+			}
 		}
 	    if(!(audiofilename.equals("")))
 		{
@@ -354,7 +425,7 @@ public class ClientController
 				map.addAttribute("fileuploaderror","true");
 				uploadMsg.add("File size must not be greater than 10 Mb.");
 				valid = false;
-			}        			
+			}
 		}
 	    map.addAttribute("uploadMsg", uploadMsg);
 		if (result.hasErrors() || model.getExp_max() <= model.getExp_min() || model.getCtc_max() <= model.getCtc_min() || !valid)
@@ -372,7 +443,7 @@ public class ClientController
 			map.addAttribute("selectedLocs", model.getLocation());
 			map.addAttribute("selectedUG", model.getQualification_ug());
 			map.addAttribute("selectedPG", model.getQualification_pg());
-			
+
 			return "addPost";
 		} else
 		{
@@ -421,16 +492,16 @@ public class ClientController
 				post.setPublished(dt);
 			}
 			post.setCreateDate(dt);
-			
+
 			Registration registration=registrationService.getRegistationByUserId(principal.getName());
 			if(registration.getAdmin()!=null)
-			{	
+			{
 				registration=registration.getAdmin();
 			}
 			post.setClient(registration);
 			post.setPosterId(principal.getName());
-			
-			
+
+
 	        try
 	        {
         		if(!(resumefilename.equals("")))
@@ -443,14 +514,14 @@ public class ClientController
         			{
         				img.mkdirs();
         			}
-        			resumefile.transferTo(img);			
+        			resumefile.transferTo(img);
         		}else{
         			try{
         				if(!post.getAdditionDetail().trim().equals("")){
         			post.setUploadjd(createJdfromText(post.getAdditionDetail()));
-        			
+
         				}}catch(Exception e){
-        			
+
         			}
         			}
         		if(!(audiofilename.equals("")))
@@ -463,7 +534,7 @@ public class ClientController
         			{
         				img.mkdirs();
         			}
-        			audiofile.transferTo(img);			
+        			audiofile.transferTo(img);
         		}
 	        }
 		    catch (IOException ie)
@@ -488,14 +559,14 @@ public class ClientController
 			   //using XWPFWordExtractor Class
 			   XWPFWordExtractor we = new XWPFWordExtractor(docx);
 			   System.out.println();
-			   
+
 			post.setAdditionDetail(we.getText());*/
 			String jobCode = registration.getOrganizationName().substring(0, 3).toUpperCase();
 			if(pid>0){
 				postService.updatePost(post);
 			}else{
 			pid = postService.addPost(post);
-			
+
 			if(pid < 10)
 			{
 				jobCode+="000"+pid;
@@ -514,12 +585,13 @@ public class ClientController
 			}
 
 			post.setJobCode(jobCode);
+
 			postService.updatePost(post);
 			}
 		}
 		map.addAttribute("message","Thanks for posting your new requirement on UniHyr.<br><br>"
 						+"We have received details of your new posting. It will be published post verification. The verification would take a maximum of 2 business hours.");
-		
+
 		if(btn_response.equals("Save")){
 			map.addAttribute("message","saved");
 		}
@@ -804,7 +876,7 @@ public class ClientController
 						+ "<p>Best Regards,</p>"
 						+ "<p></p>"
 						+ "<p><strong>Admin Team</strong></p><p></p>"
-						+ "<p>This is a system generated mail. Please do not reply to this mail. In case of any queries, please write to <a target='_blank' href='mailto:partnerdesk@unihyr.com'>partnerdesk@unihyr.com</a></p>"
+						+ "<p>This is a system generated mail. Please do not reply to this mail. In case of any queries, please write to <a target='_blank' href='mailto:partnerdesk@facebook.com'>partnerdesk@facebook.com</a></p>"
 						+ "</div>"
 						+ "</td>"
 						+ "</tr>"
@@ -2408,7 +2480,7 @@ public class ClientController
 	@RequestMapping(value="clientUpdatePost", method = RequestMethod.GET)
 	public String clientUpdatePost(ModelMap map, HttpServletRequest request ,Principal principal){
 		String updateInfo=request.getParameter("updateInfo");
-		String postId=request.getParameter("postId");
+		String postId=request.getParameter("post_id");
 		Post post=postService.getPost(Long.parseLong(postId));
 		String position="<a href='cons_your_positions?pid="+post.getPostId()+"' >"+ post.getTitle()+"</a>";
 		if(post.getUpdateInfo()!=null){
@@ -2441,7 +2513,7 @@ public class ClientController
 	
 	@RequestMapping(value="profileClosures", method = RequestMethod.GET)
 	public String profileClosures(ModelMap map, HttpServletRequest request ,Principal principal){
-		String postId=(String)request.getParameter("postId");
+		String postId=(String)request.getParameter("post_id");
 		List<ClosedProfileDetails> profileDetails=new ArrayList<ClosedProfileDetails>();
 		List<PostProfile> postProfiles=postProfileService.getPostProfileOfferedByPost(Long.parseLong(postId));
 		int i=1;

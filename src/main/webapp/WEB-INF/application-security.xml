@@ -18,9 +18,9 @@
 	    
 <!-- 		<intercept-url pattern="/admin*" access="hasRole('ROLE_ADMIN')" /> -->
 		    
-		<intercept-url pattern="/client*" access="hasRole('ROLE_EMP_MANAGER') or hasRole('ROLE_EMP_USER') " />
-		<intercept-url pattern="/cons*" access="hasRole('ROLE_CON_MANAGER') or hasRole('ROLE_CON_USER') " />
-		<intercept-url pattern="/uploadprofile" access="hasRole('ROLE_CON_MANAGER') or hasRole('ROLE_CON_USER') " />
+<!--		<intercept-url pattern="/client*" access="hasRole('ROLE_EMP_MANAGER') or hasRole('ROLE_EMP_USER') " />-->
+<!--		<intercept-url pattern="/cons*" access="hasRole('ROLE_CON_MANAGER') or hasRole('ROLE_CON_USER') " />-->
+<!--		<intercept-url pattern="/uploadprofile" access="hasRole('ROLE_CON_MANAGER') or hasRole('ROLE_CON_USER') " />-->
 		
 		
 		<form-login login-page="/login" default-target-url="/getLogedIn" authentication-failure-url="/failtologin" />

@@ -7,7 +7,7 @@ package com.unihyr.model;
 public class ConfigVariables
 {
 	private double CESS = 0.5;
-	private String UploadPath = "/var/unihyr/data/";
+	private String UploadPath = "/Users/meghnadsaha/Documents/";
 	private double TAX = 14;
 	private int NoOfRatingParams = 3;
 	private int rpp = 10;

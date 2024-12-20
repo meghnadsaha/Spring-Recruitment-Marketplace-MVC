@@ -30,7 +30,7 @@ public class ContactUsController
 		java.sql.Date dt = new java.sql.Date(date.getTime());
 		model.setMsgDate(dt);
 		contactUsService.addContactUsDetails(model);String msg="<p>"+
-				"Thank You for showing interest in UniHyr. Our representative will get in touch with you within 24 business hours . For any other information, please write to register@unihyr.com"+
+				"Thank You for showing interest in UniHyr. Our representative will get in touch with you within 24 business hours . For any other information, please write to register@facebook.com"+
 				"</p>";
 		map.addAttribute("message", msg);
 		map.addAttribute("orgName", model.getName());

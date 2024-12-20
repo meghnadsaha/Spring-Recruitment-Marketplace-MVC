@@ -207,8 +207,8 @@ width: 1076px !important;
 <ol start="7">
 <li><strong>ACCESSING, REVIEWING AND CHANGING YOUR PROFILE</strong></li>
 </ol>
-<p>Following registration, you can review and change the information you submitted at the stage of registration, except your display name/ user name. An option for facilitating such change shall be present on the home screen of the Website and such change can be facilitated by emailing us at admin@unihyr.com. If you change any information, we may keep track of your old information.</p>
-<p>If you believe that any information we are holding on you is incorrect or incomplete, or to remove your profile so that others cannot view it, please write to or email us as soon as possible, at <a href="mailto:admin@unihyr.com">admin@unihyr.com</a> . We shall promptly correct any information found to be incorrect.</p>
+<p>Following registration, you can review and change the information you submitted at the stage of registration, except your display name/ user name. An option for facilitating such change shall be present on the home screen of the Website and such change can be facilitated by emailing us at admin@facebook.com. If you change any information, we may keep track of your old information.</p>
+<p>If you believe that any information we are holding on you is incorrect or incomplete, or to remove your profile so that others cannot view it, please write to or email us as soon as possible, at <a href="mailto:admin@facebook.com">admin@facebook.com</a> . We shall promptly correct any information found to be incorrect.</p>
 <p>We shall retain in our files, information you have requested to remove for certain circumstances, such as to resolve disputes, troubleshoot problems and enforce our terms and conditions. Further, such prior information is never completely removed from our databases due to technical and legal constraints, including stored 'back up' systems. Therefore, you should not expect that all of your personally identifiable information shall be completely removed from our databases in response to your requests.</p>
 <ol start="8">
 <li><strong>SECURITY</strong></li>

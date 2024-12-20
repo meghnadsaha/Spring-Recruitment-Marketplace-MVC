@@ -174,7 +174,7 @@ public class ProfileDaoImpl implements ProfileDao
 						+ "( SELECT post.postId FROM post " + "WHERE post.postId = :postId) "
 						+ "AND candidateprofile.consultantId = :consultantId");
 		// query.setInteger("age", 32);
-		query.setString("postId", postId);
+		query.setString("post_id", postId);
 		query.setString("consultantId", consultantId);
 		query.addEntity(CandidateProfile.class).setFirstResult(i).setMaxResults(j);
 		System.out.println();
@@ -192,7 +192,7 @@ public class ProfileDaoImpl implements ProfileDao
 				+ "AND candidateprofile.consultantId = :consultantId");
 		// query.setInteger("age", 32);
 		query.setString("clientId", clientId);
-		query.setString("postId", postId);
+		query.setString("post_id", postId);
 		query.setString("consultantId", consultantId);
 		query.addEntity(CandidateProfile.class).setFirstResult(i).setMaxResults(j);
 		System.out.println();
@@ -236,7 +236,7 @@ public class ProfileDaoImpl implements ProfileDao
 	{
 		String hql = "select pr.* from candidateProfile pr INNER JOIN postprofile pp ON pr.profileId = pp.profileId AND pp.postId = :postId";
 		SQLQuery query = this.sessionFactory.getCurrentSession().createSQLQuery(hql);
-		query.setParameter("postId", postId);
+		query.setParameter("post_id", postId);
 		query.addEntity(CandidateProfile.class).setFirstResult(first).setMaxResults(max);
 		List<CandidateProfile> list = (List<CandidateProfile>) query.list();
 		return list;
@@ -247,7 +247,7 @@ public class ProfileDaoImpl implements ProfileDao
 	{
 		String sql = "select count(*) from candidateProfile pr INNER JOIN postprofile pp ON pr.profileId = pp.profileId AND pp.postId = :postId";
 		SQLQuery query = this.sessionFactory.getCurrentSession().createSQLQuery(sql);
-		query.setParameter("postId", postId);
+		query.setParameter("post_id", postId);
 		BigInteger count = (BigInteger) query.uniqueResult();
 		return count.longValue();
 	}
@@ -258,7 +258,7 @@ public class ProfileDaoImpl implements ProfileDao
 	{
 		String hql = "select pr.* from candidateProfile pr INNER JOIN postprofile pp ON pr.profileId = pp.profileId AND pr.consultantId=:consultid AND pp.postId = :postId AND pp.postId in(SELECT po.postId FROM post po LEFT JOIN registration reg ON reg.userid = po.clientId AND reg.userid LIKE :clientId)";
 		SQLQuery query = this.sessionFactory.getCurrentSession().createSQLQuery(hql);
-		query.setParameter("postId", postId);
+		query.setParameter("post_id", postId);
 		query.setParameter("consultid", consultid);
 		query.setParameter("clientId", clientId);
 		query.addEntity(CandidateProfile.class).setFirstResult(first).setMaxResults(max);
@@ -271,7 +271,7 @@ public class ProfileDaoImpl implements ProfileDao
 	{
 		String sql = "select count(*) from candidateProfile pr INNER JOIN postprofile pp ON pr.profileId = pp.profileId AND pr.consultantId=:consultid AND pp.postId = :postId AND pp.postId in(SELECT po.postId FROM post po LEFT JOIN registration reg ON reg.userid = po.clientId AND reg.userid LIKE :clientId)";
 		SQLQuery query = this.sessionFactory.getCurrentSession().createSQLQuery(sql);
-		query.setParameter("postId", postId);
+		query.setParameter("post_id", postId);
 		query.setParameter("consultid", consultid);
 		query.setParameter("clientId", clientId);
 		BigInteger count = (BigInteger) query.uniqueResult();
@@ -380,7 +380,7 @@ public class ProfileDaoImpl implements ProfileDao
 						+ "AND candidateprofile.consultantId = :consultantId");
 		// query.setInteger("age", 32);
 		query.setString("clientId", clientId);
-		query.setString("postId", postId);
+		query.setString("post_id", postId);
 		query.setString("consultantId", consultantId);
 		System.out.println();
 		BigInteger count = (BigInteger) query.uniqueResult();
@@ -411,7 +411,7 @@ public class ProfileDaoImpl implements ProfileDao
 						+ "( SELECT post.postId FROM post " + "WHERE post.postId = :postId) "
 						+ "AND candidateprofile.consultantId = :consultantId");
 		// query.setInteger("age", 32);
-		query.setString("postId", postId);
+		query.setString("post_id", postId);
 		query.setString("consultantId", consultantId);
 		System.out.println();
 		BigInteger count = (BigInteger) query.uniqueResult();

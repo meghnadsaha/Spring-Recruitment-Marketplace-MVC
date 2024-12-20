@@ -224,7 +224,7 @@ right: 0; ">
 <ol start="8">
 <li><strong>COMMUNICATIONS AND ADVERTISEMENTS</strong></li>
 </ol>
-<p>By using this Website, it is deemed that you have consented to receiving telephonic calls, SMSs and/or emails from us at any time we deem fit. We shall reach out to communicate with you and enhance your experience while using the Website. From time to time, the Company may display server advertisements within the Website and also during the use of the Website. These advertisements shall also inform you about the new products and services released by us. Such communications by us is for purposes that <em>inter alia </em>include clarification calls, marketing calls and promotional calls. These communications shall be sent to you on the telephone number and/or email address provided by you for the use of this Website which are subject to our Privacy Policy.&nbsp; In case you wish to stop receiving notifications from us with regard to marketing and promotional calls with regard to any communication received from Us, You are required to send an email toadmin@unihyr.com.</p>
+<p>By using this Website, it is deemed that you have consented to receiving telephonic calls, SMSs and/or emails from us at any time we deem fit. We shall reach out to communicate with you and enhance your experience while using the Website. From time to time, the Company may display server advertisements within the Website and also during the use of the Website. These advertisements shall also inform you about the new products and services released by us. Such communications by us is for purposes that <em>inter alia </em>include clarification calls, marketing calls and promotional calls. These communications shall be sent to you on the telephone number and/or email address provided by you for the use of this Website which are subject to our Privacy Policy.&nbsp; In case you wish to stop receiving notifications from us with regard to marketing and promotional calls with regard to any communication received from Us, You are required to send an email toadmin@facebook.com.</p>
 <p>&nbsp;</p>
 <ol start="9">
 <li><strong>OBLIGATIONS</strong></li>
@@ -315,7 +315,7 @@ right: 0; ">
 <ol start="17">
 <li><strong>NOTICES</strong></li>
 </ol>
-<p>Any and all communication relating to any dispute or grievance experienced by the User may be communicated to the Company by the User reducing the same to writing, and sending the same to the registered office of the Company by Registered Post, or the email address &shy;&shy;&shy;<a href="mailto:admin@unihyr.com">admin@unihyr.com</a>.</p>
+<p>Any and all communication relating to any dispute or grievance experienced by the User may be communicated to the Company by the User reducing the same to writing, and sending the same to the registered office of the Company by Registered Post, or the email address &shy;&shy;&shy;<a href="mailto:admin@facebook.com">admin@facebook.com</a>.</p>
 <ol start="18">
 <li><strong>MISCELLANEOUS PROVISIONS</strong></li>
 </ol>
@@ -326,7 +326,7 @@ right: 0; ">
 <ol start="19">
 <li><strong>CONTACT US</strong></li>
 </ol>
-<p>If you have any questions about this Agreement, the practices of the Website, or your experience with the Service, you can e-mail us at <a href="mailto:admin@unihyr.com">admin@unihyr.com</a>.</p>
+<p>If you have any questions about this Agreement, the practices of the Website, or your experience with the Service, you can e-mail us at <a href="mailto:admin@facebook.com">admin@facebook.com</a>.</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>

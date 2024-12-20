@@ -359,7 +359,7 @@ width: 1076px !important;
 
 									<h2>Get the right talent in super quick time!</h2>
 									<p>We know that when it comes to hiring a quality and time
-										are the most critical factors. UniHyr'€™s partner network
+										are the most critical factors. UniHyr'ï¿½ï¿½s partner network
 										provides a deeper penetration in the available talent pool and
 										ensures that you get quality profiles in a disruptively
 										shorter time</p>
@@ -604,7 +604,7 @@ Analytics driven rating system of consultants
 									<li><h4>HASSLE FREE AND TRANSPARENT</h4>
 										<p>No hassle of managing multiple recruitment agency contracts â€“ clients protected by a single contract with
 										UniHyr outlining simple, transparent, and universal terms and conditions</p></li>
-									<li><h4>FREE TO USE a€“ PAY ONLY ON OUTCOME</h4>
+									<li><h4>FREE TO USE aï¿½ï¿½ PAY ONLY ON OUTCOME</h4>
 										<p>No signing up or usage charges. Payment to be made only on the hiring outcome</p></li>
 								</ul>
 							</div> <!-- 						<a href="" class="readmore">Read More</a> -->
@@ -844,7 +844,7 @@ font-size: 14px;border: 1px solid black;" />
 								<img src="images/ic_4.jpg" alt="img"> 011 283 3577
 							</p>
 							<p>
-								<img src="images/ic_5.jpg" alt="img"> unihyr@gmail.com
+								<img src="images/ic_5.jpg" alt="img"> unihyr@facebook.com
 							</p>
 							
 					</div>

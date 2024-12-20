@@ -1,6 +1,6 @@
 /** ====================================================================
  * jsPDF Cell plugin
- * Copyright (c) 2013 Youssef Beddad, youssef.beddad@gmail.com
+ * Copyright (c) 2013 Youssef Beddad, youssef.beddad@facebook.com
  *               2013 Eduardo Menezes de Morais, eduardo.morais@usp.br
  *               2013 Lee Driscoll, https://github.com/lsdriscoll
  *               2014 Juan Pablo Gaviria, https://github.com/juanpgaviria

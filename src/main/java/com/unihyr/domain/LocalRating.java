@@ -26,7 +26,7 @@ public class LocalRating
 	private RatingParameter ratingParameter;
 
 	@ManyToOne(cascade =	{ CascadeType.ALL })
-	@JoinColumn(name = "postId", referencedColumnName = "postId")
+	@JoinColumn(name = "post_id", referencedColumnName = "post_id")
 	private Post post;
 
 	@Column(nullable = false)

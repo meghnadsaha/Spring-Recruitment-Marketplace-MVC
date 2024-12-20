@@ -6,9 +6,9 @@
  *
  * Contributors: Andreas Gal <gal@mozilla.com>
  *               Chris G Jones <cjones@mozilla.com>
- *               Shaon Barman <shaon.barman@gmail.com>
+ *               Shaon Barman <shaon.barman@facebook.com>
  *               Vivien Nicolas <21@vingtetun.org>
- *               Justin D'Arcangelo <justindarc@gmail.com>
+ *               Justin D'Arcangelo <justindarc@facebook.com>
  *               Yury Delendik
  *
  * Permission is hereby granted, free of charge, to any person obtaining a

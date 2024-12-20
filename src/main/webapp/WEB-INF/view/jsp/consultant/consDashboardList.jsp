@@ -53,46 +53,49 @@
 		Registration reg = (Registration)request.getAttribute("registration");
 		PostConsultnatService postConsultnatService=(PostConsultnatService)request.getAttribute("postConsultnatService");
        	List<Post> postList = (List)request.getAttribute("postList");
-		long totalCount = (Long)request.getAttribute("totalCount");
+		Long totalCount = (Long)request.getAttribute("totalCount");
+		if (totalCount==null) {
+          totalCount=0L;
+        }
 		int pn = (Integer) request.getAttribute("pn");
 		int rpp = (Integer) request.getAttribute("rpp");
 		int tp = 0;
 		String cc = "";
-		if(totalCount == 0)
+		if(totalCount.intValue()  == 0)
 		{
 			cc = "0 - 0";
 		}
-		else if(totalCount % rpp == 0)
+		else if(totalCount.intValue()  % rpp == 0)
 		{
-			tp = (int)totalCount/rpp;
+			tp = (int)totalCount.intValue() /rpp;
 			cc = ((pn-1)*rpp)+1 + " - " + ((pn)*rpp);
 		}
 		else
 		{
-			tp = (int)(totalCount/rpp)+1;
-			if((pn)*rpp < totalCount)
+			tp = (int)(totalCount.intValue() /rpp)+1;
+			if((pn)*rpp < totalCount.intValue() )
 			{
 				cc = ((pn-1)*rpp)+1 + " - " + ((pn)*rpp);
 			}
 			else
 			{
-				cc = ((pn-1)*rpp)+1 + " - " + totalCount;
+				cc = ((pn-1)*rpp)+1 + " - " + totalCount.intValue() ;
 			}
 		}
-		
+
 	%>
-      
+
 	    <div class="positions_info ">
 	      <div class="filter">
 	          <%-- <div class="col-md-4">
 	             <sec:authorize access="hasRole('ROLE_CON_MANAGER')">
 		      	 	<button id="close_request">Close Request</button>
-		      	 </sec:authorize>	
+		      	 </sec:authorize>
 	         </div> --%>
 	        <div class="col-md-6 pagi_summary"><span>Showing <%= cc %> of <%= totalCount %></span> </div>
-	       
+
 	         <div class="col-md-6">
-	         
+
                 <ul class="page_nav unselectable">
                 	<%
 		          		if(pn > 1)
@@ -143,11 +146,11 @@
 		       				<%
 // 								List<Registration> clientList = (List)request.getAttribute("clientList");
        							%>
-		       				
+
 					        	<select id="cons_db_sel_client" style="width: 80px;height: 30px;background: #e3e3e3;font-weight: bold;border: 0px;">
 					        		<option value="">Client</option>
 					        		<%
-										for (Registration client : clientList) 
+										for (Registration client : clientList)
 										{
 											if(sel_client != null && sel_client.getUserid().equals(client.getUserid()))
 											{
@@ -180,13 +183,13 @@
 									</select>
 						          </div>
 		       				</th>
-		       				
+
 		       				<th align="left" >CTC Range</th>
 		       				<th align="left" >Exp Range</th>
 		       				<th  align="left">
 			       				<%
 			       				String db_sel_loc = (String)request.getAttribute("db_sel_loc");
-				       				
+
 			       				List<String> locList = (List)request.getAttribute("locList");
 			       				Set<String> uniqueLocs = new HashSet<String>();
 			       				for(String loc : locList)
@@ -196,13 +199,13 @@
 			       						uniqueLocs.add(locs[i]);
 			       					}
 			       				}
-										
-			       				
+
+
 			       				String locsList="";
 			       				for(String loc : uniqueLocs)
 			       				{
 		       					locsList+="'"+loc+"',";
-			       				}			       				
+			       				}
 			       				%>
 <!-- 								<label id="location" onclick="">Location</label>	       				 -->
 <!-- 	       						<input type="text" id="autofillloc" value=""/> -->
@@ -214,7 +217,7 @@
 					       					locsList+="'"+loc+"',";
 					       					if(loc.equals(db_sel_loc))
 					       					{
-					       						
+
 							       				%>
 							       					<option value="<%=loc%>" selected="selected"><%=loc %></option>
 							       				<%
@@ -228,7 +231,7 @@
 					       				}
 		       						%>
 	       						</select>
-	       						
+
 	       						<script>
 $( function() {
   var availableTags = [
@@ -240,13 +243,13 @@ $( function() {
 } );
 </script>
        						</th>
-		       				<th width="110px"  >Openings</th> 
+		       				<th width="110px"  >Openings</th>
 		       				<th align="left" >Offered Fee <span title="<%=GeneralConfig.FaqOfferedFee %>" class="questionMark"><a>
 	       				?
 	       				</a></span></th>
-		       				
-		       				
-		       				
+
+
+
 		       				<th width="80px">Posted Date</th>
 		       				<th width="80px">Profile Quota <span title="<%=GeneralConfig.FaqProfileQuota %>" class="questionMark"><a>
 	       				?
@@ -255,17 +258,17 @@ $( function() {
 <!-- 		       				<th width="50px">Pending</th> -->
 <!-- 		       				<th width="50px">Joined</th> -->
 		       				<th width="50px">View</th>
-		       			</tr>	
+		       			</tr>
 	       			</thead>
 	       			<tbody>
 	       				<%
 	       					if(postList != null && !postList.isEmpty())
 	       					{
 	       						int count = (pn-1)*GeneralConfig.rpp + 1 ;
-	       						
+
 	       						for(Post post : postList)
 	       						{
-	       						PostConsultant ps=postConsultnatService.getPostConsultantsByConsIdandPostId(reg.getLid(), post.getPostId()).get(0);		
+	       						PostConsultant ps=postConsultnatService.getPostConsultantsByConsIdandPostId(reg.getLid(), post.getPostId()).get(0);
 	       								%>
 						       			<tr>
 						       				<%-- <sec:authorize access="hasRole('ROLE_CON_MANAGER')">
@@ -278,7 +281,7 @@ $( function() {
 						       							if(post.getCloseDate()!=null){
 						       							%>
 						       							<%if(post.getDeleteDate()!=null||(post.getNoOfPosts()==post.getNoOfPostsJoined())){ %>
-						       					<%= post.getTitle() %> 
+						       					<%= post.getTitle() %>
 						       						<%}else{ %>
 						       					<a title="Click to view your positions" href="cons_your_positions?pid=<%= post.getPostId()%>" id="<%= post.getPostId() %>" class="view_post"><%= post.getTitle() %> </a>
 						       						<%} %>
@@ -286,7 +289,7 @@ $( function() {
 						       							}else{
 						       							%>
 						       							<%if(post.getDeleteDate()!=null||(post.getNoOfPosts()==post.getNoOfPostsJoined())){ %>
-									       									<%= post.getTitle() %> 
+									       									<%= post.getTitle() %>
 						       						<%}else{ %>
 						       					<a title="Click to view your positions" href="cons_your_positions?pid=<%= post.getPostId()%>" id="<%= post.getPostId() %>" class="view_post"><%= post.getTitle() %> </a>
 						       						<%} %>
@@ -318,7 +321,7 @@ $( function() {
 											</td>
 					       					<td><label><%= post.getCtc_min() %> - <%= post.getCtc_max() %> Lacs</label></td>
 					       					<td><label><%= post.getExp_min() %> - <%= post.getExp_max() %> Year(s)</label></td>
-					       					
+
 						    				<td style="padding-left: 20px; word-wrap: break-word;max-width:100px;"><%= post.getLocation() %></td>
 					       					<td  align="center" <%-- style="cursor: pointer;"  onclick="getClosedCandidates(<%=post.getPostId()%>)" --%>>
 						       				<%= post.getNoOfPosts() %> (<%=post.getNoOfPosts()- post.getNoOfPostsFilled() %> left)
@@ -334,17 +337,17 @@ $( function() {
 						       						int prshort = 0;
 						       						int prpending = 0;
 						       						int prjoined = 0;
-						       						
+
 						       						while(it.hasNext())
 						       						{
 						       							PostProfile pr = it.next();
-						       							
+
 						       							//System.out.println(pr.getProfile().getRegistration().getUserid() + " VS " + reg.getUserid());
 														//System.out.println(pr.getProfile().getRegistration().getUserid() + " VS admin" + reg.getAdmin().getUserid());
-						       							
+
 						       							//System.out.println(" Check user : "+ pr.getProfile().getRegistration().equals(reg));
 						       							//System.out.println(" Check user in set : "+ reg.getSubuser().contains(pr.getProfile().getRegistration()));
-						       									
+
 						       							if(pr.getProfile().getRegistration().getUserid().equals(reg.getUserid()))
 						       							{
 						       								prsub++;
@@ -365,7 +368,7 @@ $( function() {
 						       									}
 						       								}
 						       							}
-						       							
+
 						       							if(pr.getProfile().getRegistration().getUserid().equals(reg.getUserid()) && pr.getProcessStatus() != null&&(pr.getProcessStatus().equals("accepted")/* ||pr.getProcessStatus().equals(GeneralConfig.SendOfferDb) */))
 						       							{
 						       								prshort++;
@@ -386,7 +389,7 @@ $( function() {
 						       									}
 						       								}
 						       							}
-						       							
+
 						       							if(pr.getAccepted() == null && pr.getRejected() == null )
 						       							{
 						       								prpending++;
@@ -394,24 +397,24 @@ $( function() {
 						       							if(pr.getJoinDate() != null)
 						       							{
 							       							prjoined++;
-						       								
+
 						       							}
 						       						}
 						       					%>
 						       				<td  align="center" >
 						       				<%
-						       				
+
 						       				long quata = postProfileService.countPostProfilesForPostByDate(post.getPostId(), reg.getUserid(),
 						       						rowDate);
 						       				%>
 						       					<%=post.getProfileParDay() %>(<%=(post.getProfileParDay()-quata) %> left)
-						       					
+
 						       				</td>
-						       			
-						       			
+
+
 						       				<td align="center"  title="number of profiles uploaded.">
 						       					<%if(post.getDeleteDate()!=null||(post.getNoOfPosts()==post.getNoOfPostsJoined())){ %>
-						       					<%= prsub %>/<%= post.getPostId()%>" 
+						       					<%= prsub %>/<%= post.getPostId()%>"
 						       					<%}else{ %>
 						       					<a title="Click to view your positions" href="cons_your_positions?pid=<%= post.getPostId()%>" ><%= prsub %></a>
 					       					/<a title="Click to view your positions" href="cons_your_positions?pid=<%= post.getPostId()%>" >
@@ -422,10 +425,10 @@ $( function() {
 						       					<%= prshort %>
 						       					<%} %>
 						       					</a>
-					       					
+
 					       					</td>
-						       				
-					       					
+
+
 						       				<td align="center" >
 						       					<div class="pre_check" style="float: none;padding:0;">
 							                		<a href="consviewjd?pid=<%= post.getPostId() %>"  class="view_post " title="Click to view post detail">
@@ -438,12 +441,12 @@ $( function() {
 	       						}
 	       					}
 	       				%>
-	       				
+
 		        	</tbody>
 		        </table>
-		        
+
 	        </div>
-        
+
          <%
         String sortParam=(String)request.getAttribute("sortParam");
         %>
@@ -455,8 +458,8 @@ $( function() {
         </script>
 	      </div>
 	    </div>
-      
-   
+
+
 
 </body>
 </html>

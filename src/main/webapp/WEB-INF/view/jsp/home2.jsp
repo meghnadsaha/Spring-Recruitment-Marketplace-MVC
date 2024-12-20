@@ -937,7 +937,7 @@ font-size: 14px;border: 1px solid black;" />
 								<img src="images/ic_4.jpg" alt="img"> 011 283 3577
 							</p>
 							<p>
-								<img src="images/ic_5.jpg" alt="img"> unihyr@gmail.com
+								<img src="images/ic_5.jpg" alt="img"> unihyr@facebook.com
 							</p>
 							
 					</div>

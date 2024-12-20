@@ -41,8 +41,7 @@ var buttonst=$('#db_post_status').val();
 </head>
 <body class="loading">
 	<%
-	long totalCount = (Long)request.getAttribute("totalCount");
-       	List<Post> postList = (List)request.getAttribute("postList");
+        Long totalCount = (Long) request.getAttribute("totalCount");       	List<Post> postList = (List)request.getAttribute("postList");
 		int pn = (Integer) request.getAttribute("pn");
 		int rpp = (Integer) request.getAttribute("rpp");
 		int tp = 0;
@@ -53,7 +52,7 @@ var buttonst=$('#db_post_status').val();
 		}
 		else if(totalCount % rpp == 0)
 		{
-			tp = (int)totalCount/rpp;
+			tp = (int) (totalCount / rpp);
 			cc = ((pn-1)*rpp)+1 + " - " + ((pn)*rpp);
 		}
 		else

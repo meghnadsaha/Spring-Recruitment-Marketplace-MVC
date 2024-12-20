@@ -158,7 +158,7 @@ public class AdminPanelController
 	@ResponseBody
 	public String acceptPostCloseRequest(ModelMap map, HttpServletRequest request, Principal principal)
 	{
-		long postId = Long.parseLong(request.getParameter("postId"));
+		long postId = Long.parseLong(request.getParameter("post_id"));
 		Post post = postService.getPost(postId);
 		if (post != null)
 		{
@@ -669,7 +669,7 @@ public class AdminPanelController
 					+ "<p>Best Regards,</p>"
 					+ "<p></p>"
 					+ "<p><strong>Admin Team</strong></p><p></p>"
-					+ "<p>This is a system generated mail. Please do not reply to this mail. In case of any queries, please write to <a target='_blank' href='mailto:partnerdesk@unihyr.com'>partnerdesk@unihyr.com</a></p>"
+					+ "<p>This is a system generated mail. Please do not reply to this mail. In case of any queries, please write to <a target='_blank' href='mailto:partnerdesk@facebook.com'>partnerdesk@facebook.com</a></p>"
 					+ "</div>"
 					+ "</td>"
 					+ "</tr>"
@@ -800,7 +800,7 @@ public class AdminPanelController
 						"We are delighted to have you on-board our�UniHyr�family.<br><br>" +
 
 				"Please find below your user credentials. Please login and change "
-						+ "password for security reasons. For any assistance, please feel free to reach out to us at help@unihyr.com<br><br>"
+						+ "password for security reasons. For any assistance, please feel free to reach out to us at help@facebook.com<br><br>"
 						+ "Username - " + registration.getUserid() + "<br>" + "Password - " + id + "<br><br>"
 								+ "HAPPY HIRING!<br><br><br>" +
 
