@@ -1,100 +1,98 @@
 package com.unihyr.service;
 
+import com.unihyr.domain.Post;
+
 import java.util.Date;
 import java.util.List;
 
-import com.unihyr.domain.Post;
+public interface PostService {
+    public long addPost ( Post post );
 
-public interface PostService
-{
-	public long addPost(Post post);
-	
-	public void updatePost(Post post);
-	
-	public Post getPost(long postId);
-	
-	public List<Post> getPosts();
-	
-	public long countPosts();
-	
-	public List<Post> getPosts(int first, int max);
-	
-	public List<Post> getActivePostsByClient(String userid);
-	
-	public List<Post> getActivePostsByClient(String userid, int first, int max, String sortParam,String filterBy);
-	
-	public long countActivePostByClient(String userid,String filterBy);
+    public void updatePost ( Post post );
 
-	
-	public List<Post> getAllPostsByClient(String userid, int first, int max, String sortParam);
-	
-	public long countAllPostByClient(String userid);
-	
-	public List<Post> getPublishedPostsByClient(String userid, int first, int max, String sortParam);
-	
-	public long countPublishedPostByClient(String userid);
+    public Post getPost ( long postId );
 
-	public List<Post> getClosedPostsByClient(String userid, int first, int max, String sortParam);
-	
-	public long countClosedPostByClient(String userid);
+    public List<Post> getPosts ();
 
-	public List<Post> getSavedPostsByClient(String clientId, int first, int max, String sortParam);
-	
-	public long countSavedPostByClient(String clientId);
-	
-	public List<Post> getPostsByIndustryUsingConsultantId(String consultantId, int first, int max, String sortParam);
+    public long countPosts ();
 
-	public long countPostsByIndustryUsingConsultantId(String name);
-	
-	public List<Post> getPostsByIndustryId(int industryId, int first, int max, String sortParam);
+    public List<Post> getPosts ( int first , int max );
 
-	public long countPostsByIndustryId(int industryId);
+    public List<Post> getActivePostsByClient ( String userid );
 
-	public List<Post> getPostsBySubmittedProfilesByConsultantId(String consultantId, int first, int max, String sortParam);
+    public List<Post> getActivePostsByClient ( String userid , int first , int max , String sortParam , String filterBy );
 
-	public long countPostsBySubmittedProfilesByConsultantId(String consultantId);
+    public long countActivePostByClient ( String userid , String filterBy );
 
-	public List<Post> getAllPostsBySubmittedProfilesByConsultantId(String consultantId, int first, int max, String sortParam);
 
-	public long countAllPostsBySubmittedProfilesByConsultantId(String consultantId);
+    public List<Post> getAllPostsByClient ( String userid , int first , int max , String sortParam );
 
-	public List<Post> getInactivePostsBySubmittedProfilesByConsultantId(String consultantId, int first, int max, String sortParam);
+    public long countAllPostByClient ( String userid );
 
-	public long countInactivePostsBySubmittedProfilesByConsultantId(String consultantId);
+    public List<Post> getPublishedPostsByClient ( String userid , int first , int max , String sortParam );
 
-	public List<Post> getPostsBySubmittedProfilesByConsultantId(String consultantId, String clientId, int first, int max, String sortParam);
+    public long countPublishedPostByClient ( String userid );
 
-	public long countPostsBySubmittedProfilesByConsultantId(String consultantId, String clientId);
+    public List<Post> getClosedPostsByClient ( String userid , int first , int max , String sortParam );
 
-	public List<Post> getAllPostsBySubmittedProfilesByConsultantId(String consultantId, String clientId, int first, int max, String sortParam);
+    public long countClosedPostByClient ( String userid );
 
-	public long countAllPostsBySubmittedProfilesByConsultantId(String consultantId, String clientId);
+    public List<Post> getSavedPostsByClient ( String clientId , int first , int max , String sortParam );
 
-	public List<Post> getInactivePostsBySubmittedProfilesByConsultantId(String consultantId, String clientId, int first, int max, String sortParam);
+    public long countSavedPostByClient ( String clientId );
 
-	public long countInactivePostsBySubmittedProfilesByConsultantId(String consultantId, String clientId);
+    public List<Post> getPostsByIndustryUsingConsultantId ( String consultantId , int first , int max , String sortParam );
 
-	public void deletePost(Post post);
+    public long countPostsByIndustryUsingConsultantId ( String name );
 
-	public List<Post> getAllPostBetweenDates(Date sDate, Date eDate, int first, int max);
-	
-	
-	
-	
-	public List<Post> getPostsFilteredForConsultant(String consultantId, String clientId, String status, String location, int first, int max, String sortParam);
-	
-	public long countPostsFilteredForConsultant(String consultantId, String clientId, String status, String location);
-	
-	public List<String> getLocationsByConsultant(String consultantId);
+    public List<Post> getPostsByIndustryId ( int industryId , int first , int max , String sortParam );
 
-	public List<Post> getAllVerifiedPostsByClient(String loggedinUser, int i, int j, String string);
-	public List<Post> getAllVerifiedPostsByClientArchive(String loggedinUser, int i, int j, String string);
+    public long countPostsByIndustryId ( int industryId );
 
-	public long countAllVerifiedPostByClient(String userid);
+    public List<Post> getPostsBySubmittedProfilesByConsultantId ( String consultantId , int first , int max , String sortParam );
 
-	public long countActiveVerifiedPostByClient(String userid);
+    public long countPostsBySubmittedProfilesByConsultantId ( String consultantId );
 
-	List<Post> getAllActivePosts();
-	
-	
+    public List<Post> getAllPostsBySubmittedProfilesByConsultantId ( String consultantId , int first , int max , String sortParam );
+
+    public long countAllPostsBySubmittedProfilesByConsultantId ( String consultantId );
+
+    public List<Post> getInactivePostsBySubmittedProfilesByConsultantId ( String consultantId , int first , int max , String sortParam );
+
+    public long countInactivePostsBySubmittedProfilesByConsultantId ( String consultantId );
+
+    public List<Post> getPostsBySubmittedProfilesByConsultantId ( String consultantId , String clientId , int first , int max , String sortParam );
+
+    public long countPostsBySubmittedProfilesByConsultantId ( String consultantId , String clientId );
+
+    public List<Post> getAllPostsBySubmittedProfilesByConsultantId ( String consultantId , String clientId , int first , int max , String sortParam );
+
+    public long countAllPostsBySubmittedProfilesByConsultantId ( String consultantId , String clientId );
+
+    public List<Post> getInactivePostsBySubmittedProfilesByConsultantId ( String consultantId , String clientId , int first , int max , String sortParam );
+
+    public long countInactivePostsBySubmittedProfilesByConsultantId ( String consultantId , String clientId );
+
+    public void deletePost ( Post post );
+
+    public List<Post> getAllPostBetweenDates ( Date sDate , Date eDate , int first , int max );
+
+
+    public List<Post> getPostsFilteredForConsultant ( String consultantId , String clientId , String status , String location , int first , int max , String sortParam );
+
+    public long countPostsFilteredForConsultant ( String consultantId , String clientId , String status , String location );
+
+    public List<String> getLocationsByConsultant ( String consultantId );
+
+    public List<Post> getAllVerifiedPostsByClient ( String loggedinUser , int i , int j , String string );
+
+    public List<Post> getAllVerifiedPostsByClientArchive ( String loggedinUser , int i , int j , String string );
+
+    public long countAllVerifiedPostByClient ( String userid );
+
+    public long countActiveVerifiedPostByClient ( String userid );
+
+    List<Post> getAllActivePosts ();
+
+
 }

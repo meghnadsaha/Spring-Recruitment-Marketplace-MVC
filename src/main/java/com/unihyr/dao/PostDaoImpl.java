@@ -8,10 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.Expression;
@@ -19,6 +16,8 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,6 +29,8 @@ import com.unihyr.domain.Registration;
 @SuppressWarnings("unchecked")
 public class PostDaoImpl implements PostDao
 {
+
+	private static final Logger logger = LoggerFactory.getLogger(PostDaoImpl.class);
 	@Autowired private SessionFactory sessionFactory;
 	
 	@Override
@@ -1504,16 +1505,37 @@ public class PostDaoImpl implements PostDao
 		return (Long)criteria.uniqueResult();
 	}
 	@Override
-	public List<Post> getAllActivePosts()
-	{
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
-		criteria.add(Restrictions.isNull("deleteDate"))
-		.add(Restrictions.isNotNull("published"))
-		.add(Restrictions.eq("isActive", true))
-		.add(Restrictions.isNull("deleteDate"))
-		.add(Restrictions.isNull("closeDate"))
-		.add(Restrictions.isNotNull("verifyDate"));
-		
-		return criteria.list();
+//	public List<Post> getAllActivePosts()
+//	{
+//		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
+//		criteria.add(Restrictions.isNull("deleteDate"))
+//		.add(Restrictions.isNotNull("published"))
+//		.add(Restrictions.eq("isActive", true))
+//		.add(Restrictions.isNull("deleteDate"))
+//		.add(Restrictions.isNull("closeDate"))
+//		.add(Restrictions.isNotNull("verifyDate"));
+//
+//		return criteria.list();
+//	}
+
+	public List<Post> getAllActivePosts() {
+		List<Post> posts = null;
+		try {
+			Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
+			criteria.add(Restrictions.isNull("deleteDate"))
+					.add(Restrictions.isNotNull("published"))
+					.add(Restrictions.eq("isActive", true))
+					.add(Restrictions.isNull("deleteDate"))
+					.add(Restrictions.isNull("closeDate"))
+					.add(Restrictions.isNotNull("verifyDate"));
+
+			posts = criteria.list();  // Execute the query and get the result
+		} catch (HibernateException e) {
+			// Log the exception
+			logger.error("Error occurred while fetching active posts", e);
+			// Optionally, rethrow a custom exception or return an empty list
+			throw new RuntimeException("Error fetching active posts", e);
+		}
+		return posts;
 	}
 }

@@ -1,64 +1,43 @@
 package com.unihyr.controller;
 
-import java.net.ConnectException;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
-
-import javax.annotation.PostConstruct;
-
-import org.apache.commons.lang.time.DateUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
-
-import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
-import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.unihyr.constraints.GeneralConfig;
 import com.unihyr.domain.BillingDetails;
-import com.unihyr.domain.ConfigVariables;
-import com.unihyr.domain.GlobalRatingPercentile;
-import com.unihyr.domain.Industry;
 import com.unihyr.domain.Post;
 import com.unihyr.domain.PostProfile;
 import com.unihyr.domain.Registration;
-import com.unihyr.service.BillingService;
-import com.unihyr.service.ConfigVariablesService;
-import com.unihyr.service.GlobalRatingPercentileService;
-import com.unihyr.service.MailService;
-import com.unihyr.service.PostProfileService;
-import com.unihyr.service.PostService;
-import com.unihyr.service.RegistrationService;
-import com.unihyr.util.ApplicationContextProvider;
+import com.unihyr.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Silvereye
  * A controller to check whether any post is idle for particular days and perform action if idle.
  */
 @Component
-public class AutoTriggerController
-{
-	@Autowired 
-	private PostProfileService postProfileService;
-	@Autowired 
-	private PostService postService;
-	@Autowired 
-	private MailService mailService;
-	@Autowired BillingService billingService;
-	@Autowired
-	private RegistrationService registrationService;
-	@Autowired
-	private GlobalRatingPercentileService globalRatingPercentileService;
+public class AutoTriggerController {
+    @Autowired
+    private PostProfileService postProfileService;
+    @Autowired
+    private PostService postService;
+    @Autowired
+    private MailService mailService;
+    @Autowired
+    BillingService billingService;
+    @Autowired
+    private RegistrationService registrationService;
+    @Autowired
+    private GlobalRatingPercentileService globalRatingPercentileService;
 
-	/**
-	 * method to check that if any post is idle or not 
-	 * @return true if post is idle, false if post is active
-	 */
-	public boolean checkPostIdle()
-	{
+    /**
+     * method to check that if any post is idle or not
+     *
+     * @return true if post is idle, false if post is active
+     */
+    public boolean checkPostIdle () {
 	/*	OpenOfficeConnection connection = new SocketOpenOfficeConnection("127.0.0.1",8100);
     	
 		try
@@ -101,27 +80,27 @@ public class AutoTriggerController
 			postProfileService.updatePostProfile(pp);
 		}
 		*/
-		StringBuilder posts=new StringBuilder("");
-		List<Post> list = postService.getAllActivePosts();
-		for (Post post : list)
-		{
-			if(post.isActive()&&post.getCloseDate()==null){
-			if(post.getNoOfPosts()<=(post.getNoOfPostsFilled()))
-			{
-				post.setCloseDate(new Date());
-				postService.updatePost(post);
-			}
-			
-			List<PostProfile> profileList = postProfileService.getPostProfileByPostForStartup(post.getPostId(), 0, 1, "modificationDate");
-			Date today = new Date();
-			Date submitted = null;
-			if (profileList.isEmpty()){
+        StringBuilder posts = new StringBuilder("");
+        List<Post> list = postService.getAllActivePosts();
+        for (Post post : list) {
+            if (post.isActive() && post.getCloseDate() == null) {
+                if (post.getNoOfPosts() <= (post.getNoOfPostsFilled())) {
+                    post.setCloseDate(new Date());
+                    postService.updatePost(post);
+                }
+
+                List<PostProfile> profileList = postProfileService.getPostProfileByPostForStartup(post.getPostId() , 0 ,
+                                                                                                  1 ,
+                                                                                                  "modificationDate");
+                Date today = new Date();
+                Date submitted = null;
+                if (profileList.isEmpty()) {
 //				submitted = post.getVerifyDate();
-			}else{
-				submitted = profileList.get(0).getModificationDate();
-			long diff = today.getTime() - submitted.getTime();
-			diff=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-			if(diff>GeneralConfig.PostDaysInactive){/*
+                } else {
+                    submitted = profileList.get(0).getModificationDate();
+                    long diff = today.getTime() - submitted.getTime();
+                    diff = TimeUnit.DAYS.convert(diff , TimeUnit.MILLISECONDS);
+                    if (diff > GeneralConfig.PostDaysInactive) {/*
 				try{
 					post.setActive(false);
 					mailService.sendMail(post.getClient().getUserid(), "Reminder on post",
@@ -130,67 +109,68 @@ public class AutoTriggerController
 					}catch(Exception e){
 						e.printStackTrace();
 					}
-			*/}
-			else if (diff > GeneralConfig.PostDaysOut)
-			{
-				
-				
-			Registration client=post.getClient();
-			posts.append("Post = "+post.getTitle()+", Client = "+client.getOrganizationName()+", contact = "+client.getContractNo()+"<br>");
-				
-				}
-		}
-			
-		}
-		
-		String mailcontent="";
-		try{
-			if(posts.length()>1){
-			mailService.sendMail(GeneralConfig.admin_email, "UniHyr Alert! Please take action on the profiles received"
-					,posts.toString()+"<br>"+
-					"These post having no actions since " + GeneralConfig.PostDaysOut);
-			System.out.println("reminded");}
-			}catch(Exception e){
-				e.printStackTrace();
-			}}
-		return false;
-	}
+			*/
+                    } else if (diff > GeneralConfig.PostDaysOut) {
 
-	/**
-	 * method to check that if any billing details is not verified since 7 days
-	 * @return true if post is idle, false if post is active
-	 */
-	public boolean checkBillingDetailsIdle()
-	{
-		List<BillingDetails> list = billingService.getAllDetailsUnverified();
-		StringBuilder users=new StringBuilder("");
-		for (BillingDetails bill : list)
-		{
-			if(bill.getVerificationStatus()==null||!bill.getVerificationStatus()){
-			Date today = new Date();
-			Date submitted = null;
-			submitted = bill.getCreateDate();
-			long diff = today.getTime() - submitted.getTime();
-			diff=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
-			if (diff > GeneralConfig.BillDaysOut)
-			{
-				bill.setVerificationStatus(true);
-				billingService.updateBillingDetails(bill);
-				users.append(bill.getClientId()+",");
-				System.out.println("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
-			}
-			}
-		}
-		try{
-			mailService.sendMail(users.toString(), "Reminder on post",
-					"Your billing details are veried it self");
-			}catch(Exception e ){
-				e.printStackTrace();
-			}
-		return false;
-	}
-	
-	public boolean initializeGlobalRatingPercentile(){/*
+
+                        Registration client = post.getClient();
+                        posts.append(
+                                "Post = " + post.getTitle() + ", Client = " + client.getOrganizationName() + ", contact = " + client.getContractNo() + "<br>");
+
+                    }
+                }
+
+            }
+
+            String mailcontent = "";
+            try {
+                if (posts.length() > 1) {
+                    mailService.sendMail(GeneralConfig.admin_email ,
+                                         "UniHyr Alert! Please take action on the profiles received"
+                            , posts.toString() + "<br>" +
+                                                 "These post having no actions since " + GeneralConfig.PostDaysOut);
+                    System.out.println("reminded");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * method to check that if any billing details is not verified since 7 days
+     *
+     * @return true if post is idle, false if post is active
+     */
+    public boolean checkBillingDetailsIdle () {
+        List<BillingDetails> list = billingService.getAllDetailsUnverified();
+        StringBuilder users = new StringBuilder("");
+        for (BillingDetails bill : list) {
+            if (bill.getVerificationStatus() == null || !bill.getVerificationStatus()) {
+                Date today = new Date();
+                Date submitted = null;
+                submitted = bill.getCreateDate();
+                long diff = today.getTime() - submitted.getTime();
+                diff = TimeUnit.DAYS.convert(diff , TimeUnit.MILLISECONDS);
+                if (diff > GeneralConfig.BillDaysOut) {
+                    bill.setVerificationStatus(true);
+                    billingService.updateBillingDetails(bill);
+                    users.append(bill.getClientId() + ",");
+                    System.out.println("Days: " + TimeUnit.DAYS.convert(diff , TimeUnit.MILLISECONDS));
+                }
+            }
+        }
+        try {
+//            mailService.sendMail(users.toString() , "Reminder on post" ,
+//                                 "Your billing details are veried it self");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean initializeGlobalRatingPercentile () {/*
 		List<Registration> list = registrationService.getConsultantListJoined(0, 1000);
 		for (Registration registration : list)
 		{
@@ -223,9 +203,9 @@ public class AutoTriggerController
 			}
 		}
 		
-	*/	
-		return false;
-		
-		
-	}
+	*/
+        return false;
+
+
+    }
 }

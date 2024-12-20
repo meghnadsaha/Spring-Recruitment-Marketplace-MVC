@@ -885,7 +885,7 @@ function getClosedCandidates(postId){
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 	      }
-    }) ;	
+    }) ;
 
 }
 

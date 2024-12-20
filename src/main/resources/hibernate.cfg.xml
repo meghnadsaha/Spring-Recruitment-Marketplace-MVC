@@ -1,37 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
-    "-//Hibernate/Hibernate Configuration DTD//EN"
-    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-    
-<hibernate-configuration>
-    
-    <session-factory>
-     	<property name="hbm2ddl.auto">create</property>
-		<mapping class="com.unihyr.domain.Post"/>
+		"-//Hibernate/Hibernate Configuration DTD//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 
+<hibernate-configuration>
+
+	<session-factory>
+		<property name="hbm2ddl.auto">update</property>
 		<mapping class="com.unihyr.domain.LoginInfo"/>
 		<mapping class="com.unihyr.domain.Registration"/>
 		<mapping class="com.unihyr.domain.UserRole"/>
 		<mapping class="com.unihyr.domain.Persistent_Logins"/>
-   	    <mapping class="com.unihyr.domain.Industry"/>
-   	    <mapping class="com.unihyr.domain.CandidateProfile"/>
-   	    <mapping class="com.unihyr.domain.GlobalRating"/>
-   	    <mapping class="com.unihyr.domain.LocalRating"/>
-   	    <mapping class="com.unihyr.domain.RatingCalculation"/>
-   	    <mapping class="com.unihyr.domain.RatingParameter"/>
-   	    <mapping class="com.unihyr.domain.LoginHistory"/>
-   	    <mapping class="com.unihyr.domain.PostProfile"/>
-   	    <mapping class="com.unihyr.domain.PostConsultant"/>
-   	    <mapping class="com.unihyr.domain.Inbox"/>
-   	    <mapping class="com.unihyr.domain.Location"/>
-   	    <mapping class="com.unihyr.domain.BillingDetails"/>
-   	    <mapping class="com.unihyr.domain.ConfigVariables"/>
-   	    <mapping class="com.unihyr.domain.GlobalRatingPercentile"/>
-   	    <mapping class="com.unihyr.domain.Notifications"/>
-   	    <mapping class="com.unihyr.domain.Qualification"/>
-   	    <mapping class="com.unihyr.domain.ContactUs"/>
-   	    <mapping class="com.unihyr.domain.HelpDesk"/>
-   	    <mapping class="com.unihyr.domain.SocialSharing"/>
-    </session-factory>
-    
+		<mapping class="com.unihyr.domain.Post"/>
+		<mapping class="com.unihyr.domain.Industry"/>
+		<mapping class="com.unihyr.domain.CandidateProfile"/>
+		<mapping class="com.unihyr.domain.GlobalRating"/>
+		<mapping class="com.unihyr.domain.LocalRating"/>
+		<mapping class="com.unihyr.domain.RatingCalculation"/>
+		<mapping class="com.unihyr.domain.RatingParameter"/>
+		<mapping class="com.unihyr.domain.LoginHistory"/>
+		<mapping class="com.unihyr.domain.PostProfile"/>
+		<mapping class="com.unihyr.domain.PostConsultant"/>
+		<mapping class="com.unihyr.domain.Inbox"/>
+		<mapping class="com.unihyr.domain.Location"/>
+		<mapping class="com.unihyr.domain.BillingDetails"/>
+		<mapping class="com.unihyr.domain.ConfigVariables"/>
+		<mapping class="com.unihyr.domain.GlobalRatingPercentile"/>
+		<mapping class="com.unihyr.domain.Notifications"/>
+		<mapping class="com.unihyr.domain.Qualification"/>
+		<mapping class="com.unihyr.domain.ContactUs"/>
+		<mapping class="com.unihyr.domain.HelpDesk"/>
+		<mapping class="com.unihyr.domain.SocialSharing"/>
+	</session-factory>
+
 </hibernate-configuration>

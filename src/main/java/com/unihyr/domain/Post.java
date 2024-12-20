@@ -44,10 +44,10 @@ public class Post implements Serializable
 	private String function;
 
 	@Column(nullable=false)
-	private int exp_min;
+	private double exp_min;
 
 	@Column(nullable=false)
-	private int exp_max;
+	private double exp_max;
 
 	@Column(nullable=false)
 	private double ctc_min;
@@ -85,6 +85,8 @@ public class Post implements Serializable
 
 	@Column
 	private Date closeDate;
+	@Column
+	private Date joinCloseDate;
 	@Column
 	private Date openAgainDate;
 
@@ -149,6 +151,16 @@ public class Post implements Serializable
 	public Date getOpenAgainDate()
 	{
 		return openAgainDate;
+	}
+
+	public Date getJoinCloseDate()
+	{
+		return joinCloseDate;
+	}
+
+	public void setJoinCloseDate(Date joinCloseDate)
+	{
+		this.joinCloseDate = joinCloseDate;
 	}
 
 	public int getNoOfPostsJoined()
@@ -358,19 +370,19 @@ public class Post implements Serializable
 		this.function = function;
 	}
 
-	public int getExp_min() {
+	public double getExp_min() {
 		return exp_min;
 	}
 
-	public void setExp_min(int exp_min) {
+	public void setExp_min(double exp_min) {
 		this.exp_min = exp_min;
 	}
 
-	public int getExp_max() {
+	public double getExp_max() {
 		return exp_max;
 	}
 
-	public void setExp_max(int exp_max) {
+	public void setExp_max(double exp_max) {
 		this.exp_max = exp_max;
 	}
 

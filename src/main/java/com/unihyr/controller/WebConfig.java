@@ -29,7 +29,7 @@ public class WebConfig
 	
 	@PostConstruct
 	public void initialize()  throws Exception {
-			System.out.println("initialized");
+//			System.out.println("initialized");
 			ConfigVariables configVariable= new ConfigVariables();
 			configVariable.setVarName("CESS");
 			configVariable.setVarValue("0.5");
