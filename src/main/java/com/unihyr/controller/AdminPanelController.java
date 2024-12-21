@@ -806,7 +806,7 @@ public class AdminPanelController
 
 				"Regards,<br>" + "UniHyr Admin Team";
 
-				mailService.sendMail(registration.getUserid(), "Welcome to UniHyr!", mailContent);
+//				mailService.sendMail(registration.getUserid(), "Welcome to UniHyr!", mailContent);
 				
 				map.addAttribute("contractagree","true");
 				}else{

@@ -292,7 +292,7 @@ function fillProfiles(pageNo)
 </style>
 
 <body onload="fillProfiles('1')">
- <input type="hidden" value="<%=arcflag %>" id="arcflag"/>
+ <input type="text" value="<%=arcflag %>" id="arcflag" style="background:red"/>
 <%
 	List<Registration> clientList = (List<Registration>) request.getAttribute("clientList");
 %>

@@ -22,6 +22,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
@@ -374,8 +376,7 @@ public class ClientController
 	 */
 	@RequestMapping(value = "/clientaddpost", method = RequestMethod.POST)
 	public String client_addPost(@ModelAttribute(value = "postForm") @Valid PostModel model, BindingResult result,
-			ModelMap map, HttpServletRequest request, Principal principal)
-	{
+			ModelMap map, HttpServletRequest request, Principal principal) throws JsonProcessingException {
 		boolean valid = true;
 		List<String> uploadMsg = new ArrayList<>();
 		MultipartFile resumefile = model.getUploadJdfile();
@@ -585,7 +586,7 @@ public class ClientController
 			}
 
 			post.setJobCode(jobCode);
-
+			//System.out.println("Post json : \n "+new ObjectMapper().writeValueAsString(post));
 			postService.updatePost(post);
 			}
 		}
@@ -597,6 +598,8 @@ public class ClientController
 		}
 		return "redirect:clientaddpost";
 	}
+
+
 
 	/**
 	 * @param map
