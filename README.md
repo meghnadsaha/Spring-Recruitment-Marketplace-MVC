@@ -14,6 +14,9 @@ Example Emails and Passwords:
 5. ROLE_EMP_MANAGER
 * Email: employee_manager@example.com
 * Password: EmpManager@5678
+
+<hr/>
+
 Recommendations:
 1. Password Encryption: Store passwords securely using hashing algorithms like BCrypt or Argon2.
 2. Role Mapping: Use a database table to map these roles to users for dynamic management.
