@@ -55,11 +55,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.artofsolving.jodconverter.DocumentConverter;
-import com.artofsolving.jodconverter.DocumentFormat;
-import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
-import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
-import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
+//import com.artofsolving.jodconverter.DocumentConverter;
+//import com.artofsolving.jodconverter.DocumentFormat;
+//import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
+//import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
+//import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.PageSize;
@@ -69,7 +69,7 @@ import com.unihyr.constraints.DateFormats;
 import com.unihyr.constraints.GeneralConfig;
 import com.unihyr.constraints.NumberUtils;
 import com.unihyr.constraints.Roles;
-import com.unihyr.constraints.numbertowordindian;
+//import com.unihyr.constraints.numbertowordindian;
 import com.unihyr.domain.BillingDetails;
 import com.unihyr.domain.CandidateProfile;
 import com.unihyr.domain.GlobalRating;
@@ -1654,7 +1654,7 @@ e.printStackTrace();
 			str.append("		<td style='width: 40%;'></td>");
 			str.append("	</tr>");
 			str.append("<tr style='height: 25px;'>");
-			str.append("	<td>" + numbertowordindian.numToWordIndian(total.intValue() + ""));
+//			str.append("	<td>" + numbertowordindian.numToWordIndian(total.intValue() + ""));
 			str.append("		Only</td>");
 			str.append("	<td></td>");
 			str.append("</tr>");
@@ -1893,7 +1893,7 @@ e.printStackTrace();
 			str.append("	</tr>");
 			
 			str.append("<tr style='height: 25px;'>");
-			str.append("	<td>" + numbertowordindian.numToWordIndian(total.intValue() + ""));
+//			str.append("	<td>" + numbertowordindian.numToWordIndian(total.intValue() + ""));
 			str.append("		Only</td>");
 			str.append("	<td></td>");
 			str.append("</tr>");
@@ -2061,7 +2061,7 @@ e.printStackTrace();
 	 * @param map
 	 * @param request
 	 * @param principal
-	 * @param childId
+//	 * @param childId
 	 * @return
 	 */
 	@RequestMapping(value = "/consRating", method = RequestMethod.GET)

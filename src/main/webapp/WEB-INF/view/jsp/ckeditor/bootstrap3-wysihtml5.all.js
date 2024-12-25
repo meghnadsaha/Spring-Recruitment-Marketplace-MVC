@@ -12533,7 +12533,7 @@ wysihtml5.views.View = Base.extend(
       ];
 
   /**
-   * With "setActive" IE offers a smart way of focusing elements without scrolling them into view:
+   * With "setIsActive" IE offers a smart way of focusing elements without scrolling them into view:
    * http://msdn.microsoft.com/en-us/library/ms536738(v=vs.85).aspx
    *
    * Other browsers need a more hacky way: (pssst don't tell my mama)
@@ -12541,10 +12541,10 @@ wysihtml5.views.View = Base.extend(
    * move it out of the scrollable area, focus it, and reset it's position
    */
   var focusWithoutScrolling = function(element) {
-    if (element.setActive) {
+    if (element.setIsActive) {
       // Following line could cause a js error when the textarea is invisible
       // See https://github.com/xing/wysihtml5/issues/9
-      try { element.setActive(); } catch(e) {}
+      try { element.setIsActive(); } catch(e) {}
     } else {
       var elementStyle = element.style,
           originalScrollTop = doc.documentElement.scrollTop || doc.body.scrollTop,

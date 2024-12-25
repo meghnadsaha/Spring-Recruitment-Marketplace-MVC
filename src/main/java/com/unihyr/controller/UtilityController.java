@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.unihyr.constraints.NumberUtils;
-import com.unihyr.constraints.numbertowordindian;
+//import com.unihyr.constraints.numbertowordindian;
 /**
  * Controls all the request related to some utitlies like convert numeric in words
  * @author Rohit Tiwari
@@ -15,11 +15,11 @@ import com.unihyr.constraints.numbertowordindian;
 public class UtilityController
 {
 	
-	@RequestMapping("/getAmountInWords")
-	@ResponseBody
-	public String getAmountInWords(@RequestParam String amount){
-		return	numbertowordindian.numToWordIndian(amount);
-		
-	}
+//	@RequestMapping("/getAmountInWords")
+//	@ResponseBody
+//	public String getAmountInWords(@RequestParam String amount){
+//		return	numbertowordindian.numToWordIndian(amount);
+//
+//	}
 
 }

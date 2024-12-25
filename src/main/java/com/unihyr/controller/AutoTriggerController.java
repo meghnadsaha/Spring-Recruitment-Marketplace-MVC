@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
-import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
+//import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
+//import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.unihyr.constraints.GeneralConfig;
 import com.unihyr.domain.BillingDetails;
 import com.unihyr.domain.ConfigVariables;
@@ -123,7 +123,7 @@ public class AutoTriggerController
 			diff=TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 			if(diff>GeneralConfig.PostDaysInactive){/*
 				try{
-					post.setActive(false);
+					post.setIsActive(false);
 					mailService.sendMail(post.getClient().getUserid(), "Reminder on post",
 							"Your post is idle for more than " + GeneralConfig.PostDaysInactive+" now it is deactivated by Unihyr");
 					System.out.println("Deactivated");

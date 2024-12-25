@@ -26,12 +26,17 @@ import com.unihyr.domain.Industry;
 import com.unihyr.domain.Post;
 import com.unihyr.domain.Registration;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 @Repository
 @SuppressWarnings("unchecked")
 public class PostDaoImpl implements PostDao
 {
 	@Autowired private SessionFactory sessionFactory;
-	
+	@PersistenceContext
+	private EntityManager entityManager;
 	@Override
 	public long addPost(Post post)
 	{
@@ -39,14 +44,14 @@ public class PostDaoImpl implements PostDao
 		this.sessionFactory.getCurrentSession().flush();
 		return post.getPostId();
 	}
-	
+
 	@Override
 	public void updatePost(Post post)
 	{
 		this.sessionFactory.getCurrentSession().update(post);
 		this.sessionFactory.getCurrentSession().flush();
 	}
-	
+
 	@Override
 	public Post getPost(long postId)
 	{
@@ -62,7 +67,7 @@ public class PostDaoImpl implements PostDao
 		}
 		return null;
 	}
-	
+
 	@Override
 	public List<Post> getPosts()
 	{
@@ -72,7 +77,7 @@ public class PostDaoImpl implements PostDao
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 				.list();
 	}
-	
+
 	public long countPosts()
 	{
 		long count = (Long)this.sessionFactory.getCurrentSession().createCriteria(Post.class)
@@ -81,7 +86,7 @@ public class PostDaoImpl implements PostDao
 				.uniqueResult();
 		return count;
 	}
-	
+
 	@Override
 	public List<Post> getPosts(int first, int max)
 	{
@@ -91,11 +96,11 @@ public class PostDaoImpl implements PostDao
 				.setFetchMode("postProfile", FetchMode.JOIN)
 				.setFirstResult(first).setMaxResults(max)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-				
-		
+
+
 		return criteria.list();
 	}
-	
+
 	public List<Post> getActivePostsByClient(String clientId)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
@@ -112,8 +117,8 @@ public class PostDaoImpl implements PostDao
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return criteria.list();
 	}
-	
-	
+
+
 	public List<Post> getActivePostsByClient(String clientId, int first, int max,String sortParam,String filterBy)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
@@ -122,7 +127,7 @@ public class PostDaoImpl implements PostDao
 		criteria.createAlias("client", "clientAlias");
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
-		
+
 		if(filterBy.equals("isActive")){
 			criteria.add(Restrictions.eq("isActive", true)).add(Restrictions.isNotNull("verifyDate")).add(Restrictions.isNull("closeDate"));
 		}
@@ -156,7 +161,7 @@ public class PostDaoImpl implements PostDao
         }
 		if (longList.size() > 0)
 		{
-			//get all the id's corresponding to the projection, 
+			//get all the id's corresponding to the projection,
 			//then apply distinct root entity
             criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
             criteria.add(Restrictions.in("postId", longList)).addOrder(Order.desc("createDate"));
@@ -167,7 +172,7 @@ public class PostDaoImpl implements PostDao
           		else
           		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
+        }
 		else
 		{
 		//no results, so let's ommit the second query to the DB
@@ -175,7 +180,7 @@ public class PostDaoImpl implements PostDao
         }
 
 		return criteria.list();
-		
+
 //		return this.sessionFactory.getCurrentSession().createCriteria(Post.class)
 //				.add(Restrictions.isNull("deleteDate")).add(Restrictions.eq("client.userid", userid))
 //				.addOrder(Order.desc("createDate")).setFetchMode("postProfile", FetchMode.JOIN)
@@ -183,8 +188,8 @@ public class PostDaoImpl implements PostDao
 //				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 //				.list();
 	}
-	
-	
+
+
 	@Override
 	public long countActivePostByClient(String clientId,String filterBy)
 	{
@@ -194,7 +199,7 @@ public class PostDaoImpl implements PostDao
 		criteria.createAlias("client", "clientAlias");
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
-		
+
 		if(filterBy.equals("isActive")){
 			criteria.add(Restrictions.eq("isActive", true)).add(Restrictions.isNotNull("verifyDate")).add(Restrictions.isNull("closeDate"));
 		}
@@ -215,7 +220,7 @@ public class PostDaoImpl implements PostDao
 		criteria.setProjection(Projections.rowCount());
 		return (Long)criteria.uniqueResult();
 	}
-	
+
 	@Override
 	public List<Post> getAllPostsByClient(String userid, int first, int max,String sortParam)
 	{
@@ -224,7 +229,7 @@ public class PostDaoImpl implements PostDao
 		criteria.add(Restrictions.isNull("deleteDate"));
 		//	.add(Restrictions.isNotNull("verifyDate"));
 		//	criteria.add(Restrictions.eq("client.userid", userid));
-		
+
 		Criterion cn1 = Restrictions.eq("client.userid", userid);
 		criteria.createAlias("client", "clientAlias");
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", userid);
@@ -236,8 +241,8 @@ public class PostDaoImpl implements PostDao
 	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -248,7 +253,7 @@ public class PostDaoImpl implements PostDao
 
 		if (longList.size() > 0)
 		{
-			//get all the id's corresponding to the projection, 
+			//get all the id's corresponding to the projection,
 			//then apply distinct root entity
             criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
             criteria.add(Restrictions.in("postId", longList));
@@ -259,7 +264,7 @@ public class PostDaoImpl implements PostDao
           		else
           		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
+        }
 		else
 		{
 		//no results, so let's ommit the second query to the DB
@@ -267,9 +272,9 @@ public class PostDaoImpl implements PostDao
         }
 
 		return criteria.list();
-		
+
 	}
-	
+
 	@Override
 	public long countAllPostByClient(String clientId)
 	{
@@ -281,16 +286,16 @@ public class PostDaoImpl implements PostDao
 		criteria.createAlias("client", "clientAlias");
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
-		
+
 		criteria.setProjection(Projections.rowCount()) ;
-		
+
 		return (Long)criteria.uniqueResult();
 	}
-	
+
 	@Override
 	public List<Post> getPublishedPostsByClient(String clientId, int first, int max,String sortParam)
 	{
-		
+
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
 		criteria.add(Restrictions.isNotNull("published"))
@@ -303,15 +308,15 @@ public class PostDaoImpl implements PostDao
 		criteria.createAlias("client", "clientAlias");
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
-		
+
 		 if(sortParam.indexOf("published")>=0)
 	      		criteria.addOrder(Order.desc(sortParam));
 	      		else
 	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -322,7 +327,7 @@ public class PostDaoImpl implements PostDao
 
 		if (longList.size() > 0)
 		{
-			//get all the id's corresponding to the projection, 
+			//get all the id's corresponding to the projection,
 			//then apply distinct root entity
             criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
             criteria.add(Restrictions.in("postId", longList));
@@ -330,7 +335,7 @@ public class PostDaoImpl implements PostDao
             criteria.setFetchMode("postConsultants", FetchMode.JOIN);
             criteria.addOrder(Order.desc("postId"));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
+        }
 		else
 		{
 		//no results, so let's ommit the second query to the DB
@@ -338,9 +343,9 @@ public class PostDaoImpl implements PostDao
         }
 
 		return criteria.list();
-		
+
 	}
-	
+
 	@Override
 	public long countPublishedPostByClient(String clientId)
 	{
@@ -351,7 +356,7 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
 	//	.add(Restrictions.isNotNull("verifyDate"));
-		
+
 		criteria.add(Restrictions.isNotNull("published"))
 				.add(Restrictions.isNull("deleteDate"))
 				.add(Restrictions.isNull("closeDate"))
@@ -367,22 +372,22 @@ public class PostDaoImpl implements PostDao
 		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
 		criteria.add(Restrictions.isNull("deleteDate"));
 		criteria.add(Restrictions.isNotNull("closeDate"));
-		
+
 //		criteria.add(Restrictions.eq("client.userid", clientId));
 		Criterion cn1 = Restrictions.eq("client.userid", clientId);
 		criteria.createAlias("client", "clientAlias");
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
 	//	.add(Restrictions.isNotNull("verifyDate"));
-		
+
 		 if(sortParam.indexOf("published")>=0)
 	      		criteria.addOrder(Order.desc(sortParam));
 	      		else
 	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -393,7 +398,7 @@ public class PostDaoImpl implements PostDao
 
 		if (longList.size() > 0)
 		{
-			//get all the id's corresponding to the projection, 
+			//get all the id's corresponding to the projection,
 			//then apply distinct root entity
             criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
             criteria.add(Restrictions.in("postId", longList));
@@ -404,7 +409,7 @@ public class PostDaoImpl implements PostDao
           		else
           		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
+        }
 		else
 		{
 		//no results, so let's ommit the second query to the DB
@@ -412,9 +417,9 @@ public class PostDaoImpl implements PostDao
         }
 
 		return criteria.list();
-		
+
 	}
-	
+
 	@Override
 	public long countClosedPostByClient(String clientId)
 	{
@@ -427,12 +432,12 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
 		//.add(Restrictions.isNotNull("verifyDate"));
-		
-		
+
+
 		criteria.setProjection(Projections.rowCount());
 		return (Long)criteria.uniqueResult();
 	}
-	
+
 	public List<Post> getSavedPostsByClient(String clientId, int first, int max,String sortParam)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
@@ -445,15 +450,15 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
 //		.add(Restrictions.isNotNull("verifyDate"));
-		
+
 		 if(sortParam.indexOf("published")>=0)
 	      		criteria.addOrder(Order.desc(sortParam));
 	      		else
 	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -464,7 +469,7 @@ public class PostDaoImpl implements PostDao
 
 		if (longList.size() > 0)
 		{
-			//get all the id's corresponding to the projection, 
+			//get all the id's corresponding to the projection,
 			//then apply distinct root entity
             criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
             criteria.add(Restrictions.in("postId", longList));
@@ -475,7 +480,7 @@ public class PostDaoImpl implements PostDao
           		else
           		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
+        }
 		else
 		{
 		//no results, so let's ommit the second query to the DB
@@ -483,9 +488,9 @@ public class PostDaoImpl implements PostDao
         }
 
 		return criteria.list();
-		
+
 	}
-	
+
 	public long countSavedPostByClient(String clientId)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
@@ -497,30 +502,30 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
 	//	.add(Restrictions.isNotNull("verifyDate"));
-		
-		
+
+
 		criteria.setProjection(Projections.rowCount());
-				
+
 		return (Long)criteria.uniqueResult();
 	}
-	
-	
-	
+
+
+
 	@Override
 	public List<Post> getPostsByIndustryUsingConsultantId(String consultantId, int first, int max,String sortParam)
 	{
 		List<Integer> indList = new ArrayList<>();
-		
+
 		Criteria crt = this.sessionFactory.getCurrentSession().createCriteria(Registration.class);
-				 
+
 //		crt.add(Restrictions.eq("userid", consultantId));
-		
+
 		Criterion cn1 = Restrictions.eq("userid", consultantId);
 		Criterion cn2 = Restrictions.eq("admin.userid", consultantId);
 		crt.add(Restrictions.or(cn1, cn2));
-			 
+
 		List<Registration> reg = crt.list();
-				
+
 		if(reg != null && !reg.isEmpty())
 		{
 			Set<Industry> inds = reg.get(0).getIndustries();
@@ -530,14 +535,14 @@ public class PostDaoImpl implements PostDao
 				indList.add(it.next().getId());
 			}
 		}
-		
-		
+
+
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
 		criteria.add(Restrictions.isNull("deleteDate")).add(Restrictions.isNotNull("published"));
 
 		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, -15); 
+		c.add(Calendar.DATE, -15);
 		criteria.createAlias("client", "clientAlias");
 		criteria.createAlias("clientAlias.industries", "indAlias");
 		criteria.add(Restrictions.in("indAlias.id", indList));
@@ -551,8 +556,8 @@ public class PostDaoImpl implements PostDao
       		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -563,7 +568,7 @@ public class PostDaoImpl implements PostDao
 
 		if (longList.size() > 0)
 		{
-			//get all the id's corresponding to the projection, 
+			//get all the id's corresponding to the projection,
 			//then apply distinct root entity
             criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
             criteria.add(Restrictions.in("postId", longList));
@@ -575,7 +580,7 @@ public class PostDaoImpl implements PostDao
         		else
         		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
+        }
 		else
 		{
 		//no results, so let's ommit the second query to the DB
@@ -583,7 +588,7 @@ public class PostDaoImpl implements PostDao
         }
 
 		return criteria.list();
-		
+
 	}
 
 	@Override
@@ -601,8 +606,8 @@ public class PostDaoImpl implements PostDao
 			}
 		}
 		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, -15); 
-		
+		c.add(Calendar.DATE, -15);
+
 		long count = (Long)this.sessionFactory.getCurrentSession().createCriteria(Post.class)
 					.add(Restrictions.isNull("deleteDate")).add(Restrictions.isNotNull("published"))
 					.createAlias("client", "clientAlias")
@@ -616,15 +621,15 @@ public class PostDaoImpl implements PostDao
 					.uniqueResult();
 		return count;
 	}
-	
+
 	public List<Post> getPostsByIndustryId(int industryId, int first, int max,String sortParam)
 	{
-		
+
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
 		criteria.add(Restrictions.isNull("deleteDate")).add(Restrictions.isNotNull("published"));
 		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, -15); 
+		c.add(Calendar.DATE, -15);
 		criteria.createAlias("client", "clientAlias");
 		criteria.createAlias("clientAlias.industries", "indAlias");
 		criteria.add(Restrictions.eq("indAlias.id", industryId));
@@ -648,7 +653,7 @@ public class PostDaoImpl implements PostDao
 
 		if (longList.size() > 0)
 		{
-			//get all the id's corresponding to the projection, 
+			//get all the id's corresponding to the projection,
 			//then apply distinct root entity
             criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
             criteria.add(Restrictions.in("postId", longList));
@@ -660,7 +665,7 @@ public class PostDaoImpl implements PostDao
         		else
         		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
+        }
 		else
 		{
 		//no results, so let's ommit the second query to the DB
@@ -668,13 +673,13 @@ public class PostDaoImpl implements PostDao
         }
 
 		return criteria.list();
-		
+
 	}
 
 	public long countPostsByIndustryId(int industryId)
 	{
 		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, -15); 
+		c.add(Calendar.DATE, -15);
 		long count = (Long)this.sessionFactory.getCurrentSession().createCriteria(Post.class)
 					.add(Restrictions.isNull("deleteDate")).add(Restrictions.isNotNull("published"))
 					.createAlias("client", "clientAlias")
@@ -689,7 +694,7 @@ public class PostDaoImpl implements PostDao
 		return count;
 	}
 
-	
+
 	public List<Post> getPostsBySubmittedProfilesByConsultantId(String consultantId, int first, int max, String sortParam)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
@@ -706,8 +711,8 @@ public class PostDaoImpl implements PostDao
     		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -726,15 +731,15 @@ public class PostDaoImpl implements PostDao
 				else
 				criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			
+
 		}
 		else
 		{
 			return new ArrayList<Post>();
 		}
-		
-		
-       
+
+
+
 		return criteria.list();
 	}
 
@@ -744,13 +749,13 @@ public class PostDaoImpl implements PostDao
 		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
 		criteria.add(Restrictions.isNull("deleteDate"));
 		criteria.add(Restrictions.eq("isActive", true));
-		
+
 		criteria.createAlias("postConsultants", "pcAlias");
 		criteria.createAlias("pcAlias.consultant", "consAlias");
         criteria.add(Restrictions.eq("consAlias.userid",consultantId));
         criteria.addOrder(Order.desc("createDate"))
 		.add(Restrictions.isNotNull("verifyDate"));
-        
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -767,13 +772,13 @@ public class PostDaoImpl implements PostDao
 					.setProjection(Projections.rowCount())
 					.uniqueResult();
 			return count;
-			
+
 		}
 		return 0;
-		
+
 	}
 
-	
+
 	public List<Post> getAllPostsBySubmittedProfilesByConsultantId(String consultantId, int first, int max, String sortParam)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
@@ -783,20 +788,20 @@ public class PostDaoImpl implements PostDao
 		criteria.createAlias("pcAlias.consultant", "consAlias")
 		.add(Restrictions.isNotNull("verifyDate"));
 //        criteria.add(Restrictions.eq("consAlias.userid",consultantId));
-        
+
         Criterion cn1 = Restrictions.eq("consAlias.userid", consultantId);
 		Criterion cn2 = Restrictions.eq("consAlias.admin.userid", consultantId);
 		criteria.add(Restrictions.or(cn1, cn2));
-        
+
         if(sortParam.indexOf("published")>=0)
       		criteria.addOrder(Order.desc(sortParam));
       		else
       		criteria.addOrder(Order.asc(sortParam));
-        
+
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -815,15 +820,15 @@ public class PostDaoImpl implements PostDao
 		      		else
 		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			
+
 		}
 		else
 		{
 			return new ArrayList<Post>();
 		}
-		
-		
-       
+
+
+
 		return criteria.list();
 	}
 
@@ -837,7 +842,7 @@ public class PostDaoImpl implements PostDao
         criteria.add(Restrictions.eq("consAlias.userid",consultantId));
         criteria.addOrder(Order.desc("createDate"))
 		.add(Restrictions.isNotNull("verifyDate"));
-        
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -854,7 +859,7 @@ public class PostDaoImpl implements PostDao
 					.setProjection(Projections.rowCount())
 					.uniqueResult();
 			return count;
-			
+
 		}
 		return 0;
 
@@ -876,11 +881,11 @@ public class PostDaoImpl implements PostDao
       		criteria.addOrder(Order.desc(sortParam));
       		else
       		criteria.addOrder(Order.asc(sortParam));
-        
+
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -899,15 +904,15 @@ public class PostDaoImpl implements PostDao
 		      		else
 		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			
+
 		}
 		else
 		{
 			return new ArrayList<Post>();
 		}
-		
-		
-       
+
+
+
 		return criteria.list();
 	}
 
@@ -922,10 +927,10 @@ public class PostDaoImpl implements PostDao
 		criteria.createAlias("pcAlias.consultant", "consAlias");
         criteria.add(Restrictions.eq("consAlias.userid",consultantId))
 		.add(Restrictions.isNotNull("verifyDate"))
-        
+
         .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 		.setProjection(Projections.rowCount());
-				
+
 		return (Long)criteria.uniqueResult();
 	}
 
@@ -944,15 +949,15 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2))
 		.add(Restrictions.isNotNull("verifyDate"));
-		
+
         if(sortParam.indexOf("published")>=0)
       		criteria.addOrder(Order.desc(sortParam));
       		else
       		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -971,15 +976,15 @@ public class PostDaoImpl implements PostDao
 		      		else
 		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			
+
 		}
 		else
 		{
 			return new ArrayList<Post>();
 		}
-		
-		
-       
+
+
+
 		return criteria.list();
 	}
 
@@ -989,7 +994,7 @@ public class PostDaoImpl implements PostDao
 		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
 		criteria.add(Restrictions.isNull("deleteDate"));
 		criteria.add(Restrictions.eq("isActive", true));
-		
+
 		criteria.createAlias("postConsultants", "pcAlias");
 		criteria.createAlias("pcAlias.consultant", "consAlias");
         criteria.add(Restrictions.eq("consAlias.userid",consultantId));
@@ -999,9 +1004,9 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2))
 		.add(Restrictions.isNotNull("verifyDate"));
-		
+
         criteria.addOrder(Order.desc("createDate"));
-        
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -1018,13 +1023,13 @@ public class PostDaoImpl implements PostDao
 					.setProjection(Projections.rowCount())
 					.uniqueResult();
 			return count;
-			
+
 		}
 		return 0;
-		
+
 	}
 
-	
+
 	public List<Post> getAllPostsBySubmittedProfilesByConsultantId(String consultantId, String clientId, int first, int max, String sortParam)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
@@ -1039,16 +1044,16 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2))
 		.add(Restrictions.isNotNull("verifyDate"));
-		
+
         if(sortParam.indexOf("published")>=0)
       		criteria.addOrder(Order.desc(sortParam));
       		else
       		criteria.addOrder(Order.asc(sortParam));
-        
+
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -1067,15 +1072,15 @@ public class PostDaoImpl implements PostDao
 		      		else
 		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			
+
 		}
 		else
 		{
 			return new ArrayList<Post>();
 		}
-		
-		
-       
+
+
+
 		return criteria.list();
 	}
 
@@ -1093,9 +1098,9 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2))
 		.add(Restrictions.isNotNull("verifyDate"));
-		
+
         criteria.addOrder(Order.desc("createDate"));
-        
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -1112,7 +1117,7 @@ public class PostDaoImpl implements PostDao
 					.setProjection(Projections.rowCount())
 					.uniqueResult();
 			return count;
-			
+
 		}
 		return 0;
 
@@ -1135,16 +1140,16 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2))
 		.add(Restrictions.isNotNull("verifyDate"));
-		
+
         if(sortParam.indexOf("published")>=0)
       		criteria.addOrder(Order.desc(sortParam));
       		else
       		criteria.addOrder(Order.asc(sortParam));
-        
+
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -1163,15 +1168,15 @@ public class PostDaoImpl implements PostDao
 		      		else
 		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			
+
 		}
 		else
 		{
 			return new ArrayList<Post>();
 		}
-		
-		
-       
+
+
+
 		return criteria.list();
 	}
 
@@ -1191,10 +1196,10 @@ public class PostDaoImpl implements PostDao
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2))
 		.add(Restrictions.isNotNull("verifyDate"));
-		
+
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
 		.setProjection(Projections.rowCount());
-				
+
 		return (Long)criteria.uniqueResult();
 	}
 
@@ -1203,7 +1208,7 @@ public class PostDaoImpl implements PostDao
 	{
 		this.sessionFactory.getCurrentSession().delete(post);
 		this.sessionFactory.getCurrentSession().flush();
-		
+
 	}
 
 
@@ -1220,7 +1225,7 @@ public class PostDaoImpl implements PostDao
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
 		criteria.add(Restrictions.isNull("deleteDate"));
-		
+
 		criteria.createAlias("postConsultants", "pcAlias");
 		criteria.createAlias("pcAlias.consultant", "consAlias");
         criteria.add(Restrictions.eq("consAlias.userid",consultantId))
@@ -1250,15 +1255,15 @@ public class PostDaoImpl implements PostDao
         {
         	criteria.add(Restrictions.like("location",location, MatchMode.ANYWHERE));
         }
-        
+
         if(sortParam.indexOf("published")>=0)
       		criteria.addOrder(Order.desc(sortParam));
       		else
       		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -1277,24 +1282,24 @@ public class PostDaoImpl implements PostDao
 		      		else
 		      		criteria.addOrder(Order.asc(sortParam));
 			criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			
+
 		}
 		else
 		{
 			return new ArrayList<Post>();
 		}
-		
-		
-       
+
+
+
 		return criteria.list();
 	}
-	
+
 	public long countPostsFilteredForConsultant(String consultantId, String clientId, String status, String location)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
 		criteria.setProjection(Projections.distinct((Projections.projectionList().add(Projections.id()).add(Projections.property("postId")))));
 		criteria.add(Restrictions.isNull("deleteDate"));
-		
+
 		criteria.createAlias("postConsultants", "pcAlias");
 		criteria.createAlias("pcAlias.consultant", "consAlias");
         criteria.add(Restrictions.eq("consAlias.userid",consultantId))
@@ -1322,7 +1327,7 @@ public class PostDaoImpl implements PostDao
         {
         	criteria.add(Restrictions.eq("location",location));
         }
-        
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -1339,12 +1344,12 @@ public class PostDaoImpl implements PostDao
 					.setProjection(Projections.rowCount())
 					.uniqueResult();
 			return count;
-			
+
 		}
 		return 0;
-		
+
 	}
-	
+
 	public List<String> getLocationsByConsultant(String consultantId)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
@@ -1356,7 +1361,7 @@ public class PostDaoImpl implements PostDao
         criteria.add(Restrictions.eq("consAlias.userid",consultantId));
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		return  criteria.list();
-		
+
 	}
 
 	@Override
@@ -1367,7 +1372,7 @@ public class PostDaoImpl implements PostDao
 		criteria.add(Restrictions.isNull("deleteDate")).add(Restrictions.isNull("joinCloseDate"))
 		.add(Restrictions.isNotNull("verifyDate"));
 //		criteria.add(Restrictions.eq("client.userid", userid));
-		
+
 		Criterion cn1 = Restrictions.eq("client.userid", userid);
 		criteria.createAlias("client", "clientAlias");
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", userid);
@@ -1379,8 +1384,8 @@ public class PostDaoImpl implements PostDao
 	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
-		
+
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -1391,7 +1396,7 @@ public class PostDaoImpl implements PostDao
 
 		if (longList.size() > 0)
 		{
-			//get all the id's corresponding to the projection, 
+			//get all the id's corresponding to the projection,
 			//then apply distinct root entity
             criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
             criteria.add(Restrictions.in("postId", longList));
@@ -1402,7 +1407,7 @@ public class PostDaoImpl implements PostDao
           		else
           		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
+        }
 		else
 		{
 		//no results, so let's ommit the second query to the DB
@@ -1410,7 +1415,7 @@ public class PostDaoImpl implements PostDao
         }
 
 		return criteria.list();
-		
+
 	}
 
 	@Override
@@ -1421,7 +1426,7 @@ public class PostDaoImpl implements PostDao
 		criteria.add(Restrictions.isNotNull("deleteDate")).add(Restrictions.isNotNull("joinCloseDate"))
 		.add(Restrictions.isNotNull("verifyDate"));
 //		criteria.add(Restrictions.eq("client.userid", userid));
-		
+
 		Criterion cn1 = Restrictions.eq("client.userid", userid);
 		criteria.createAlias("client", "clientAlias");
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", userid);
@@ -1433,7 +1438,7 @@ public class PostDaoImpl implements PostDao
 	      		criteria.addOrder(Order.asc(sortParam));
 		criteria.setFirstResult(first);
 		criteria.setMaxResults(max);
-		
+
 		List<Object[]> idList = criteria.list();
 		//get the id's from the projection
         List<Long> longList = new ArrayList<Long>();
@@ -1444,7 +1449,7 @@ public class PostDaoImpl implements PostDao
 
 		if (longList.size() > 0)
 		{
-			//get all the id's corresponding to the projection, 
+			//get all the id's corresponding to the projection,
 			//then apply distinct root entity
             criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
             criteria.add(Restrictions.in("postId", longList));
@@ -1455,7 +1460,7 @@ public class PostDaoImpl implements PostDao
           		else
           		criteria.addOrder(Order.asc(sortParam));
             criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        } 
+        }
 		else
 		{
 		//no results, so let's ommit the second query to the DB
@@ -1463,7 +1468,7 @@ public class PostDaoImpl implements PostDao
         }
 
 		return criteria.list();
-		
+
 	}
 
 	@Override
@@ -1477,43 +1482,78 @@ public class PostDaoImpl implements PostDao
 		criteria.createAlias("client", "clientAlias");
 		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
 		criteria.add(Restrictions.or(cn1, cn2));
-		
+
 		criteria.setProjection(Projections.rowCount()) ;
-		
+
 		return (Long)criteria.uniqueResult();
 	}
 
+//	@Override
+//	public long countActiveVerifiedPostByClient(String clientId)
+//	{
+//		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
+////		criteria.add(Restrictions.eq("client.userid", clientId));
+//
+//		Criterion cn1 = Restrictions.eq("client.userid", clientId);
+//		criteria.createAlias("client", "clientAlias");
+//		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
+//		criteria.add(Restrictions.or(cn1, cn2));
+//
+//		criteria.add(Restrictions.isNotNull("published"))
+//				.add(Restrictions.eq("isActive", true))
+//				.add(Restrictions.isNull("deleteDate"))
+//				.add(Restrictions.isNull("closeDate"))
+//				.add(Restrictions.isNotNull("verifyDate"))
+//				.setProjection(Projections.rowCount());
+//
+//		return (Long)criteria.uniqueResult();
+//	}
+	/**
+	 * Counts the number of active and verified posts by a specific client.
+	 *
+	 * @param clientId The ID of the client.
+	 * @return The count of active and verified posts.
+	 */
 	@Override
-	public long countActiveVerifiedPostByClient(String clientId)
-	{
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
-//		criteria.add(Restrictions.eq("client.userid", clientId));
-				
-		Criterion cn1 = Restrictions.eq("client.userid", clientId);
-		criteria.createAlias("client", "clientAlias");
-		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
-		criteria.add(Restrictions.or(cn1, cn2));
-				
-		criteria.add(Restrictions.isNotNull("published"))
-				.add(Restrictions.eq("isActive", true))
-				.add(Restrictions.isNull("deleteDate"))
-				.add(Restrictions.isNull("closeDate"))
-				.add(Restrictions.isNotNull("verifyDate"))
-				.setProjection(Projections.rowCount());
-		
-		return (Long)criteria.uniqueResult();
+	public long countActiveVerifiedPostByClient(String clientId) {
+		String jpql = "SELECT COUNT(p) FROM Post p " +
+				"JOIN p.client c " +
+				"LEFT JOIN c.admin a " +
+				"WHERE (c.userid = :clientId OR a.userid = :clientId) " +
+				"AND p.published IS NOT NULL " +
+				"AND p.isActive = TRUE " +
+				"AND p.deleteDate IS NULL " +
+				"AND p.closeDate IS NULL " +
+				"AND p.verifyDate IS NOT NULL";
+
+		TypedQuery<Long> query = entityManager.createQuery(jpql, Long.class);
+		query.setParameter("clientId", clientId);
+
+		return query.getSingleResult();
 	}
-	@Override
-	public List<Post> getAllActivePosts()
-	{
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
-		criteria.add(Restrictions.isNull("deleteDate"))
-		.add(Restrictions.isNotNull("published"))
-		.add(Restrictions.eq("isActive", true))
-		.add(Restrictions.isNull("deleteDate"))
-		.add(Restrictions.isNull("closeDate"))
-		.add(Restrictions.isNotNull("verifyDate"));
-		
-		return criteria.list();
-	}
+//	@Override
+//	public List<Post> getAllActivePosts()
+//	{
+//		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(Post.class);
+//		criteria.add(Restrictions.isNull("deleteDate"))
+//		.add(Restrictions.isNotNull("published"))
+//		.add(Restrictions.eq("isActive", true))
+//		.add(Restrictions.isNull("deleteDate"))
+//		.add(Restrictions.isNull("closeDate"))
+//		.add(Restrictions.isNotNull("verifyDate"));
+//
+//		return criteria.list();
+//	}
+@Override
+public List<Post> getAllActivePosts() {
+	String jpql = "SELECT p FROM Post p " +
+			"WHERE p.deleteDate IS NULL " +
+			"AND p.published IS NOT NULL " +
+			"AND p.isActive = TRUE " +
+			"AND p.closeDate IS NULL " +
+			"AND p.verifyDate IS NOT NULL";
+
+	TypedQuery<Post> query = entityManager.createQuery(jpql, Post.class);
+	return query.getResultList();
+}
 }
