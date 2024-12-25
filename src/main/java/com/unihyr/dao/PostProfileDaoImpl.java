@@ -587,24 +587,25 @@ public class PostProfileDaoImpl implements PostProfileDao
 	public long countPostProfilesForPostByDate(long pid, String consid, Date date)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(PostProfile.class)
-				.createAlias("post", "postAlias")   
+				.createAlias("post", "postAlias")
 				.createAlias("profile", "profileAlias")
 				.createAlias("profileAlias.registration", "consAlias")
 				.add(Restrictions.eq("postAlias.postId", pid))
 				.add(Restrictions.gt("submitted", date));
-				
-		
+
+
 		Criterion cn3 = Restrictions.eq("consAlias.userid", consid);
 		Criterion cn4 = Restrictions.eq("consAlias.admin.userid", consid);
 		criteria.add(Restrictions.or(cn3, cn4));
-		
+
 		long count = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
 		return count;
 	}
-	
-	
-	
-	
+
+
+
+
+
 	public long countSubmittedProfileByClientOrConsultant(String client, String consultant)
 	{
 		

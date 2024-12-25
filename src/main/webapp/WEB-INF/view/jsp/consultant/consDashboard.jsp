@@ -221,7 +221,7 @@ jQuery(document).ready(function() {
 		        </div>
 		    </div>
 	  	<div class="cons_db_posts" >
-		    
+
 	    </div>
    	</div>
     <div id="post_detail" style="padding: 25px 20px">

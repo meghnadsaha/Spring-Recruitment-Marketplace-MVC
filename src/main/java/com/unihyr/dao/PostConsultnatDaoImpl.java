@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
@@ -40,27 +41,60 @@ public class PostConsultnatDaoImpl implements PostConsultnatDao
 		}
 		return criteria.list();
 	}
-	public List<PostConsultant> getClosedInterestedPostForConsultantByClient(String consultantId, String clientId,String sortParam)
-	{
-		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(PostConsultant.class);
-		criteria.createAlias("post.client", "clientAlias").createAlias("post", "postAlias")
-		.add(Restrictions.isNotNull("postAlias.verifyDate")).add(Restrictions.disjunction().add(Restrictions.isNotNull("postAlias.joinCloseDate"))
-		.add(Restrictions.isNotNull("postAlias.deleteDate")));
-		// criteria.add(Restrictions.eq("clientAlias.userid", clientId));
-		Criterion cn1 = Restrictions.eq("clientAlias.userid", clientId);
-		// criteria.createAlias("client", "clientAlias");
-		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
-		criteria.add(Restrictions.or(cn1, cn2));
-		criteria.createAlias("consultant", "consAlias").add(Restrictions.eq("consAlias.userid", consultantId));
-		if(sortParam.equals("percentile"))
+//	public List<PostConsultant> getClosedInterestedPostForConsultantByClient(String consultantId, String clientId,String sortParam)
+//	{
+//		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(PostConsultant.class);
+//		criteria.createAlias("post.client", "clientAlias").createAlias("post", "postAlias")
+//		.add(Restrictions.isNotNull("postAlias.verifyDate")).add(Restrictions.disjunction().add(Restrictions.isNotNull("postAlias.joinCloseDate"))
+//		.add(Restrictions.isNotNull("postAlias.deleteDate")));
+//		// criteria.add(Restrictions.eq("clientAlias.userid", clientId));
+//		Criterion cn1 = Restrictions.eq("clientAlias.userid", clientId);
+//		// criteria.createAlias("client", "clientAlias");
+//		Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
+//		criteria.add(Restrictions.or(cn1, cn2));
+//		criteria.createAlias("consultant", "consAlias").add(Restrictions.eq("consAlias.userid", consultantId));
+//		if(sortParam.equals("percentile"))
+//		criteria.addOrder(Order.asc(sortParam));
+//		else{
+//			criteria.addOrder(Order.asc("postAlias."+sortParam));
+//			criteria.addOrder(Order.desc("postAlias.verifyDate"));
+//
+//		}
+//		return criteria.list();
+//	}
+public List<PostConsultant> getClosedInterestedPostForConsultantByClient(String consultantId, String clientId, String sortParam) {
+	Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(PostConsultant.class);
+
+	// Fetch required associations eagerly
+	criteria.setFetchMode("post.client", FetchMode.JOIN);
+	criteria.setFetchMode("post", FetchMode.JOIN);
+	criteria.setFetchMode("consultant", FetchMode.JOIN);
+
+	criteria.createAlias("post.client", "clientAlias")
+			.createAlias("post", "postAlias")
+			.add(Restrictions.isNotNull("postAlias.verifyDate"))
+			.add(Restrictions.disjunction()
+							 .add(Restrictions.isNotNull("postAlias.joinCloseDate"))
+							 .add(Restrictions.isNotNull("postAlias.deleteDate"))
+			);
+
+	Criterion cn1 = Restrictions.eq("clientAlias.userid", clientId);
+	Criterion cn2 = Restrictions.eq("clientAlias.admin.userid", clientId);
+	criteria.add(Restrictions.or(cn1, cn2));
+
+	criteria.createAlias("consultant", "consAlias")
+			.add(Restrictions.eq("consAlias.userid", consultantId));
+
+	if (sortParam.equals("percentile")) {
 		criteria.addOrder(Order.asc(sortParam));
-		else{
-			criteria.addOrder(Order.asc("postAlias."+sortParam));
-			criteria.addOrder(Order.desc("postAlias.verifyDate"));
-		
-		}
-		return criteria.list();
+	} else {
+		criteria.addOrder(Order.asc("postAlias." + sortParam));
+		criteria.addOrder(Order.desc("postAlias.verifyDate"));
 	}
+
+	return criteria.list();
+}
+
 	public List<PostConsultant> getInterestedPostForConsultantByClientOrdered(String consultantId, String clientId,String sortParam)
 	{
 		Criteria criteria = this.sessionFactory.getCurrentSession().createCriteria(PostConsultant.class);

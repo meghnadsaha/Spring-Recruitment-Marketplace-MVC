@@ -43,6 +43,8 @@ import org.hsqldb.lib.StringUtil;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -161,7 +163,6 @@ public class ConsultantController
 	 */
 	@Autowired
 	private LoginInfoService loginInfoService;
-
 	@RequestMapping(value = "/uploadprofile", method = RequestMethod.GET)
 	public String uploadprofile(ModelMap map, HttpServletRequest request, Principal principal, @RequestParam long pid)
 	{
@@ -529,7 +530,7 @@ public class ConsultantController
 		map.addAttribute("registration",reg);
 		if(reg.getAdmin() != null)
 		{
-			reg =reg.getAdmin(); 
+			reg =reg.getAdmin();
 		}
 		String loggedinUser=reg.getUserid();
 		
@@ -603,7 +604,7 @@ public class ConsultantController
 		map.addAttribute("socialSharing" ,socialSharingService.getSocialSharing(loggedinUser));
 
 		map.addAttribute("newpostcount", postService.countPostsByIndustryUsingConsultantId(loggedinUser));
-		return "profilelistbyconsidclientid";
+		return "profilelistbyconsidclientid";//List<PostProfile> cons_your_positionsinnerpage
 	}
 
 	@RequestMapping(value = "/cons_leftside_postlist", method = RequestMethod.GET)

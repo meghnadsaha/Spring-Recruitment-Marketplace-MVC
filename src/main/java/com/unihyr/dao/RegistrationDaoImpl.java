@@ -1,10 +1,7 @@
 package com.unihyr.dao;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -238,24 +235,52 @@ public class RegistrationDaoImpl implements RegistrationDao
 
 	}
 
-	public List<Registration> getClientAndConsultantAdminList(int first, int max)
-	{
-		String sql = "select reg.lid from registration reg INNER JOIN userrole ur on reg.userid= ur.userid where ur.userrole =:clientrole or ur.userrole =:consrole";
-		List<Integer> lids = (List<Integer>) this.sessionFactory.getCurrentSession().createSQLQuery(sql)
-				.setString("clientrole", Roles.ROLE_EMP_MANAGER.toString())
-				.setString("consrole", Roles.ROLE_CON_MANAGER.toString()).setFirstResult(first).setMaxResults(max)
-				.list();
+//	public List<Registration> getClientAndConsultantAdminList(int first, int max)
+//	{
+//		String sql = "select reg.lid from registration reg INNER JOIN userrole ur on reg.userid= ur.userid where ur.userrole =:clientrole or ur.userrole =:consrole";
+//		List<Integer> lids = (List<Integer>) this.sessionFactory.getCurrentSession().createSQLQuery(sql)
+//				.setString("clientrole", Roles.ROLE_EMP_MANAGER.toString())
+//				.setString("consrole", Roles.ROLE_CON_MANAGER.toString()).setFirstResult(first).setMaxResults(max)
+//				.list();
+//
+//		return this.sessionFactory.getCurrentSession().createCriteria(Registration.class)
+//				.add(Restrictions.in("lid", lids)).addOrder(Order.desc("lid")).setFetchMode("log", FetchMode.JOIN)
+//				.list();
+//
+//		// return
+//		// (List<Registration>)this.sessionFactory.getCurrentSession().createSQLQuery(sql)
+//		// .addEntity(Registration.class)
+//		// .setFetchMode("log", FetchMode.JOIN)
+//		// .list();
+//	}
 
-		return this.sessionFactory.getCurrentSession().createCriteria(Registration.class)
-				.add(Restrictions.in("lid", lids)).addOrder(Order.desc("lid")).setFetchMode("log", FetchMode.JOIN)
-				.list();
+	public List<Registration> getClientAndConsultantAdminList(int first, int max) {
+		// Modify SQL query to use proper parameter binding
+		String sql = "select reg.lid from registration reg INNER JOIN userrole ur on reg.userid = ur.userid " +
+				"where ur.userrole = :clientrole or ur.userrole = :consrole";
 
-		// return
-		// (List<Registration>)this.sessionFactory.getCurrentSession().createSQLQuery(sql)
-		// .addEntity(Registration.class)
-		// .setFetchMode("log", FetchMode.JOIN)
-		// .list();
+		List<Integer> lids = (List<Integer>) this.sessionFactory.getCurrentSession()
+																.createSQLQuery(sql)
+																.setParameter("clientrole", Roles.ROLE_EMP_MANAGER.toString())  // Use setParameter instead of setString
+																.setParameter("consrole", Roles.ROLE_CON_MANAGER.toString())  // Use setParameter instead of setString
+																.setFirstResult(first)
+																.setMaxResults(max)
+																.list();
+
+		// Check if lids is empty, handle this case gracefully
+		if (lids == null || lids.isEmpty()) {
+			return Collections.emptyList();  // Return an empty list if no matching records
+		}
+
+		// Use Criteria to fetch the registration objects
+		return this.sessionFactory.getCurrentSession()
+								  .createCriteria(Registration.class)
+								  .add(Restrictions.in("lid", lids))
+								  .addOrder(Order.desc("lid"))
+								  .setFetchMode("log", FetchMode.JOIN)
+								  .list();
 	}
+
 
 	@Override
 	public void insertUserIndustryMap(int industryId, int registrationId)

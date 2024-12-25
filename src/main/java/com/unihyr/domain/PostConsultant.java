@@ -23,7 +23,8 @@ public class PostConsultant
 	private long pcid;
 	
 	@ManyToOne  
-    @JoinColumn(name = "post_id" , nullable= false)
+//    @JoinColumn(name = "post_id" , nullable= false)
+	@JoinColumn(name = "post_id", referencedColumnName = "post_id", nullable = false)
 	private Post post;
 	
 	@ManyToOne  

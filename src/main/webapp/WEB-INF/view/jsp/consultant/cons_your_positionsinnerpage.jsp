@@ -65,7 +65,7 @@
     <div style="padding-bottom: 0" class="rightside_in new_table">
         <div class="bottom-padding" style=" border: 2px solid gray; border-radius: 5px; margin-bottom: 10px;  padding: 10px;">
 	        <div class="bottom-padding">
-	        	
+
 	        	<div class="col-md-4 report_sum" >
 		        	<div class="col-md-5">
 		        		Post ID
