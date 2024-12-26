@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.unihyr.domain.BillingDetails;
 import com.unihyr.domain.Industry;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class BillingDaoImpl implements BillingDao
@@ -100,6 +101,7 @@ public class BillingDaoImpl implements BillingDao
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<BillingDetails> getAllDetailsUnverified()
 	{
 		Session session=this.sessionFactory.getCurrentSession();

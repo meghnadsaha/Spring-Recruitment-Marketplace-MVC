@@ -1,29 +1,21 @@
 package com.unihyr.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 
 @Entity
 @Table(name="postconsultant", uniqueConstraints={ @UniqueConstraint( columnNames = { "postId", "lid" } ) } )
-public class PostConsultant
-{
+public class PostConsultant implements Serializable {
 	@Id
 	@Column(nullable=false)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long pcid;
-	
-	@ManyToOne  
-    @JoinColumn(name = "postId" , nullable= false)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "postId", nullable = false)
 	private Post post;
 	
 	@ManyToOne  

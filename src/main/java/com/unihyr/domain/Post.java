@@ -28,7 +28,7 @@ public class Post implements Serializable
 
 	@Id
 	@Column(nullable=false)
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long postId;
 	
 	@Column
@@ -445,12 +445,11 @@ public class Post implements Serializable
 
 
 
-	@ManyToOne()
-	@JoinColumn(name = "clientId", referencedColumnName = "userid" , nullable=false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "clientId", referencedColumnName = "userid", nullable = false)
 	private Registration client;
-	
-	
-	@ManyToOne()
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "lastModifier", referencedColumnName = "userid")
 	private Registration lastModifier;
 	
@@ -576,8 +575,12 @@ public class Post implements Serializable
 
 
 
-	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)  
-	private Set<PostProfile> postProfile;
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private Set<PostProfile> postProfile = new HashSet<>();
+
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private Set<PostConsultant> postConsultants = new HashSet<>();
+
 
 	public Set<PostProfile> getPostProfile()
 	{
@@ -590,8 +593,8 @@ public class Post implements Serializable
 	}
 
 	
-	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)  
-	private Set<PostConsultant> postConsultants;
+//	@OneToMany(mappedBy="post", cascade=CascadeType.ALL)
+//	private Set<PostConsultant> postConsultants;
 
 
 	public Set<PostConsultant> getPostConsultants()

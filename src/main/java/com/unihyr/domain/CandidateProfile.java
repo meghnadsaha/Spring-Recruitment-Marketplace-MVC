@@ -24,8 +24,8 @@ import javax.persistence.Table;
 public class CandidateProfile
 {
 	@Id
-	@Column(nullable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "profileId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long profileId;
 
 	

@@ -32,6 +32,11 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
+
 		<!-- ============ SPRING BOOT STARTERS ============= -->
 		<!-- For Spring MVC, JSON, Tomcat, etc. -->
 		<dependency>
@@ -46,6 +51,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
 
 		<!-- Tomcat + JSP support to fix "NoClassDefFoundError: JspFactory" when embedding Tomcat -->
 		<dependency>
@@ -54,14 +63,17 @@
 			<!-- Use <scope>provided</scope> if external Tomcat. -->
 		</dependency>
 
-		<!-- (Optional) Spring Security 5.x if needed:
+		<!-- (Optional) Spring Security 5.x if needed:-->
         <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        -->
-
-		<!-- ============ YOUR ORIGINAL LIBRARIES (NON-CONFLICTING) ============= -->
+        <!--  -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency>
+		<!--============ YOUR ORIGINAL LIBRARIES (NON-CONFLICTING) ============= -->
 		<dependency>
 			<groupId>org.directwebremoting</groupId>
 			<artifactId>dwr</artifactId>
@@ -235,11 +247,11 @@
 			<artifactId>tiles-jsp</artifactId>
 			<version>${apache.tiles}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.6</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.slf4j</groupId>-->
+<!--			<artifactId>slf4j-log4j12</artifactId>-->
+<!--			<version>1.7.6</version>-->
+<!--		</dependency>-->
 
 		<!-- MySQL Connector -->
 		<dependency>

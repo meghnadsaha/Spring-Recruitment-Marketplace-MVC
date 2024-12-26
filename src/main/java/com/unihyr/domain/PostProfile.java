@@ -1,36 +1,30 @@
 package com.unihyr.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 @Entity
 @Table(name="postprofile", uniqueConstraints={ @UniqueConstraint( columnNames = { "postId", "profileId" } ) } )
-public class PostProfile
-{
+public class PostProfile implements Serializable
+	{
+
+		private static final long serialVersionUID = 1L;
 	@Id
 	@Column(nullable=false)
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long ppid;
-	
-	@ManyToOne  
-    @JoinColumn(name = "postId" , nullable= false)
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "postId", nullable = false)
 	private Post post;
+
 	
 	@ManyToOne  
-    @JoinColumn(name = "profileId"  , nullable= false)
+//    @JoinColumn(name = "profileId"  , nullable= false)
+	@JoinColumn(name = "profileId", referencedColumnName = "profileId")
 	private CandidateProfile profile;
 	
 	@Column(nullable=false)

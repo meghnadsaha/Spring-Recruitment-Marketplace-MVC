@@ -1,76 +1,63 @@
 package com.unihyr.service;
 
 import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
+import com.unihyr.dao.BillingDao;
 import com.unihyr.domain.BillingDetails;
 
 @Service
-@Transactional
-public class BillingServiceImpl implements BillingService
-{
+public class BillingServiceImpl implements BillingService {
 
 	@Autowired
-	com.unihyr.dao.BillingDao BillingDao;
+	private BillingDao billingDao;
 
 	@Override
-	public BillingDetails getBillingDetailsById(int id)
-	{
-		// TODO Auto-generated method stub
-		return this.BillingDao.getBillingDetailsById(id);
+	@Transactional(readOnly = true)
+	public BillingDetails getBillingDetailsById(int id) {
+		return billingDao.getBillingDetailsById(id);
 	}
 
 	@Override
-	public long addBillingDetails(BillingDetails billingDetails)
-	{
-		// TODO Auto-generated method stub
-		return this.BillingDao.addBillingDetails(billingDetails);
+	@Transactional
+	public long addBillingDetails(BillingDetails billing) {
+		return billingDao.addBillingDetails(billing);
 	}
 
 	@Override
-	public List<BillingDetails> getBillingDetailsByClientList(String userid,String sortParam)
-	{
-		// TODO Auto-generated method stub
-		return this.BillingDao.getBillingDetailsByClientList(userid,sortParam);
+	@Transactional
+	public long updateBillingDetails(BillingDetails billing) {
+		return billingDao.updateBillingDetails(billing);
 	}
 
 	@Override
-	public long updateBillingDetails(BillingDetails billingDetails)
-	{
-		// TODO Auto-generated method stub
-		return this.BillingDao.updateBillingDetails(billingDetails);
+	@Transactional(readOnly = true)
+	public List<BillingDetails> getBillingDetailsByClientList(String userid, String sortParam) {
+		return billingDao.getBillingDetailsByClientList(userid, sortParam);
 	}
 
 	@Override
-	public List<BillingDetails> getBillingDetailsByConsList(String userid, String sortParam)
-	{
-		// TODO Auto-generated method stub
-				return this.BillingDao.getBillingDetailsByConsList(userid,sortParam);
-			}
-
-	@Override
-	public BillingDetails getBillingDetailsById(long ppid)
-	{
-		// TODO Auto-generated method stub
-		return this.BillingDao.getBillingDetailsById(ppid);
-		
+	@Transactional(readOnly = true)
+	public List<BillingDetails> getBillingDetailsByConsList(String userid, String sortParam) {
+		return billingDao.getBillingDetailsByConsList(userid, sortParam);
 	}
 
 	@Override
-	public List<BillingDetails> getAllDetailsUnverified()
-	{
-		// TODO Auto-generated method stub
-		return this.BillingDao.getAllDetailsUnverified();
+	@Transactional(readOnly = true)
+	public BillingDetails getBillingDetailsById(long ppid) {
+		return billingDao.getBillingDetailsById(ppid);
 	}
 
 	@Override
-	public  List<BillingDetails> getAllDetails()
-	{
-		// TODO Auto-generated method stub
-		return this.BillingDao.getAllDetails();
+	@Transactional(readOnly = true)
+	public List<BillingDetails> getAllDetailsUnverified() {
+		return billingDao.getAllDetailsUnverified();
 	}
 
-	
+	@Override
+	@Transactional(readOnly = true)
+	public List<BillingDetails> getAllDetails() {
+		return billingDao.getAllDetails();
+	}
 }

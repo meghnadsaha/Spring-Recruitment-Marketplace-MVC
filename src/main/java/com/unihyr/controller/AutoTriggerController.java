@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 //import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
@@ -33,6 +34,7 @@ import com.unihyr.service.PostProfileService;
 import com.unihyr.service.PostService;
 import com.unihyr.service.RegistrationService;
 import com.unihyr.util.ApplicationContextProvider;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Silvereye
@@ -160,6 +162,9 @@ public class AutoTriggerController
 	 * method to check that if any billing details is not verified since 7 days
 	 * @return true if post is idle, false if post is active
 	 */
+	@Scheduled(fixedRate = 60000) // Runs every minute
+	@Transactional
+
 	public boolean checkBillingDetailsIdle()
 	{
 		List<BillingDetails> list = billingService.getAllDetailsUnverified();
@@ -182,8 +187,8 @@ public class AutoTriggerController
 			}
 		}
 		try{
-			mailService.sendMail(users.toString(), "Reminder on post",
-					"Your billing details are veried it self");
+//			mailService.sendMail(users.toString(), "Reminder on post",
+//					"Your billing details are veried it self");
 			}catch(Exception e ){
 				e.printStackTrace();
 			}
